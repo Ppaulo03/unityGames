@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad05bdec2f92d80498255668c7c37b91, type: 3}
+  m_Name: SlimeBlue
+  m_EditorClassIdentifier: 
+  loots:
+  - thisLoot: {fileID: 7547720180064268192, guid: 0e0a038a06ec4334eae1817264f34e2f,
+      type: 3}
+    lootChance: 20
+  - thisLoot: {fileID: 6462479559977624955, guid: 2d6f76cc1d7055b4fa70a40a145ea4fb,
+      type: 3}
+    lootChance: 10

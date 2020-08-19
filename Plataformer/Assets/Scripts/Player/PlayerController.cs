@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpForce;
     public float doubleJumpForce;
-    private bool doubleJump;
+    public bool doubleJump;
 
     [Header("Fire Settings")]
     public Transform firePoint;
@@ -44,23 +44,26 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private SpriteRenderer mySpriteRenderer;
 
+    private bool deleyedAnim;
+
 
     private void Awake()
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        StartCoroutine(delayCo(0.2f));
     }
 
     private void Update(){
-        
-        if(currentState == PlayerState.onGround && Input.GetButtonDown("Jump")) Jump();
-      
-        else if(currentState != PlayerState.attacking){
-                if(Input.GetButtonDown("Fire1")) PreparFire();
-                else if(Input.GetKeyDown(KeyCode.G)){
-                    if( actionArrow[chosenArrow] != null) actionArrow[chosenArrow].Raise();
-                }
+        setAnimGround();
+        if(currentState != PlayerState.attacking){
+            SetGround();
+            if(Input.GetButtonDown("Jump")) Jump();
+            else if(Input.GetButtonDown("Fire1")) PreparFire();
+            else if(Input.GetKeyDown(KeyCode.G)){
+                if( actionArrow[chosenArrow] != null) actionArrow[chosenArrow].Raise();
+            }
         }
   
         else{
@@ -80,19 +83,31 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {   
-        SetGround();
-        if(currentState != PlayerState.attacking) Run();
+        
+        if(currentState != PlayerState.attacking){
+            Run();
+        } 
     }
-    
-    private void SetGround(){
 
+    private void setAnimGround(){
+        if(IsGrounded()){
+                anim.SetBool("Jumping",false);
+                anim.SetBool("DoubleJump",false);
+                anim.SetBool("Falling",false);
+        }
+        else{
+            if(!deleyedAnim) anim.SetBool("Falling",true);
+        }
+    }
+    private void SetGround(){
+        
         if(IsGrounded()){
                 currentState = PlayerState.onGround;
                 doubleJump = true;
-                anim.SetBool("Jumping",false);
-                anim.SetBool("DoubleJump",false);
         }
-        else currentState = PlayerState.jumping;
+        else{
+            currentState = PlayerState.jumping;
+        }
   
     }
 
@@ -141,11 +156,11 @@ public class PlayerController : MonoBehaviour
     
     private void Jump()
     {
-
         if(IsGrounded()){
-            myRigidbody2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
             anim.SetBool("Jumping",true);
+            myRigidbody2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
+
         else if(doubleJump){
             myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, 0, myRigidbody2D.velocity.y);
             myRigidbody2D.AddForce(Vector3.up * doubleJumpForce, ForceMode2D.Impulse);
@@ -176,6 +191,7 @@ public class PlayerController : MonoBehaviour
 
     private void PreparFire(){
         anim.SetBool("FiringArrow", true);
+        anim.SetTrigger("Fire");
         currentState = PlayerState.attacking;
         myRigidbody2D.velocity = new Vector2( 0, myRigidbody2D.velocity.y);
         
@@ -218,7 +234,13 @@ public class PlayerController : MonoBehaviour
         Flip(transform.localScale.x);
         transform.localScale = new Vector3(1,1,1);
         attackRunning = false;
+        SetGround();
+    }
 
+    private IEnumerator delayCo(float delayTime){
+        deleyedAnim = true;
+        yield return new WaitForSeconds(delayTime);
+        deleyedAnim = false;
     }
 
 }

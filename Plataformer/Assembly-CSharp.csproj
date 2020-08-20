@@ -37,6 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Arrow\Arrow.cs" />
+     <Compile Include="Assets\Scripts\Arrow\BombArrow.cs" />
+     <Compile Include="Assets\Scripts\Arrow\FireArrow.cs" />
+     <Compile Include="Assets\Scripts\Arrow\IceArrow.cs" />
      <Compile Include="Assets\Scripts\Arrow\PlantArrow.cs" />
      <Compile Include="Assets\Scripts\Arrow\PlantGrow.cs" />
      <Compile Include="Assets\Scripts\DestroyOverTime.cs" />

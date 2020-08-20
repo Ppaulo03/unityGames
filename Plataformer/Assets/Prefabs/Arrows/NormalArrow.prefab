@@ -159,4 +159,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackForce: 500
-  collider: {fileID: 6194531589586600020}
+  arrowCollider: {fileID: 6194531589586600020}

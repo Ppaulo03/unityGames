@@ -44,7 +44,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0664773, y: -0.51187515}
+  m_Offset: {x: -0.0664773, y: 1.27}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 5066548100870776662}
   - component: {fileID: 5066548100870776661}
   - component: {fileID: 5066548100870776666}
+  - component: {fileID: 3872598921720044655}
   m_Layer: 11
   m_Name: Dark Slime
   m_TagString: Enemy
@@ -175,7 +176,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -197,10 +198,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12630701, y: -1.209887}
+  m_Offset: {x: -0.12630701, y: 0.32}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 4, y: 3}
     newSize: {x: 1.28, y: 0.96}
     adaptiveTilingThreshold: 0.5
@@ -223,7 +224,7 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.082848676, y: -1.0024589}
+  m_Offset: {x: -0.082848676, y: 0.5}
   m_Size: {x: 3.0058417, y: 0.9951016}
   m_Direction: 1
 --- !u!114 &5066548100870776666
@@ -241,15 +242,38 @@ MonoBehaviour:
   currentState: 0
   speed: 1
   direction: -1
+  knockBackForce: 7.5
   lifePoints: 2
   invunerableTime: 0.5
+  DamageEffect: {fileID: 846235345726533522, guid: 5069a0984165a304687b3146214d2f9b,
+    type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  groundDistance: 0.25
+  groundDistance: 0.1
   raycastCorrection: 0.5
-  SizeCorrection: {x: -0.1, y: -1.4, z: 0}
+  SizeCorrection: {x: -0.1, y: 0, z: 0}
   attackTime: 0.75
-  velocityAttack: 500
-  jumpAttack: 500
+  velocityAttack: 5
+  jumpAttack: 5
   idleTime: 2.5
+--- !u!250 &3872598921720044655
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5066548100870776658}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_ForceMagnitude: 5
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0

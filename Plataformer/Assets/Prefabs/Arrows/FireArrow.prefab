@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97244d607313a2c44a411aa717f49237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 500
+  knockBackForce: 5
   arrowCollider: {fileID: 1384069349769454524}
   particles: {fileID: 8386420136980915066}
 --- !u!1 &8386420136980915066

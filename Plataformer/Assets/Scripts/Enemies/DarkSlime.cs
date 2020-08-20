@@ -28,6 +28,7 @@ public class DarkSlime : Enemy
             case EnemyState.walking:
                 Move();
                 break;
+            
         }
        
     }

@@ -8,6 +8,7 @@ public enum EnemyState{
     idle,
     jumping,
     attacking,
+    stagger
 }
 
 public class Enemy : MonoBehaviour
@@ -17,11 +18,12 @@ public class Enemy : MonoBehaviour
     [Header("Movement Settings")]
     public float speed;
     public int direction = 1;
+    public float knockBackForce;
 
     [Header("Hurt Settings")]
     public int lifePoints;
     public float invunerableTime;
-    private bool invunerable;
+    public GameObject DamageEffect;
 
     [Header("Ground Check")]
     public LayerMask groundLayer;
@@ -66,8 +68,10 @@ public class Enemy : MonoBehaviour
     }
 
     public void Hurt(Vector3 knockBack){
-        if(!invunerable){
-            invunerable = true;
+        if(currentState != EnemyState.stagger){
+            currentState = EnemyState.stagger;
+            Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
+            myRigidbody2D.velocity = Vector2.zero;
             myRigidbody2D.AddForce(knockBack, ForceMode2D.Impulse);
             lifePoints -= 1;
             if (lifePoints <= 0){
@@ -77,13 +81,21 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
     private void Die(){
         gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+         if(other.gameObject.CompareTag("Player")){
+            Vector3 direction = (other.gameObject.transform.position - transform.position ).normalized;
+            other.gameObject.GetComponent<PlayerController>().Hurt(direction* knockBackForce);
+        }
     }
     private IEnumerator invunerableCo()
     {
         yield return new WaitForSeconds(invunerableTime);
-        invunerable = false;
+        currentState = EnemyState.walking;
     }
 
 

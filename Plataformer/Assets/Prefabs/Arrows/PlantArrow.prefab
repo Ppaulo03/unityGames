@@ -189,8 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b604c9bf39d0441a2d7569e8b0a738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 500
-  collider: {fileID: 0}
+  knockBackForce: 5
+  arrowCollider: {fileID: 0}
   plant: {fileID: 2323175498251826759, guid: f12055a9538a192429513cbcafa63161, type: 3}
   plantPosition: {fileID: 1275888181166919232}
   delayTime: 0

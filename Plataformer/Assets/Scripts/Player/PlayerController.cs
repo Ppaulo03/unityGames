@@ -6,6 +6,7 @@ public enum PlayerState{
     onGround,
     jumping,
     attacking,
+    stagger,
 }
 
 public class PlayerController : MonoBehaviour
@@ -13,11 +14,18 @@ public class PlayerController : MonoBehaviour
 
     public PlayerState currentState;
 
+    [Header("Life Settings")]
+    public float invunerableTime;
+    public int maxLife;
+    private int currentLife;
+
+
     [Header("Moviment Settings")]
     public float speed;
     public float jumpForce;
     public float doubleJumpForce;
     public bool doubleJump;
+    
 
     [Header("Fire Settings")]
     public Transform firePoint;
@@ -52,26 +60,28 @@ public class PlayerController : MonoBehaviour
         myRigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        currentLife = maxLife;
         StartCoroutine(delayCo(0.2f));
     }
 
     private void Update(){
         setAnimGround();
-        if(currentState != PlayerState.attacking){
-            SetGround();
-            if(Input.GetButtonDown("Jump")) Jump();
-            else if(Input.GetButtonDown("Fire1")) PreparFire();
-            else if(Input.GetKeyDown(KeyCode.G)){
-                if( actionArrow[chosenArrow] != null) actionArrow[chosenArrow].Raise();
+        if(currentState != PlayerState.stagger)
+            if(currentState != PlayerState.attacking){
+                SetGround();
+                if(Input.GetButtonDown("Jump")) Jump();
+                else if(Input.GetButtonDown("Fire1")) PreparFire();
+                else if(Input.GetKeyDown(KeyCode.G)){
+                    if( actionArrow[chosenArrow] != null) actionArrow[chosenArrow].Raise();
+                }
             }
-        }
-  
-        else{
-            posBow();
-            if(chargeTime != 0 && currentStrenght < arrowSpeed) currentStrenght += arrowSpeed/chargeTime * Time.deltaTime;
-            else currentStrenght = arrowSpeed;
-            if(Input.GetButtonUp("Fire1") || !Input.GetButton("Fire1")) Fire();
-        }
+    
+            else{
+                posBow();
+                if(chargeTime != 0 && currentStrenght < arrowSpeed) currentStrenght += arrowSpeed/chargeTime * Time.deltaTime;
+                else currentStrenght = arrowSpeed;
+                if(Input.GetButtonUp("Fire1") || !Input.GetButton("Fire1")) Fire();
+            }
         
         if(Input.GetButtonDown("ChangeArrow")){
             chosenArrow += (int)Input.GetAxisRaw("ChangeArrow");
@@ -84,7 +94,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {   
         
-        if(currentState != PlayerState.attacking){
+        if(currentState != PlayerState.attacking && currentState != PlayerState.stagger){
             Run();
         } 
     }
@@ -214,6 +224,37 @@ public class PlayerController : MonoBehaviour
 
     }
     
+    public void Hurt(Vector3 knockBack){
+        if(currentState != PlayerState.stagger){
+            Reset();
+            currentLife -= 1;
+            if(currentLife <= 0){
+                myRigidbody2D.velocity = Vector2.zero;
+                SetGround();
+                transform.position = GameObject.FindWithTag("Respawn").transform.position;
+                currentLife = maxLife;
+            }else{          
+                currentState = PlayerState.stagger;
+                myRigidbody2D.velocity = Vector2.zero;
+                myRigidbody2D.AddForce(knockBack, ForceMode2D.Impulse);
+                StartCoroutine(invunerableCo());
+            }
+            
+        }
+    }
+
+    private void Reset(){
+        foreach(AnimatorControllerParameter parameter in anim.parameters) {            
+                anim.SetBool(parameter.name, false);            
+        }
+        anim.SetTrigger("Idle");
+        currentStrenght = 0;
+        Flip(transform.localScale.x);
+        transform.localScale = new Vector3(1,1,1);
+        attackRunning = false;
+        SetGround();
+    }
+
     private void OnTriggerExit2D(Collider2D other) {
         if(other.CompareTag("LevelArea")){
             transform.position = GameObject.FindWithTag("Respawn").transform.position;
@@ -229,12 +270,8 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = (new Vector2(mousePos.x,mousePos.y) - new Vector2(BowPositon.position.x, BowPositon.position.y)).normalized;
         clone.GetComponent<Rigidbody2D>().AddForce(dir*currentStrenght, ForceMode2D.Impulse);
         yield return new WaitForSeconds(attackTime);
+        Reset();
 
-        currentStrenght = 0;
-        Flip(transform.localScale.x);
-        transform.localScale = new Vector3(1,1,1);
-        attackRunning = false;
-        SetGround();
     }
 
     private IEnumerator delayCo(float delayTime){
@@ -243,4 +280,8 @@ public class PlayerController : MonoBehaviour
         deleyedAnim = false;
     }
 
+    private IEnumerator invunerableCo(){
+        yield return new WaitForSeconds(invunerableTime);
+        SetGround();
+    }
 }

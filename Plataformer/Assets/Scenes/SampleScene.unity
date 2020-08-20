@@ -247,12 +247,12 @@ PrefabInstance:
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.09
+      value: 11.86
       objectReference: {fileID: 0}
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.59
+      value: -3.87
       objectReference: {fileID: 0}
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}
@@ -8707,12 +8707,12 @@ PrefabInstance:
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.32
+      value: 11.22
       objectReference: {fileID: 0}
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.54
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}
@@ -9278,6 +9278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  invunerableTime: 0.5
+  maxLife: 3
   speed: 5
   jumpForce: 5
   doubleJumpForce: 5
@@ -9358,15 +9360,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5066548099164467137, guid: 4941c8d070b962c4cacc65af3c1a79f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.43
+      value: -0.36
       objectReference: {fileID: 0}
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43
+      value: -1.87
       objectReference: {fileID: 0}
     - target: {fileID: 5066548100870776656, guid: 4941c8d070b962c4cacc65af3c1a79f1,
         type: 3}

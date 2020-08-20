@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {   
 
-    public int knockBackForce;
+    public float knockBackForce;
     public Collider2D arrowCollider;
     [Header("Components")]
     [System.NonSerialized]

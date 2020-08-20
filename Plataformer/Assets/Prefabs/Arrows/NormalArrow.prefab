@@ -158,5 +158,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe4ed889504c904795313ef208329a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 500
+  knockBackForce: 5
   arrowCollider: {fileID: 6194531589586600020}

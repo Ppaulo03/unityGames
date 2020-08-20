@@ -4971,6 +4971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1c5befc120d6b4687d1d56541d5129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 500
+  knockBackForce: 5
   arrowCollider: {fileID: 8935528094185849649}
   particles: {fileID: 1970008617559327735}

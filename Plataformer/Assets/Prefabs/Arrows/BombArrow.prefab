@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c5e3439dac85042955d7c89bafc2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 750
+  knockBackForce: 7.5
   arrowCollider: {fileID: 8169994308900303925}
   explosion: {fileID: 6269064208262271925, guid: b3a6a4eb7278fd64a92433f128982879,
     type: 3}

@@ -42,6 +42,7 @@
      <Compile Include="Assets\Scripts\Arrow\IceArrow.cs" />
      <Compile Include="Assets\Scripts\Arrow\PlantArrow.cs" />
      <Compile Include="Assets\Scripts\Arrow\PlantGrow.cs" />
+     <Compile Include="Assets\Scripts\Arrow\TelekineseArrow.cs" />
      <Compile Include="Assets\Scripts\DestroyOverTime.cs" />
      <Compile Include="Assets\Scripts\Enemies\DarkSlime.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />

@@ -21,12 +21,11 @@ public class Arrow : MonoBehaviour
             if(arrowCollider != null) arrowCollider.enabled = false;
 
         }
-        else{
-            float angle = (Mathf.Atan2(myRigidbody.velocity.y, myRigidbody.velocity.x) * Mathf.Rad2Deg) - 90;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-        
-         
+        else DirectArrow();
+    }
+    public virtual void DirectArrow(){
+        float angle = (Mathf.Atan2(myRigidbody.velocity.y, myRigidbody.velocity.x) * Mathf.Rad2Deg) - 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Enemy")){

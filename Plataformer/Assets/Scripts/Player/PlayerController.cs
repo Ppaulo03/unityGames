@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum PlayerState{
     onGround,
+    crouching,
     jumping,
     attacking,
     stagger,
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float doubleJumpForce;
     public bool doubleJump;
+    public float slideTime;
     
 
     [Header("Fire Settings")]
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer mySpriteRenderer;
 
     private bool deleyedAnim;
+    private bool crouching;
 
 
     private void Awake()
@@ -71,6 +74,8 @@ public class PlayerController : MonoBehaviour
                 SetGround();
                 if(Input.GetButtonDown("Jump")) Jump();
                 else if(Input.GetButtonDown("Fire1")) PreparFire();
+                else if(Input.GetButtonDown("Down")) Crouch();
+                else if(Input.GetButtonUp("Down")) Stand();
                 else if(Input.GetKeyDown(KeyCode.G)){
                     if( actionArrow[chosenArrow] != null) actionArrow[chosenArrow].Raise();
                 }
@@ -94,7 +99,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {   
         
-        if(currentState != PlayerState.attacking && currentState != PlayerState.stagger){
+        if(currentState == PlayerState.jumping || currentState == PlayerState.onGround){
             Run();
         } 
     }
@@ -106,13 +111,16 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Falling",false);
         }
         else{
-            if(!deleyedAnim) anim.SetBool("Falling",true);
+            if(!deleyedAnim){
+                anim.SetBool("Falling",true);
+                anim.SetBool("Crouch",false);
+            }
         }
     }
     private void SetGround(){
         
         if(IsGrounded()){
-                currentState = PlayerState.onGround;
+                if(currentState != PlayerState.crouching) currentState = PlayerState.onGround;
                 doubleJump = true;
         }
         else{
@@ -147,6 +155,18 @@ public class PlayerController : MonoBehaviour
             }
     }
     
+    private void Crouch(){
+        anim.SetBool("Crouch", true);
+        StartCoroutine(slideCo());
+        currentState = PlayerState.crouching;
+    }
+
+    private void Stand(){
+        anim.SetBool("Crouch", false);
+        currentState = PlayerState.onGround;
+        SetGround();
+    }
+
     private void Run()
     {
         
@@ -168,6 +188,7 @@ public class PlayerController : MonoBehaviour
     {
         if(IsGrounded()){
             anim.SetBool("Jumping",true);
+            anim.SetBool("Crouch",false);
             myRigidbody2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
 
@@ -283,5 +304,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator invunerableCo(){
         yield return new WaitForSeconds(invunerableTime);
         SetGround();
+    }
+    private IEnumerator slideCo(){
+        yield return new WaitForSeconds(slideTime);
+        myRigidbody2D.velocity = Vector2.zero;
     }
 }

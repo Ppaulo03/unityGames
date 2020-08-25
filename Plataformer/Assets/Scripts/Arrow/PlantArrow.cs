@@ -55,7 +55,8 @@ public class PlantArrow : Arrow
             Destroy(gameObject);
         }
         else{
-            myRigidbody.velocity = Vector2.zero;
+            if(myRigidbody.bodyType != RigidbodyType2D.Static)
+                myRigidbody.velocity = Vector2.zero;
         }
         
     }

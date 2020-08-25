@@ -13,41 +13,42 @@ public enum PlayerState{
 public class PlayerController : MonoBehaviour
 {
 
-    public PlayerState currentState;
+    [SerializeField] private PlayerState currentState;
 
     [Header("Life Settings")]
-    public float invunerableTime;
-    public int maxLife;
+    [SerializeField] private GameObject DamageEffect = null;
+    [SerializeField] private float invunerableTime = 0f;
+    [SerializeField] private int maxLife = 0;
     private int currentLife;
 
 
     [Header("Moviment Settings")]
-    public float speed;
-    public float jumpForce;
-    public float doubleJumpForce;
-    public bool doubleJump;
-    public float slideTime;
+    [SerializeField] private float speed = 0f;
+    [SerializeField] private float jumpForce = 0f;
+    [SerializeField] private float doubleJumpForce = 0f;
+    [SerializeField] private bool doubleJump = false;
+    [SerializeField] private float slideTime = 0f;
     
 
     [Header("Fire Settings")]
-    public Transform firePoint;
-    public Transform BowPositon;
-    public float arrowSpeed;
-    public float chargeTime;
-    public float currentStrenght = 0;
+    [SerializeField] private Transform firePoint = null;
+    [SerializeField] private Transform BowPositon = null;
+    [SerializeField] private float arrowSpeed = 0f;
+    [SerializeField] private float chargeTime = 0f;
+    [SerializeField] private float currentStrenght = 0f;
     private float arrowAngle;
-    public float attackTime;
+    [SerializeField] private float attackTime = 0f;
     private bool attackRunning;
     
     [Header("Arrows Settings")]
-    public GameObject[] arrows;
-    public Signal[] actionArrow;
-    public int chosenArrow;
+    [SerializeField] private GameObject[] arrows = null;
+    [SerializeField] private Signal[] actionArrow = null;
+    [SerializeField] private int chosenArrow = 0;
 
     [Header("Ground Check")]
-    public LayerMask groundLayer;
-    public float groundDistance;
-    public float raycastCorrection;
+    [SerializeField] private LayerMask groundLayer = ~0;
+    [SerializeField] private float groundDistance = 0f;
+    [SerializeField] private float raycastCorrection = 0f;
 
     [Header("Components")]
     private Rigidbody2D myRigidbody2D;
@@ -248,6 +249,7 @@ public class PlayerController : MonoBehaviour
     public void Hurt(Vector3 knockBack){
         if(currentState != PlayerState.stagger){
             Reset();
+            Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
             currentLife -= 1;
             if(currentLife <= 0){
                 myRigidbody2D.velocity = Vector2.zero;

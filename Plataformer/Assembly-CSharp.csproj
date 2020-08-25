@@ -43,13 +43,19 @@
      <Compile Include="Assets\Scripts\Arrow\PlantArrow.cs" />
      <Compile Include="Assets\Scripts\Arrow\PlantGrow.cs" />
      <Compile Include="Assets\Scripts\Arrow\TelekineseArrow.cs" />
-     <Compile Include="Assets\Scripts\DestroyOverTime.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Bee.cs" />
+     <Compile Include="Assets\Scripts\Enemies\BeeQueen.cs" />
      <Compile Include="Assets\Scripts\Enemies\DarkSlime.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\FlyingEnemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\GroundEnemy.cs" />
+     <Compile Include="Assets\Scripts\Mechanic Stuff\DestroyOverTime.cs" />
+     <Compile Include="Assets\Scripts\Mechanic Stuff\SignalListener.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\FallingPlataform.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Scenario\ParallaxBackground.cs" />
      <Compile Include="Assets\Scripts\Scriptables\Range.cs" />
      <Compile Include="Assets\Scripts\Scriptables\Signal.cs" />
-     <Compile Include="Assets\Scripts\SignalListener.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

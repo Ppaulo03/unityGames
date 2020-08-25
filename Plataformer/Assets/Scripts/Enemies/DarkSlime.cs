@@ -8,13 +8,16 @@ public class DarkSlime : Enemy
     private Animator anim;
     private SpriteRenderer mySpriteRenderer;
 
+
     [Header("Attack Settings")]
-    public float attackTime;
-    public float velocityAttack;
-    public float jumpAttack;
+    [SerializeField] private float attackTime = 0f;
+    [SerializeField] private float velocityAttack = 0f;
+    [SerializeField] private float jumpAttack = 0f;
+
 
     [Header("Idle Settings")]
-    public float idleTime;
+    [SerializeField] private float idleTime = 0f;
+
 
     private void Start() {
         anim = GetComponent<Animator>();
@@ -24,13 +27,8 @@ public class DarkSlime : Enemy
     }
 
     private void FixedUpdate() {
-        switch(currentState){
-            case EnemyState.walking:
-                Move();
-                break;
-            
-        }
-       
+        if(currentState == EnemyState.walking)
+            Move();    
     }
 
     private void Move(){

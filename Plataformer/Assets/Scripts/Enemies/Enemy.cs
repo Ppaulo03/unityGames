@@ -15,16 +15,18 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected EnemyState currentState;
 
+
     [Header("Movement Settings")]
     [SerializeField] protected float speed = 0f;
     [SerializeField] protected int direction = 1;
 
 
     [Header("Hurt Settings")]
-    [SerializeField] private GameObject DamageEffect = null;
-    [SerializeField] private int lifePoints = 0;
+    [SerializeField] protected GameObject DamageEffect = null;
+    [SerializeField] protected int lifePoints = 0;
     [SerializeField] private float invunerableTime = 0f;
     [SerializeField] protected float knockBackForce = 0f;
+
 
     [Header("Ground Check")]
     [SerializeField] protected LayerMask groundLayer = ~0;
@@ -34,68 +36,89 @@ public class Enemy : MonoBehaviour
 
 
     [Header("Components")]
-    [System.NonSerialized] public Rigidbody2D myRigidbody2D;
+    protected Rigidbody2D myRigidbody2D;
+    protected SpriteRenderer mySpriteRenderer;
+    protected Animator anim;
+    
 
 
     private void Awake() {
         myRigidbody2D = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Hurt(Vector3 knockBack){
+    public virtual void Hurt(Vector3 knockBack){
+
         if(currentState != EnemyState.stagger){
+
             currentState = EnemyState.stagger;
             Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
+            
             myRigidbody2D.velocity = Vector2.zero;
             myRigidbody2D.AddForce(knockBack, ForceMode2D.Impulse);
+            
             lifePoints -= 1;
-            if (lifePoints <= 0){
-                Die();
-            }else{
-                StartCoroutine(invunerableCo());
-            }
+
+            if (lifePoints <= 0) Die();
+            else StartCoroutine(invunerableCo());
+
         }
+
     }
 
-    private void Die(){
+    protected virtual void Die(){
         gameObject.SetActive(false);
-    }    
+    }
+        
+    protected void Turn(){
+        myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
+        direction = -direction;
+        mySpriteRenderer.flipX = !mySpriteRenderer.flipX;
+    }
 
-    public float PlataformEnd() {
+    protected float PlataformEnd() {
+        
         Vector2 position = transform.position + SizeCorrection;
         Vector2 direction = Vector2.down;
         
         for(float i = -raycastCorrection; i <= raycastCorrection; i += 2*raycastCorrection){
-            Debug.DrawRay(position + Vector2.right*i, direction, Color.green);
+
+            Debug.DrawRay(position + Vector2.right*i, direction, Color.green); 
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, direction, groundDistance, groundLayer);
-            if (hit.collider == null){
-                return (i/raycastCorrection);
-            }
+
+            if (hit.collider == null) return (i/raycastCorrection);
+            
         }
         return 0;
+        
     }
 
-    public bool OnGround() {
+    protected bool OnGround() {
         Vector2 position = transform.position + SizeCorrection;
         Vector2 direction = Vector2.down;
         
         for(float i = -raycastCorrection; i <= raycastCorrection; i += raycastCorrection){
+            
             Debug.DrawRay(position + Vector2.right*i, direction, Color.green);
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, direction, groundDistance, groundLayer);
-            if (hit.collider != null){
-                return true;
-            }
+            
+            if (hit.collider != null) return true;
+            
         }
         return false;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-         if(other.gameObject.CompareTag("Player")){
+        
+        if(other.gameObject.CompareTag("Player")){
             Vector3 direction = (other.gameObject.transform.position - transform.position ).normalized;
             other.gameObject.GetComponent<PlayerController>().Hurt(direction* knockBackForce);
         }
+
     }
     
-    private IEnumerator invunerableCo()
+    protected IEnumerator invunerableCo()
     {
         yield return new WaitForSeconds(invunerableTime);
         currentState = EnemyState.walking;

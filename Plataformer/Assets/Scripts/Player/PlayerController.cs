@@ -10,8 +10,7 @@ public enum PlayerState{
     stagger,
 }
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour{
 
     [SerializeField] private PlayerState currentState;
 
@@ -19,7 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject DamageEffect = null;
     [SerializeField] private float invunerableTime = 0f;
     [SerializeField] private int maxLife = 0;
-    private int currentLife;
+    [SerializeField] private FloatValue currentLife = null;
+    [SerializeField] private Signal HealthChange = null;
 
 
     [Header("Moviment Settings")]
@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float doubleJumpForce = 0f;
     [SerializeField] private bool doubleJump = false;
     [SerializeField] private float slideTime = 0f;
+    [Header("AirTime")]
+    [SerializeField] private float resistenciaDoAr = 0f;
+    [SerializeField] private float gravidade = 0f;
     
 
     [Header("Fire Settings")]
@@ -35,15 +38,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform BowPositon = null;
     [SerializeField] private float arrowSpeed = 0f;
     [SerializeField] private float chargeTime = 0f;
-    [SerializeField] private float currentStrenght = 0f;
+    [SerializeField] private float minStrength = 0f;
+    private float currentStrenght = 0f;
     private float arrowAngle;
     [SerializeField] private float attackTime = 0f;
+    [SerializeField] private float arrowDelay = 0f;
     private bool attackRunning;
     
+
     [Header("Arrows Settings")]
-    [SerializeField] private GameObject[] arrows = null;
+    [SerializeField] private ObjectArray arrows = null;
     [SerializeField] private Signal[] actionArrow = null;
-    [SerializeField] private int chosenArrow = 0;
+    [SerializeField] private Signal changeArrow = null;
+    [SerializeField] private IntValue chosenArrow = null;
+
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayer = ~0;
@@ -56,20 +64,21 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer mySpriteRenderer;
 
     private bool deleyedAnim;
-    private bool crouching;
 
-
-    private void Awake()
-    {
+    private void Awake(){
         myRigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
-        currentLife = maxLife;
+        currentLife.Value = maxLife;
+        currentStrenght = minStrength;
         StartCoroutine(delayCo(0.2f));
     }
 
     private void Update(){
         setAnimGround();
+        if(Input.GetButtonDown("Effect")){
+                if( actionArrow[chosenArrow.Value] != null) actionArrow[chosenArrow.Value].Raise();
+            }
         if(currentState != PlayerState.stagger)
             if(currentState != PlayerState.attacking){
                 SetGround();
@@ -77,9 +86,6 @@ public class PlayerController : MonoBehaviour
                 else if(Input.GetButtonDown("Fire1")) PreparFire();
                 else if(Input.GetButtonDown("Down")) Crouch();
                 else if(Input.GetButtonUp("Down")) Stand();
-                else if(Input.GetKeyDown(KeyCode.G)){
-                    if( actionArrow[chosenArrow] != null) actionArrow[chosenArrow].Raise();
-                }
             }
     
             else{
@@ -87,24 +93,25 @@ public class PlayerController : MonoBehaviour
                 if(chargeTime != 0 && currentStrenght < arrowSpeed) currentStrenght += arrowSpeed/chargeTime * Time.deltaTime;
                 else currentStrenght = arrowSpeed;
                 if(Input.GetButtonUp("Fire1") || !Input.GetButton("Fire1")) Fire();
+                if(!Input.GetButton("Horizontal")) myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
             }
         
         if(Input.GetButtonDown("ChangeArrow")){
-            chosenArrow += (int)Input.GetAxisRaw("ChangeArrow");
-            if(chosenArrow >= arrows.Length) chosenArrow = 0;
-            else if(chosenArrow < 0) chosenArrow = arrows.Length - 1;
+            chosenArrow.Value += (int)Input.GetAxisRaw("ChangeArrow");
+            if(chosenArrow.Value >= arrows.currentObjects.Length) chosenArrow.Value = 0;
+            else if(chosenArrow.Value < 0) chosenArrow.Value = arrows.currentObjects.Length - 1;
+            changeArrow.Raise();
         }
 
     }
     
-    private void FixedUpdate()
-    {   
+    private void FixedUpdate(){   
         
         if(currentState == PlayerState.jumping || currentState == PlayerState.onGround){
             Run();
-        } 
+        }
     }
-
+    
     private void setAnimGround(){
         if(IsGrounded()){
                 anim.SetBool("Jumping",false);
@@ -118,18 +125,23 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    
     private void SetGround(){
         
         if(IsGrounded()){
+                myRigidbody2D.drag = 0;
+                myRigidbody2D.gravityScale = 1;
                 if(currentState != PlayerState.crouching) currentState = PlayerState.onGround;
                 doubleJump = true;
         }
         else{
+            myRigidbody2D.drag = resistenciaDoAr;
+            myRigidbody2D.gravityScale = gravidade;
             currentState = PlayerState.jumping;
         }
   
     }
-
+    
     private bool IsGrounded() {
 
         Vector2 position = transform.position;
@@ -137,16 +149,14 @@ public class PlayerController : MonoBehaviour
         for(float i = -raycastCorrection; i <= raycastCorrection; i += raycastCorrection){
 
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, Vector2.down, groundDistance,  groundLayer);
-            if (hit.collider != null){
-                
+            if (hit.collider != null){          
                 return true;
             }
         }
-
         
         return false;
     }
-
+    
     private void Flip(float xValue){
             if(xValue > 0){
                 mySpriteRenderer.flipX = false;
@@ -161,32 +171,31 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(slideCo());
         currentState = PlayerState.crouching;
     }
-
+    
     private void Stand(){
         anim.SetBool("Crouch", false);
         currentState = PlayerState.onGround;
         SetGround();
     }
-
-    private void Run()
-    {
+    
+    private void Run(){
         
         float xValue;
         xValue = Input.GetAxisRaw("Horizontal");
 
         if(xValue != 0){
             anim.SetBool("Running",true);
+            myRigidbody2D.velocity = new Vector2(xValue*speed, myRigidbody2D.velocity.y);
             Flip(xValue);
         }
         else{
+            if(IsGrounded()) myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
             anim.SetBool("Running",false);
         }
         
-        myRigidbody2D.velocity = new Vector2(xValue*speed, myRigidbody2D.velocity.y);
     }
     
-    private void Jump()
-    {
+    private void Jump(){
         if(IsGrounded()){
             anim.SetBool("Jumping",true);
             anim.SetBool("Crouch",false);
@@ -200,7 +209,7 @@ public class PlayerController : MonoBehaviour
             doubleJump = false;
         }
     }
-
+    
     private void posBow(){
 
         Vector3 mousPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -220,12 +229,13 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    
     private void PreparFire(){
         anim.SetBool("FiringArrow", true);
         anim.SetTrigger("Fire");
         currentState = PlayerState.attacking;
-        myRigidbody2D.velocity = new Vector2( 0, myRigidbody2D.velocity.y);
+        myRigidbody2D.drag = 2f;
+        //myRigidbody2D.velocity = new Vector2( 0, myRigidbody2D.velocity.y);
         
         if(mySpriteRenderer.flipX == true){
             mySpriteRenderer.flipX = false;
@@ -235,9 +245,8 @@ public class PlayerController : MonoBehaviour
 
     }
     
-    private void Fire()
-    {
-
+    private void Fire(){
+        myRigidbody2D.drag = 0;
         anim.SetBool("Jumping", false);
         anim.SetBool("DoubleJump", false);
         anim.SetBool("FiringArrow", false);
@@ -246,24 +255,32 @@ public class PlayerController : MonoBehaviour
 
     }
     
+    private void Die(){
+        myRigidbody2D.velocity = Vector2.zero;
+        SetGround();
+        transform.position = GameObject.FindWithTag("Respawn").transform.position;
+        currentLife.Value = maxLife;
+        HealthChange.Raise();
+    }
+
+    public void KnockBack(Vector3 knockBack){
+        currentState = PlayerState.stagger;
+        myRigidbody2D.velocity = Vector2.zero;
+        myRigidbody2D.AddForce(knockBack, ForceMode2D.Impulse);
+        StartCoroutine(invunerableCo());
+    }
+
     public void Hurt(Vector3 knockBack){
+        
         if(currentState != PlayerState.stagger){
             Reset();
             Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
-            currentLife -= 1;
-            if(currentLife <= 0){
-                myRigidbody2D.velocity = Vector2.zero;
-                SetGround();
-                transform.position = GameObject.FindWithTag("Respawn").transform.position;
-                currentLife = maxLife;
-            }else{          
-                currentState = PlayerState.stagger;
-                myRigidbody2D.velocity = Vector2.zero;
-                myRigidbody2D.AddForce(knockBack, ForceMode2D.Impulse);
-                StartCoroutine(invunerableCo());
-            }
-            
+            currentLife.Value -= 1;
+            HealthChange.Raise();
+            if(currentLife.Value <= 0) Die();
+            else KnockBack(knockBack);    
         }
+        
     }
 
     private void Reset(){
@@ -271,7 +288,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool(parameter.name, false);            
         }
         anim.SetTrigger("Idle");
-        currentStrenght = 0;
+        currentStrenght = minStrength;
         Flip(transform.localScale.x);
         transform.localScale = new Vector3(1,1,1);
         attackRunning = false;
@@ -280,15 +297,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.CompareTag("LevelArea")){
-            transform.position = GameObject.FindWithTag("Respawn").transform.position;
+            Die();
         }
     }
     
-    private IEnumerator attackCo()
-    {
+    private IEnumerator attackCo(){
 
         attackRunning = true;
-        GameObject clone = Instantiate(arrows[chosenArrow], firePoint.position, Quaternion.Euler (new Vector3(0,0,arrowAngle)));
+        if(currentStrenght < (arrowSpeed / 2)) yield return new WaitForSeconds(arrowDelay);
+        GameObject clone = Instantiate(arrows.currentObjects[chosenArrow.Value], firePoint.position, Quaternion.Euler (new Vector3(0,0,arrowAngle)));
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (new Vector2(mousePos.x,mousePos.y) - new Vector2(BowPositon.position.x, BowPositon.position.y)).normalized;
         clone.GetComponent<Rigidbody2D>().AddForce(dir*currentStrenght, ForceMode2D.Impulse);
@@ -302,11 +319,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         deleyedAnim = false;
     }
-
+    
     private IEnumerator invunerableCo(){
         yield return new WaitForSeconds(invunerableTime);
         SetGround();
     }
+    
     private IEnumerator slideCo(){
         yield return new WaitForSeconds(slideTime);
         myRigidbody2D.velocity = Vector2.zero;

@@ -6,9 +6,10 @@ public class FallingPlataform : MonoBehaviour
 {
     [SerializeField] private float fallTime = 0f, respawnTime = 0f, shackEffect = 0f;
     [SerializeField] private int shackTimes = 0;
-    public BoxCollider2D myCollider2D;
+    [SerializeField] private BoxCollider2D myCollider2D = null;
     private Rigidbody2D myRigidbody;
     private Vector3 StartPos;
+    
     private void Start() {
         myRigidbody = GetComponent<Rigidbody2D>();
         StartPos = transform.position;

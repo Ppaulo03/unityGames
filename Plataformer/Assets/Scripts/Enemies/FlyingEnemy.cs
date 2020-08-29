@@ -8,9 +8,8 @@ public class FlyingEnemy : Enemy
     [SerializeField] private float desiredHeight = 0f;
     [SerializeField] private float hoverForce = 0f;
     [SerializeField] private float gravityFall = 0f;
-    public float distance;
-    public bool ground;
-
+    [SerializeField] private float turnTime = 0f;
+    protected bool turn = true;
     
     public void GetHeight(){
         Vector2 position = transform.position + SizeCorrection;
@@ -21,8 +20,6 @@ public class FlyingEnemy : Enemy
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, direction, groundDistance, groundLayer);
         
             if (hit.collider != null){
-                ground = true;
-                distance = hit.distance;
                 if(hit.distance > desiredHeight)
                     myRigidbody2D.gravityScale = gravityFall;
                 
@@ -35,9 +32,13 @@ public class FlyingEnemy : Enemy
             } 
 
         }
-        ground = false;
         myRigidbody2D.gravityScale = gravityFall;
         return;
+    }
+
+    protected IEnumerator TurnCo(){
+        yield return new WaitForSeconds(turnTime);
+        turn = true;
     }
 
 }

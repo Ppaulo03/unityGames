@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class DarkSlime : Enemy
 {
-    [Header("Components")]
-    private Animator anim;
-    private SpriteRenderer mySpriteRenderer;
-
-
     [Header("Attack Settings")]
     [SerializeField] private float attackTime = 0f;
     [SerializeField] private float velocityAttack = 0f;
@@ -20,10 +15,7 @@ public class DarkSlime : Enemy
 
 
     private void Start() {
-        anim = GetComponent<Animator>();
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
         currentState = EnemyState.walking;
-
     }
 
     private void FixedUpdate() {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyOverTime : MonoBehaviour
 {
-    public float lifeTime;
+    [SerializeField] private float lifeTime = 0f;
     void Start()
     {
         StartCoroutine(destroyCo());

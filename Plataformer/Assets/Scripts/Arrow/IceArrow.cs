@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceArrow : Arrow
 {
-    public GameObject particles;
+    [SerializeField] private GameObject particles = null;
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Enemy")){
             Destroy(gameObject);

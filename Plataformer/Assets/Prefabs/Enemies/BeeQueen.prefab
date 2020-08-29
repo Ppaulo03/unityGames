@@ -181,10 +181,9 @@ MonoBehaviour:
   gravityFall: 0.25
   distance: 0
   ground: 0
+  turnTime: 1
   attackTime: 0.5
   bee: {fileID: 7683855655470011273, guid: 3a264d7a3cec1094db22ebcc2408f787, type: 3}
-  SpawnTimeMin: 10
-  SpawnTimeMax: 30
 --- !u!95 &4741796374965722289
 Animator:
   serializedVersion: 3

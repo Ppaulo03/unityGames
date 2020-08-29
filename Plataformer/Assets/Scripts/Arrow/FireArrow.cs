@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireArrow : Arrow
 {
-    public GameObject particles;
+    [SerializeField] private GameObject particles = null;
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Enemy")){
             Destroy(gameObject);
@@ -14,6 +14,5 @@ public class FireArrow : Arrow
             myRigidbody.velocity = Vector2.zero;
             Destroy(particles);
         }
-
     }
 }

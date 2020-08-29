@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -4195582761621981391
     second: Empty_Heart
+  - first:
+      213: -6167995919846560122
+    second: Heart_0
+  - first:
+      213: 8229536453357614128
+    second: Heart_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -93,43 +99,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Full_Heart
+      name: Heart_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 5
+        y: 6
+        width: 21
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed7a23e75760fef30800000000000000
-      internalID: 4606908045521496030
+      spriteID: 68eac7de360e66aa0800000000000000
+      internalID: -6167995919846560122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Empty_Heart
+      name: Heart_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
+        x: 37
+        y: 6
+        width: 21
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 137f4cb15bb46c5c0800000000000000
-      internalID: -4195582761621981391
+      spriteID: 03432886dcf253270800000000000000
+      internalID: 8229536453357614128
       vertices: []
       indices: 
       edges: []

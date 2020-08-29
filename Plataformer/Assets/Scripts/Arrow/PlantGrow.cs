@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class PlantGrow : MonoBehaviour
 {
-    public float LifeTime;
-    public float DieAnimationTime;
+    [SerializeField] private float LifeTime = 0f;
+    [SerializeField] private float DieAnimationTime = 0f;
 
     [Header("MudaState")]
-    public Signal killExtras;
-    public Range numMudas;
-    public Range growOrder;
-    private float currentMuda;
-    public float mudaLifeTime;
+    [SerializeField] private Signal killExtras = null;
+    [SerializeField] private Range numMudas = null;
+    [SerializeField] private Range growOrder = null;
+    [SerializeField] private float mudaLifeTime = 0f;
+    private float currentMuda;    
     private bool grew;
-    
-    public bool isSideway;
-    public float sideCorrection;
+    [System.NonSerialized] public bool isSideway;
+    [System.NonSerialized] public float sideCorrection;
 
     [Header("Components")]
     private Animator anim;

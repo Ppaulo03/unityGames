@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class Bee : FlyingEnemy
 {
-    protected float currentSpeed;
-    [Header("Components")]
-    protected SpriteRenderer mySpriteRenderer;
-
+    private float currentSpeed;
 
     private void Start() {
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
         currentSpeed = Random.Range(speed*0.5f, speed*1.5f);
         currentState = EnemyState.walking;
     }
@@ -33,20 +29,16 @@ public class Bee : FlyingEnemy
         }
     }
 
-    protected void Turn(){
-        myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
-        direction = -direction;
-        mySpriteRenderer.flipX = !mySpriteRenderer.flipX;
-        currentSpeed = Random.Range(speed*0.5f, speed*1.5f);
-    }
-
     protected virtual void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Player")){
             Vector3 direction = (other.gameObject.transform.position - transform.position ).normalized;
             other.gameObject.GetComponent<PlayerController>().Hurt(direction* knockBackForce);
         }
-        else if(!other.gameObject.CompareTag("Arrow")){
+        else if(!other.gameObject.CompareTag("Arrow") && turn){
             Turn();
+            turn = false;
+            currentSpeed = Random.Range(speed*0.5f, speed*1.5f);
+            StartCoroutine(TurnCo());
         }
     }
 

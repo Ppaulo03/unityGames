@@ -5,26 +5,25 @@ using UnityEngine;
 public class PlantArrow : Arrow
 {
     [Header("Plant Stuff")]
-    public GameObject plant;
-    public Transform plantPosition;
-    public float delayTime;
+    [SerializeField] private GameObject plant = null;
+    [SerializeField] private Transform plantPosition = null;
+    [SerializeField] private float delayTime = 0f;
+
 
     [Header("Ground Identify")]
-    public LayerMask groundLayer;
-    public float groundDistance;
+    [SerializeField] private LayerMask groundLayer = ~0;
+    [SerializeField] private float groundDistance = 0f;
+
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Enemy")){
             Destroy(gameObject);
             other.gameObject.GetComponent<Enemy>().Hurt(myRigidbody.velocity.normalized * knockBackForce);
         }
-
         else{
             myRigidbody.velocity = Vector2.zero;
-            StartCoroutine(plantCo());
-           
+            StartCoroutine(plantCo());           
         }
-
     }
     
     private bool plantDirection(Vector2 direction){
@@ -42,22 +41,22 @@ public class PlantArrow : Arrow
             clone.GetComponent<PlantGrow>().sideCorrection = 1;
             Destroy(gameObject);
         }
+
         else if(plantDirection(Vector2.left)){
             GameObject clone = Instantiate(plant, plantPosition.position, Quaternion.Euler (new Vector3(0,0,-90)));
             clone.GetComponent<PlantGrow>().isSideway = true;
             clone.GetComponent<PlantGrow>().sideCorrection = -1;
             Destroy(gameObject);
         }
+
         else if(plantDirection(Vector2.down)){
             GameObject clone = Instantiate(plant, plantPosition.position, Quaternion.Euler (new Vector3(0,0,0)));
             clone.GetComponent<PlantGrow>().isSideway = false;
             clone.GetComponent<PlantGrow>().sideCorrection = 1;
             Destroy(gameObject);
         }
-        else{
-            if(myRigidbody.bodyType != RigidbodyType2D.Static)
-                myRigidbody.velocity = Vector2.zero;
-        }
-        
+
+        else if(myRigidbody.bodyType != RigidbodyType2D.Static) myRigidbody.velocity = Vector2.zero;
     }
+    
 }

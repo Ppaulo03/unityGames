@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class TelekineseArrow : Arrow
 {
-    public float arrowForce;
+    [SerializeField] private float arrowForce = 0f;
+    [SerializeField] private float burstTime = 0f;
     private bool controlling = true;
     private bool change = true;
-    public float burstTime;
+    
 
     private void FixedUpdate() {
         

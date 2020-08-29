@@ -48,14 +48,22 @@
      <Compile Include="Assets\Scripts\Enemies\DarkSlime.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\FlyingEnemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Goblin.cs" />
+     <Compile Include="Assets\Scripts\Enemies\GoblinBomb.cs" />
      <Compile Include="Assets\Scripts\Enemies\GroundEnemy.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\DestroyOverTime.cs" />
+     <Compile Include="Assets\Scripts\Mechanic Stuff\ExplosionDamage.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Obstacles\FallingPlataform.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Scenario\ParallaxBackground.cs" />
+     <Compile Include="Assets\Scripts\Scriptables\FloatValue.cs" />
+     <Compile Include="Assets\Scripts\Scriptables\IntValue.cs" />
+     <Compile Include="Assets\Scripts\Scriptables\ObjectArray.cs" />
      <Compile Include="Assets\Scripts\Scriptables\Range.cs" />
      <Compile Include="Assets\Scripts\Scriptables\Signal.cs" />
+     <Compile Include="Assets\Scripts\UI\ArrowManager.cs" />
+     <Compile Include="Assets\Scripts\UI\HearthManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

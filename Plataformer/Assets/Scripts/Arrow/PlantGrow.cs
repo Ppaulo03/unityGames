@@ -45,11 +45,23 @@ public class PlantGrow : MonoBehaviour
         if(currentMuda == numMudas.currentValue) 
             Destroy(gameObject);
     }
-    private IEnumerator dieCo(){
-        yield return new WaitForSeconds(LifeTime);
-        anim.SetBool("Die",true);
+
+    public void Kill(){
+        StopCoroutine(dieCo());
+        if(!grew){
+            anim.SetBool("Die",true);
+            StartCoroutine(KillCo());
+        }else Destroy(gameObject);
+    }   
+    
+    private IEnumerator KillCo(){
         yield return new WaitForSeconds(DieAnimationTime);
         Destroy(gameObject);
+    }
+
+    private IEnumerator dieCo(){
+        yield return new WaitForSeconds(LifeTime);
+        Kill();
     }
     private IEnumerator DissapearCo(){
         yield return new WaitForSeconds(mudaLifeTime);

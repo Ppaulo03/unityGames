@@ -6,7 +6,12 @@ public class Bee : FlyingEnemy
 {
     private float currentSpeed;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip buzzSound = null;
+    private AudioSource myAudioSource;
+
     private void Start() {
+        myAudioSource = GetComponent<AudioSource>();
         currentSpeed = Random.Range(speed*0.5f, speed*1.5f);
         currentState = EnemyState.walking;
     }
@@ -40,6 +45,31 @@ public class Bee : FlyingEnemy
             currentSpeed = Random.Range(speed*0.5f, speed*1.5f);
             StartCoroutine(TurnCo());
         }
+    }
+
+    private void BuzzSound(){
+        myAudioSource.loop = true;
+        myAudioSource.clip = buzzSound;
+        myAudioSource.volume = 0.05f;
+        myAudioSource.Play();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("Player")){
+            BuzzSound();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if(other.gameObject.CompareTag("Player")){
+            myAudioSource.Stop();
+            StopCoroutine(idleSoundCo());
+        }
+    }
+
+    private IEnumerator idleSoundCo(){
+        yield return new WaitForSeconds(myAudioSource.clip.length + 0.2f);
+            BuzzSound();
     }
 
 }

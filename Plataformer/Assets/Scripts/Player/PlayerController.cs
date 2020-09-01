@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour{
 
     [SerializeField] private PlayerState currentState;
 
+
     [Header("Life Settings")]
     [SerializeField] private GameObject DamageEffect = null;
     [SerializeField] private float invunerableTime = 0f;
     [SerializeField] private int maxLife = 0;
     [SerializeField] private FloatValue currentLife = null;
     [SerializeField] private Signal HealthChange = null;
+    [SerializeField] private AudioClip HurtSound = null;
 
 
     [Header("Moviment Settings")]
@@ -28,9 +30,12 @@ public class PlayerController : MonoBehaviour{
     [SerializeField] private float doubleJumpForce = 0f;
     [SerializeField] private bool doubleJump = false;
     [SerializeField] private float slideTime = 0f;
+
+
     [Header("AirTime")]
     [SerializeField] private float resistenciaDoAr = 0f;
     [SerializeField] private float gravidade = 0f;
+    [SerializeField] private AudioClip JumpSound = null;
     
 
     [Header("Fire Settings")]
@@ -44,6 +49,7 @@ public class PlayerController : MonoBehaviour{
     [SerializeField] private float attackTime = 0f;
     [SerializeField] private float arrowDelay = 0f;
     private bool attackRunning;
+     [SerializeField] private AudioClip ArrowSound = null;
     
 
     [Header("Arrows Settings")]
@@ -58,10 +64,12 @@ public class PlayerController : MonoBehaviour{
     [SerializeField] private float groundDistance = 0f;
     [SerializeField] private float raycastCorrection = 0f;
 
+
     [Header("Components")]
     private Rigidbody2D myRigidbody2D;
     private Animator anim;
     private SpriteRenderer mySpriteRenderer;
+    private AudioSource myAudioSource;
 
     private bool deleyedAnim;
 
@@ -69,6 +77,7 @@ public class PlayerController : MonoBehaviour{
         myRigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        myAudioSource = GetComponent<AudioSource>();
         currentLife.Value = maxLife;
         currentStrenght = minStrength;
         StartCoroutine(delayCo(0.2f));
@@ -147,7 +156,7 @@ public class PlayerController : MonoBehaviour{
         Vector2 position = transform.position;
         
         for(float i = -raycastCorrection; i <= raycastCorrection; i += raycastCorrection){
-
+            Debug.DrawRay(position + Vector2.right*i, Vector2.down, Color.green);
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, Vector2.down, groundDistance,  groundLayer);
             if (hit.collider != null){          
                 return true;
@@ -200,6 +209,10 @@ public class PlayerController : MonoBehaviour{
             anim.SetBool("Jumping",true);
             anim.SetBool("Crouch",false);
             myRigidbody2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            if(JumpSound != null){
+                myAudioSource.clip = JumpSound;
+                myAudioSource.Play(0);
+            }
         }
 
         else if(doubleJump){
@@ -207,6 +220,10 @@ public class PlayerController : MonoBehaviour{
             myRigidbody2D.AddForce(Vector3.up * doubleJumpForce, ForceMode2D.Impulse);
             anim.SetBool("DoubleJump", true);
             doubleJump = false;
+            if(JumpSound != null){
+                myAudioSource.clip = JumpSound;
+                myAudioSource.Play(0);
+            }
         }
     }
     
@@ -235,7 +252,6 @@ public class PlayerController : MonoBehaviour{
         anim.SetTrigger("Fire");
         currentState = PlayerState.attacking;
         myRigidbody2D.drag = 2f;
-        //myRigidbody2D.velocity = new Vector2( 0, myRigidbody2D.velocity.y);
         
         if(mySpriteRenderer.flipX == true){
             mySpriteRenderer.flipX = false;
@@ -269,16 +285,23 @@ public class PlayerController : MonoBehaviour{
         myRigidbody2D.AddForce(knockBack, ForceMode2D.Impulse);
         StartCoroutine(invunerableCo());
     }
-
+    
     public void Hurt(Vector3 knockBack){
         
         if(currentState != PlayerState.stagger){
+            if(HurtSound != null){
+                myAudioSource.clip = HurtSound;
+                myAudioSource.Play(0);
+            }
+
             Reset();
+            currentState = PlayerState.stagger;
             Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
             currentLife.Value -= 1;
             HealthChange.Raise();
             if(currentLife.Value <= 0) Die();
-            else KnockBack(knockBack);    
+            else if( knockBack != Vector3.zero ) KnockBack(knockBack);
+            StartCoroutine(invunerableCo());
         }
         
     }
@@ -304,7 +327,12 @@ public class PlayerController : MonoBehaviour{
     private IEnumerator attackCo(){
 
         attackRunning = true;
+        myAudioSource.clip = ArrowSound;
+        myAudioSource.Play(0);
+        yield return new WaitForSeconds(0.05f);
         if(currentStrenght < (arrowSpeed / 2)) yield return new WaitForSeconds(arrowDelay);
+        
+        
         GameObject clone = Instantiate(arrows.currentObjects[chosenArrow.Value], firePoint.position, Quaternion.Euler (new Vector3(0,0,arrowAngle)));
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = (new Vector2(mousePos.x,mousePos.y) - new Vector2(BowPositon.position.x, BowPositon.position.y)).normalized;

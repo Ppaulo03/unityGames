@@ -22,7 +22,7 @@ public class PlantArrow : Arrow
         }
         else{
             myRigidbody.velocity = Vector2.zero;
-            StartCoroutine(plantCo());           
+            StartCoroutine(plantCo(other.collider));           
         }
     }
     
@@ -33,30 +33,30 @@ public class PlantArrow : Arrow
         return false;
     }
 
-    private IEnumerator plantCo(){
+    private IEnumerator plantCo(Collider2D plataform){
         yield return new WaitForSeconds(delayTime);
         if(plantDirection(Vector2.right)){
-            GameObject clone = Instantiate(plant, plantPosition.position, Quaternion.Euler (new Vector3(0,0,90)));
+            GameObject clone = Instantiate(plant, plataform.ClosestPoint(plantPosition.position), Quaternion.Euler (new Vector3(0,0,90)));
             clone.GetComponent<PlantGrow>().isSideway = true;
             clone.GetComponent<PlantGrow>().sideCorrection = 1;
             Destroy(gameObject);
         }
 
         else if(plantDirection(Vector2.left)){
-            GameObject clone = Instantiate(plant, plantPosition.position, Quaternion.Euler (new Vector3(0,0,-90)));
+            GameObject clone = Instantiate(plant, plataform.ClosestPoint(plantPosition.position), Quaternion.Euler (new Vector3(0,0,-90)));
             clone.GetComponent<PlantGrow>().isSideway = true;
             clone.GetComponent<PlantGrow>().sideCorrection = -1;
             Destroy(gameObject);
         }
 
         else if(plantDirection(Vector2.down)){
-            GameObject clone = Instantiate(plant, plantPosition.position, Quaternion.Euler (new Vector3(0,0,0)));
+            GameObject clone = Instantiate(plant, plataform.ClosestPoint(plantPosition.position), Quaternion.Euler (new Vector3(0,0,0)));
             clone.GetComponent<PlantGrow>().isSideway = false;
             clone.GetComponent<PlantGrow>().sideCorrection = 1;
             Destroy(gameObject);
         }
-
         else if(myRigidbody.bodyType != RigidbodyType2D.Static) myRigidbody.velocity = Vector2.zero;
+    
     }
     
 }

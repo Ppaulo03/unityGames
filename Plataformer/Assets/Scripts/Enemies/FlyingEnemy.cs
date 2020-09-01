@@ -10,7 +10,6 @@ public class FlyingEnemy : Enemy
     [SerializeField] private float gravityFall = 0f;
     [SerializeField] private float turnTime = 0f;
     protected bool turn = true;
-    
     public void GetHeight(){
         Vector2 position = transform.position + SizeCorrection;
         Vector2 direction = Vector2.down;

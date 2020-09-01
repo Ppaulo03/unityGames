@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int lifePoints = 0;
     [SerializeField] private float invunerableTime = 0f;
     [SerializeField] protected float knockBackForce = 0f;
+    [SerializeField] protected float knockBackResistence = 0f;
+
 
 
     [Header("Ground Check")]
@@ -39,8 +41,6 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D myRigidbody2D;
     protected SpriteRenderer mySpriteRenderer;
     protected Animator anim;
-    
-
 
     private void Awake() {
         myRigidbody2D = GetComponent<Rigidbody2D>();
@@ -48,15 +48,22 @@ public class Enemy : MonoBehaviour
         mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    protected virtual void HurtSound(){}
+
     public virtual void Hurt(Vector3 knockBack){
 
         if(currentState != EnemyState.stagger){
+            HurtSound();
 
             currentState = EnemyState.stagger;
             Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
             
             myRigidbody2D.velocity = Vector2.zero;
-            myRigidbody2D.AddForce(knockBack, ForceMode2D.Impulse);
+            Vector3 RealKnockBack = knockBack - new Vector3(knockBackResistence,knockBackResistence, 0);
+            if(RealKnockBack.x < 0) new Vector3(0, RealKnockBack.y, 0);
+            if(RealKnockBack.x < 0) new Vector3(RealKnockBack.x, 0, 0);
+
+            myRigidbody2D.AddForce(RealKnockBack, ForceMode2D.Impulse);
             
             lifePoints -= 1;
 
@@ -66,12 +73,13 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
+    protected virtual void DieEffect(){}
     protected virtual void Die(){
+        DieEffect();
         gameObject.SetActive(false);
     }
         
-    protected void Turn(){
+    protected virtual void Turn(){
         myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
         direction = -direction;
         mySpriteRenderer.flipX = !mySpriteRenderer.flipX;

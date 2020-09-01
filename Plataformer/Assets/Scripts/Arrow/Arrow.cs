@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
-{   
+public class Arrow : MonoBehaviour{   
 
     [SerializeField] protected float knockBackForce = 0f;
     [SerializeField] protected Collider2D arrowCollider = null;
@@ -17,15 +16,16 @@ public class Arrow : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        
         if(myRigidbody.velocity.y == 0){
             myRigidbody.bodyType = RigidbodyType2D.Static;
             if(arrowCollider != null) arrowCollider.enabled = false;
-
         }
         else DirectArrow();
+
     }
 
-    public virtual void DirectArrow(){
+    protected virtual void DirectArrow(){
         float angle = (Mathf.Atan2(myRigidbody.velocity.y, myRigidbody.velocity.x) * Mathf.Rad2Deg) - 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
@@ -35,10 +35,9 @@ public class Arrow : MonoBehaviour
             Destroy(gameObject);
             other.gameObject.GetComponent<Enemy>().Hurt(myRigidbody.velocity.normalized * knockBackForce);
         }
-        else{
+        else if(other.gameObject.layer == LayerMask.NameToLayer ("Ground")){
             myRigidbody.velocity = Vector2.zero;
-        }
-
+        }else Destroy(gameObject);
     }
 
 }

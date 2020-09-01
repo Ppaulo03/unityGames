@@ -5,10 +5,15 @@ using UnityEngine;
 public class BeeQueen : FlyingEnemy
 {
     private float currentSpeed;
-
+    [SerializeField] private GameObject teleportArea = null;
     [Header("Attack Settings")]
     [SerializeField] private float attackTime = 0f;
     [SerializeField] private GameObject bee = null;
+
+    [Header("Sound Settings")]
+    [SerializeField] private SoundEffect sounds = null;
+    [SerializeField] private AudioClip damageSound = null;
+
 
     private void Start(){
         currentSpeed = Random.Range(speed*0.5f, speed*1.5f);
@@ -40,6 +45,11 @@ public class BeeQueen : FlyingEnemy
         }
     }
 
+    protected override void DieEffect(){
+        if(teleportArea != null)
+            teleportArea.SetActive(true);
+    }
+
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Player")){
             Vector3 direction = (other.gameObject.transform.position - transform.position ).normalized;
@@ -49,7 +59,7 @@ public class BeeQueen : FlyingEnemy
             SpawnBee();
         }
         else{
-            if(turn){
+            if(turn && !other.gameObject.CompareTag("Arrow")){
                 Turn();
                 turn = false;
                 currentSpeed = Random.Range(speed*0.5f, speed*1.5f);

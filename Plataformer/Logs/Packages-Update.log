@@ -46,3 +46,11 @@ The following packages were added:
 The following packages were updated:
   com.unity.2d.animation from version 3.2.2 to 3.2.3
   com.unity.2d.spriteshape from version 3.0.11 to 3.0.12
+
+=== Sat Aug 29 10:04:46 2020
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.test-framework from version 1.1.14 to 1.1.16

@@ -1,0 +1,1220 @@
+fileFormatVersion: 2
+guid: 42d7cbea47317734dba973a8a331b7a2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1004704971791485786
+    second: acid1-14x67_0
+  - first:
+      213: 6142652966724117416
+    second: acid1-14x67_1
+  - first:
+      213: -4929117754616835785
+    second: acid1-14x67_2
+  - first:
+      213: 6405090136067733309
+    second: acid1-14x67_3
+  - first:
+      213: -6985540099615560503
+    second: acid1-14x67_4
+  - first:
+      213: 8334999271400704107
+    second: acid1-14x67_5
+  - first:
+      213: -3011405657921234008
+    second: acid1-14x67_6
+  - first:
+      213: 3113986517665891891
+    second: acid1-14x67_7
+  - first:
+      213: 2202851966507246105
+    second: acid1-14x67_8
+  - first:
+      213: -7465949110151822596
+    second: acid1-14x67_9
+  - first:
+      213: 8067677761896888116
+    second: acid1-14x67_10
+  - first:
+      213: 7051504550423534636
+    second: acid1-14x67_11
+  - first:
+      213: 1935704924727782438
+    second: acid1-14x67_12
+  - first:
+      213: -8272353589587495636
+    second: acid1-14x67_13
+  - first:
+      213: 7753336157191948147
+    second: acid1-14x67_14
+  - first:
+      213: 1640145013213284278
+    second: acid1-14x67_15
+  - first:
+      213: 4431103004126515821
+    second: acid1-14x67_16
+  - first:
+      213: -8859774982622023418
+    second: acid1-14x67_17
+  - first:
+      213: 7302628920813607757
+    second: acid1-14x67_18
+  - first:
+      213: -5356735302631148559
+    second: acid1-14x67_19
+  - first:
+      213: 6642715991564570680
+    second: acid1-14x67_20
+  - first:
+      213: 2915889039401941857
+    second: acid1-14x67_21
+  - first:
+      213: 7568972623060239202
+    second: acid1-14x67_22
+  - first:
+      213: -5626173083069234477
+    second: acid1-14x67_23
+  - first:
+      213: -7453282873939724995
+    second: acid1-14x67_0
+  - first:
+      213: -6483230217165857890
+    second: acid1-14x67_1
+  - first:
+      213: -325788517064857896
+    second: acid1-14x67_2
+  - first:
+      213: -5349586929189587029
+    second: acid1-14x67_3
+  - first:
+      213: -4954699035180334004
+    second: acid1-14x67_4
+  - first:
+      213: 6759162887395755135
+    second: acid1-14x67_5
+  - first:
+      213: 4848988946431030824
+    second: acid1-14x67_6
+  - first:
+      213: 4756793225118623635
+    second: acid1-14x67_7
+  - first:
+      213: 6357683740568877255
+    second: acid1-14x67_8
+  - first:
+      213: 7801737158442539177
+    second: acid1-14x67_9
+  - first:
+      213: 7422365347619968915
+    second: acid1-14x67_10
+  - first:
+      213: -6708381847996932241
+    second: acid1-14x67_11
+  - first:
+      213: -7748539667321997277
+    second: acid1-14x67_12
+  - first:
+      213: -2569709533850635469
+    second: acid1-14x67_13
+  - first:
+      213: -7758352551555420608
+    second: acid1-14x67_14
+  - first:
+      213: -3184886026050447113
+    second: acid1-14x67_15
+  - first:
+      213: 3401289127603616338
+    second: acid1-14x67_16
+  - first:
+      213: 2176164900959434721
+    second: acid1-14x67_17
+  - first:
+      213: 2826614637981199945
+    second: acid1-14x67_18
+  - first:
+      213: -5470049052298244730
+    second: acid1-14x67_19
+  - first:
+      213: -700004237410007392
+    second: acid1-14x67_20
+  - first:
+      213: 7655666392339726635
+    second: acid1-14x67_21
+  - first:
+      213: -8486005651165408234
+    second: acid1-14x67_22
+  - first:
+      213: 5983177735064108161
+    second: acid1-14x67_23
+  - first:
+      213: -2574284190225621522
+    second: acid1-14x67_24
+  - first:
+      213: -3348014206798342353
+    second: acid1-14x67_25
+  - first:
+      213: 7908731069671498034
+    second: acid1-14x67_26
+  - first:
+      213: 7360215004052012881
+    second: acid1-14x67_27
+  - first:
+      213: 4533119316990390339
+    second: acid1-14x67_28
+  - first:
+      213: 9019333055493088915
+    second: acid1-14x67_29
+  - first:
+      213: 8087782893846582479
+    second: acid1-14x67_30
+  - first:
+      213: -6908735068539368603
+    second: acid1-14x67_31
+  - first:
+      213: -2371517374581890388
+    second: acid1-14x67_32
+  - first:
+      213: 5150593672937259640
+    second: acid1-14x67_33
+  - first:
+      213: 5022732740238596358
+    second: acid1-14x67_34
+  - first:
+      213: 8292732673499511569
+    second: acid1-14x67_35
+  - first:
+      213: 5969645517674803100
+    second: acid1-14x67_36
+  - first:
+      213: -8719464957037957199
+    second: acid1-14x67_37
+  - first:
+      213: -3706397313281712850
+    second: acid1-14x67_38
+  - first:
+      213: 181374282827550735
+    second: acid1-14x67_39
+  - first:
+      213: 7146316274214407083
+    second: acid1-14x67_40
+  - first:
+      213: 8643352893200840752
+    second: acid1-14x67_41
+  - first:
+      213: -1037087722756148441
+    second: acid1-14x67_42
+  - first:
+      213: 8096177898843647675
+    second: acid1-14x67_43
+  - first:
+      213: -8075495444449968643
+    second: acid1-14x67_44
+  - first:
+      213: 7468958257566193229
+    second: acid1-14x67_45
+  - first:
+      213: -1556051103953849258
+    second: acid1-14x67_46
+  - first:
+      213: 8436051982764537394
+    second: acid1-14x67_47
+  - first:
+      213: 2441830696730400149
+    second: acid1-14x67_48
+  - first:
+      213: -6273355224718290292
+    second: acid1-14x67_49
+  - first:
+      213: -1607514442971196709
+    second: acid1-14x67_50
+  - first:
+      213: -264765628419805641
+    second: acid1-14x67_51
+  - first:
+      213: -7940179460452400780
+    second: acid1-14x67_52
+  - first:
+      213: 8444650745101785213
+    second: acid1-14x67_53
+  - first:
+      213: -3695357308996211913
+    second: acid1-14x67_54
+  - first:
+      213: 66253188324268398
+    second: acid1-14x67_55
+  - first:
+      213: 8056651997239675609
+    second: acid1-14x67_56
+  - first:
+      213: 7190524730450697893
+    second: acid1-14x67_57
+  - first:
+      213: -2098986731392358156
+    second: acid1-14x67_58
+  - first:
+      213: 2808638390718180922
+    second: acid1-14x67_59
+  - first:
+      213: 7855857036455113711
+    second: acid1-14x67_60
+  - first:
+      213: 8927529361434659538
+    second: acid1-14x67_61
+  - first:
+      213: -8166596328816033085
+    second: acid1-14x67_62
+  - first:
+      213: -1728954550034708367
+    second: acid1-14x67_63
+  - first:
+      213: -1841775408858957617
+    second: acid1-14x67_64
+  - first:
+      213: -5776174317253759927
+    second: acid1-14x67_65
+  - first:
+      213: -7263238982783923506
+    second: acid1-14x67_66
+  - first:
+      213: 2422620918548168106
+    second: acid1-14x67_67
+  - first:
+      213: -7124378217656789769
+    second: acid1-14x67_68
+  - first:
+      213: -5339011269949014692
+    second: acid1-14x67_69
+  - first:
+      213: -7177980279301335352
+    second: acid1-14x67_70
+  - first:
+      213: -537719631154996269
+    second: acid1-14x67_71
+  - first:
+      213: -1411948490625661895
+    second: acid1-14x67_72
+  - first:
+      213: 1934432420075504645
+    second: acid1-14x67_73
+  - first:
+      213: 321473266286319333
+    second: acid1-14x67_74
+  - first:
+      213: 2486222169210271774
+    second: acid1-14x67_75
+  - first:
+      213: -7618691796903162367
+    second: acid1-14x67_76
+  - first:
+      213: 7463256839896766783
+    second: acid1-14x67_77
+  - first:
+      213: 3251196079289583736
+    second: acid1-14x67_78
+  - first:
+      213: 8112162321230516495
+    second: acid1-14x67_79
+  - first:
+      213: -4327066757176731674
+    second: acid1-14x67_80
+  - first:
+      213: 422793871305503411
+    second: acid1-14x67_81
+  - first:
+      213: 653888120505403764
+    second: acid1-14x67_82
+  - first:
+      213: 3096794965165303463
+    second: acid1-14x67_83
+  - first:
+      213: -4267140959192077270
+    second: acid1-14x67_84
+  - first:
+      213: 4617792047567590716
+    second: acid1-14x67_85
+  - first:
+      213: 9141538815346859001
+    second: acid1-14x67_86
+  - first:
+      213: 5933216699990427195
+    second: acid1-14x67_87
+  - first:
+      213: 3923293114702855988
+    second: acid1-14x67_88
+  - first:
+      213: 5917531350924072745
+    second: acid1-14x67_89
+  - first:
+      213: 7496896263243595436
+    second: acid1-14x67_90
+  - first:
+      213: 1940418022083129315
+    second: acid1-14x67_91
+  - first:
+      213: -9074430200819704412
+    second: acid1-14x67_92
+  - first:
+      213: 3246215633652058321
+    second: acid1-14x67_93
+  - first:
+      213: 1955621541644559166
+    second: acid1-14x67_94
+  - first:
+      213: -5633858781217307665
+    second: acid1-14x67_95
+  - first:
+      213: 7440192543680846350
+    second: acid1-14x67_96
+  - first:
+      213: -4992920899207310129
+    second: acid1-14x67_97
+  - first:
+      213: -2515222932311541049
+    second: acid1-14x67_98
+  - first:
+      213: 5492879405741796153
+    second: acid1-14x67_99
+  - first:
+      213: -4656597960271202313
+    second: acid1-14x67_100
+  - first:
+      213: 435260099811554671
+    second: acid1-14x67_101
+  - first:
+      213: -892602804666284585
+    second: acid1-14x67_102
+  - first:
+      213: -4928493412319941041
+    second: acid1-14x67_103
+  - first:
+      213: 966266440801920439
+    second: acid1-14x67_104
+  - first:
+      213: 3630484486333454334
+    second: acid1-14x67_105
+  - first:
+      213: -6939913549066375604
+    second: acid1-14x67_106
+  - first:
+      213: -1948893087231294061
+    second: acid1-14x67_107
+  - first:
+      213: 2734513660164426418
+    second: acid1-14x67_108
+  - first:
+      213: -8449795263835492508
+    second: acid1-14x67_109
+  - first:
+      213: 4594939363453024429
+    second: acid1-14x67_110
+  - first:
+      213: 5066957446704035003
+    second: acid1-14x67_111
+  - first:
+      213: -3786193380175710343
+    second: acid1-14x67_112
+  - first:
+      213: -782330471215626482
+    second: acid1-14x67_113
+  - first:
+      213: -6494334601427091424
+    second: acid1-14x67_114
+  - first:
+      213: -6214252311572814670
+    second: acid1-14x67_115
+  - first:
+      213: 2303636443796490254
+    second: acid1-14x67_116
+  - first:
+      213: -4220261276070356204
+    second: acid1-14x67_117
+  - first:
+      213: -1688660681817610403
+    second: acid1-14x67_118
+  - first:
+      213: -5086058346392383297
+    second: acid1-14x67_119
+  - first:
+      213: 1733590806642625893
+    second: acid1-14x67_120
+  - first:
+      213: -591634579509708463
+    second: acid1-14x67_121
+  - first:
+      213: -8974431512455282106
+    second: acid1-14x67_122
+  - first:
+      213: 8245051653832360321
+    second: acid1-14x67_123
+  - first:
+      213: 7710944213642942193
+    second: acid1-14x67_124
+  - first:
+      213: -3031179228286488174
+    second: acid1-14x67_125
+  - first:
+      213: -9031449826235806592
+    second: acid1-14x67_126
+  - first:
+      213: -6430272365141575304
+    second: acid1-14x67_127
+  - first:
+      213: -4966159460584294214
+    second: acid1-14x67_128
+  - first:
+      213: -3406102933168004078
+    second: acid1-14x67_129
+  - first:
+      213: 8915431000558169371
+    second: acid1-14x67_130
+  - first:
+      213: 2680230118914932578
+    second: acid1-14x67_131
+  - first:
+      213: 3520125861194028006
+    second: acid1-14x67_132
+  - first:
+      213: 8267709332764318050
+    second: acid1-14x67_133
+  - first:
+      213: -5047004758085086703
+    second: acid1-14x67_134
+  - first:
+      213: -805463983677855815
+    second: acid1-14x67_135
+  - first:
+      213: 8435559592901619923
+    second: acid1-14x67_136
+  - first:
+      213: 4640288000737373098
+    second: acid1-14x67_137
+  - first:
+      213: 1387496548103281857
+    second: acid1-14x67_138
+  - first:
+      213: -3901649196980744697
+    second: acid1-14x67_139
+  - first:
+      213: 1967468825078785455
+    second: acid1-14x67_140
+  - first:
+      213: 55430328258891461
+    second: acid1-14x67_141
+  - first:
+      213: -1203970024428347146
+    second: acid1-14x67_142
+  - first:
+      213: -5725202434368925947
+    second: acid1-14x67_143
+  - first:
+      213: 5341606160276534672
+    second: acid1-14x67_144
+  - first:
+      213: 6173133216450297369
+    second: acid1-14x67_145
+  - first:
+      213: -8152039917078979187
+    second: acid1-14x67_146
+  - first:
+      213: 1579714533350810802
+    second: acid1-14x67_147
+  - first:
+      213: 89790726538040496
+    second: acid1-14x67_148
+  - first:
+      213: 2321977951409625804
+    second: acid1-14x67_149
+  - first:
+      213: -9023870119970454362
+    second: acid1-14x67_150
+  - first:
+      213: 9209473853960423435
+    second: acid1-14x67_151
+  - first:
+      213: 2286203946995189284
+    second: acid1-14x67_152
+  - first:
+      213: -2867863500074963351
+    second: acid1-14x67_153
+  - first:
+      213: -5165400618404035190
+    second: acid1-14x67_154
+  - first:
+      213: -8669679324369775210
+    second: acid1-14x67_155
+  - first:
+      213: 1827609098258693795
+    second: acid1-14x67_156
+  - first:
+      213: -6671283583225559206
+    second: acid1-14x67_157
+  - first:
+      213: 6540509550296033678
+    second: acid1-14x67_158
+  - first:
+      213: -276685020170154346
+    second: acid1-14x67_159
+  - first:
+      213: 4502857360737237878
+    second: acid1-14x67_160
+  - first:
+      213: -2896493718325472365
+    second: acid1-14x67_161
+  - first:
+      213: 289717000098687416
+    second: acid1-14x67_162
+  - first:
+      213: 4991585614539444692
+    second: acid1-14x67_163
+  - first:
+      213: 1963801925639336926
+    second: acid1-14x67_164
+  - first:
+      213: 7293293933769327731
+    second: acid1-14x67_165
+  - first:
+      213: 7296778832713140891
+    second: acid1-14x67_166
+  - first:
+      213: 4971029681352694982
+    second: acid1-14x67_167
+  - first:
+      213: -1810099025489089201
+    second: acid1-14x67_168
+  - first:
+      213: 8805604346469667661
+    second: acid1-14x67_169
+  - first:
+      213: 6084394762287772311
+    second: acid1-14x67_170
+  - first:
+      213: -1130994457172899792
+    second: acid1-14x67_171
+  - first:
+      213: 2971771405189491593
+    second: acid1-14x67_172
+  - first:
+      213: 3613220391907743115
+    second: acid1-14x67_173
+  - first:
+      213: -5655637977695847910
+    second: acid1-14x67_174
+  - first:
+      213: 8743738709148830399
+    second: acid1-14x67_175
+  - first:
+      213: -1611974372494931861
+    second: acid1-14x67_176
+  - first:
+      213: -2971130056529258184
+    second: acid1-14x67_177
+  - first:
+      213: -6260727824865829539
+    second: acid1-14x67_178
+  - first:
+      213: -7477651860022870601
+    second: acid1-14x67_179
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: acid1-14x67_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 134
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35f15027be909890800000000000000
+      internalID: -7453282873939724995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_1
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 134
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9b10c49770f606a0800000000000000
+      internalID: -6483230217165857890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_2
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 134
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d6a270e1119a7bf0800000000000000
+      internalID: -325788517064857896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_3
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 134
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba7f49ef70372c5b0800000000000000
+      internalID: -5349586929189587029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_4
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 134
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c440b178a7f5d3bb0800000000000000
+      internalID: -4954699035180334004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_5
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 134
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f744a32a5de5dcd50800000000000000
+      internalID: 6759162887395755135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_6
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 134
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82631d771c11b4340800000000000000
+      internalID: 4848988946431030824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_7
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 134
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3972e255c36830240800000000000000
+      internalID: 4756793225118623635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 67
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c872e67da70b3850800000000000000
+      internalID: 6357683740568877255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_9
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 67
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a8dee73c96554c60800000000000000
+      internalID: 7801737158442539177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_10
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 67
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3979e0255f9810760800000000000000
+      internalID: 7422365347619968915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_11
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 67
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6fd674704a07e2a0800000000000000
+      internalID: -6708381847996932241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_12
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 67
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 328bf31e938a77490800000000000000
+      internalID: -7748539667321997277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_13
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 67
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 333f5ea3bce865cd0800000000000000
+      internalID: -2569709533850635469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_14
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 67
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04e2b4ab57bc45490800000000000000
+      internalID: -7758352551555420608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_15
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 67
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f8582798030dc3d0800000000000000
+      internalID: -3184886026050447113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25a3635d07ec33f20800000000000000
+      internalID: 3401289127603616338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_17
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 0
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e73c56927a433e10800000000000000
+      internalID: 2176164900959434721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_18
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94ee9c589072a3720800000000000000
+      internalID: 2826614637981199945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_19
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68d0dc55e5b7614b0800000000000000
+      internalID: -5470049052298244730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_20
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 0
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a688e7dad51946f0800000000000000
+      internalID: -700004237410007392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_21
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 0
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b214e4ab5046e3a60800000000000000
+      internalID: 7655666392339726635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_22
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 614145032d6ab3a80800000000000000
+      internalID: -8486005651165408234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: acid1-14x67_23
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 0
+        width: 14
+        height: 67
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18cb5862374880350800000000000000
+      internalID: 5983177735064108161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

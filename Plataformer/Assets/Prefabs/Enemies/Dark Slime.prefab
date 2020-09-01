@@ -248,7 +248,7 @@ MonoBehaviour:
   knockBackForce: 7.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 28928
   groundDistance: 0.1
   raycastCorrection: 0.5
   SizeCorrection: {x: -0.1, y: 0, z: 0}

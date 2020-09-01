@@ -11,8 +11,12 @@ public class Goblin : GroundEnemy{
     [Header("Attack Settings")]
     [SerializeField] private GameObject bomb = null;
     [SerializeField] private Transform bombPoint = null;
+    [SerializeField] private Collider2D attackArea = null;
 
-    [SerializeField] private float attackTime = 0f;
+    [SerializeField] private float[] attackTimes = null;
+    [SerializeField] private float bombTime = 0f;
+    [SerializeField] private float forceModifier = 0f;
+    [SerializeField] private float AttackCooldown = 0f; 
     [SerializeField] private float AttackDistance = 0f;
     [SerializeField] private float velocityAttack = 0f;
 
@@ -22,6 +26,7 @@ public class Goblin : GroundEnemy{
     private void Start() {
         currentState = EnemyState.walking;
         anim.SetBool("Walking", true);
+        attackArea.enabled = true;
     }
 
     private void FixedUpdate() {
@@ -71,7 +76,9 @@ public class Goblin : GroundEnemy{
 
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player") && currentState != EnemyState.attacking && currentState != EnemyState.stagger){
+        if(other.gameObject.CompareTag("Player") && currentState != EnemyState.stagger){
+            float time = 0f;
+            attackArea.enabled = false;
             currentState = EnemyState.attacking;
             anim.SetBool("Walking", false); 
             bool back = false;
@@ -86,28 +93,41 @@ public class Goblin : GroundEnemy{
             }
             float distance = Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
             if(distance <= AttackDistance){
-                if(!back) anim.SetTrigger("AttackA");
-                else anim.SetTrigger("AttackB");
+                if(!back){
+                    anim.SetTrigger("AttackA");
+                    time = attackTimes[0];
+                }
+                else{
+                    anim.SetTrigger("AttackB");
+                    time = attackTimes[1];
+                }
                 myRigidbody2D.AddForce(new Vector3(direction*velocityAttack, 0, 0), ForceMode2D.Impulse);
             }else{
                 anim.SetTrigger("AttackC");
-                StartCoroutine(bombCo(distance));
-
+                time = attackTimes[2];
+                StartCoroutine(bombCo(distance*forceModifier));
             }
-            StartCoroutine(attackCo());
+            StartCoroutine(attackCo(time));
 
         }
     }
 
 
-    private IEnumerator attackCo(){
-        yield return new WaitForSeconds(attackTime);
+    private IEnumerator attackCo(float time){
+        yield return new WaitForSeconds(time);
         myRigidbody2D.velocity = Vector2.zero;
         currentState = EnemyState.idle;
         StartCoroutine(idleCo());
+        StartCoroutine(attackCooldownCo());
     }
+
+    private IEnumerator attackCooldownCo(){
+        yield return new WaitForSeconds(AttackCooldown);
+        attackArea.enabled = true;
+    }
+
     private IEnumerator bombCo(float force){
-        yield return new WaitForSeconds(attackTime);
+        yield return new WaitForSeconds(bombTime);
         if(currentState == EnemyState.attacking){
             GameObject clone = Instantiate(bomb, bombPoint.position, Quaternion.Euler(Vector3.zero));
             clone.GetComponent<Rigidbody2D>().AddForce(new Vector3(direction,0.25f,0)*force, ForceMode2D.Impulse);

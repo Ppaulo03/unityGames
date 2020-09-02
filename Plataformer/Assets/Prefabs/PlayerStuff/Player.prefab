@@ -197,11 +197,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  Pause: {fileID: 11400000, guid: cf7ce135ea9d00d4996ad297b6810905, type: 2}
+  UnPause: {fileID: 11400000, guid: f17bb1539b800ac428a1b773b77e4c63, type: 2}
   DamageEffect: {fileID: 7904119211016606380, guid: 711dd75f6cb21134cbc5e0387f6f9071,
     type: 3}
   invunerableTime: 1
-  maxLife: 4
+  maxLife: 3
   currentLife: {fileID: 11400000, guid: 968398fd07f8ddb4f9d45ffda69520cb, type: 2}
+  herathContainers: {fileID: 11400000, guid: fd7a2dc8c9191534b9cc120d9c6bc528, type: 2}
   HealthChange: {fileID: 11400000, guid: 7d31c03f8d495024e9045817f664d946, type: 2}
   HurtSound: {fileID: 8300000, guid: 0097d52f745b0804d81f2ac9076aa938, type: 3}
   speed: 5
@@ -244,7 +247,8 @@ AudioSource:
   m_GameObject: {fileID: 2947310824417121643}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 608a5e0fef97db1499c4975a1ee302a5,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

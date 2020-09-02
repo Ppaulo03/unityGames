@@ -179,7 +179,8 @@ AudioSource:
   m_GameObject: {fileID: 7683855655470011273}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 608a5e0fef97db1499c4975a1ee302a5,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.05
@@ -298,4 +299,3 @@ MonoBehaviour:
   gravityFall: 0.5
   turnTime: 0
   buzzSound: {fileID: 8300000, guid: f8dd7e74e4addab48a91994d4dffa725, type: 3}
-  damageSound: {fileID: 8300000, guid: 2a30a4ef941dfde4c982425ce2452a11, type: 3}

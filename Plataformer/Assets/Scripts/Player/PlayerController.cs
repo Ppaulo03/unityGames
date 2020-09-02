@@ -13,13 +13,15 @@ public enum PlayerState{
 public class PlayerController : MonoBehaviour{
 
     [SerializeField] private PlayerState currentState;
-
+    [SerializeField] private Signal Pause = null;
+    [SerializeField] private Signal UnPause = null;
 
     [Header("Life Settings")]
     [SerializeField] private GameObject DamageEffect = null;
     [SerializeField] private float invunerableTime = 0f;
     [SerializeField] private int maxLife = 0;
     [SerializeField] private FloatValue currentLife = null;
+    [SerializeField] private FloatValue herathContainers = null;
     [SerializeField] private Signal HealthChange = null;
     [SerializeField] private AudioClip HurtSound = null;
 
@@ -79,37 +81,52 @@ public class PlayerController : MonoBehaviour{
         mySpriteRenderer = GetComponent<SpriteRenderer>();
         myAudioSource = GetComponent<AudioSource>();
         currentLife.Value = maxLife;
+        herathContainers.Value = maxLife;
         currentStrenght = minStrength;
         StartCoroutine(delayCo(0.2f));
     }
 
     private void Update(){
         setAnimGround();
-        if(Input.GetButtonDown("Effect")){
-                if( actionArrow[chosenArrow.Value] != null) actionArrow[chosenArrow.Value].Raise();
+
+        if(Input.GetButtonDown("Pause")){
+            if( Time.timeScale == 0){
+                Time.timeScale = 1;
+                UnPause.Raise();
             }
-        if(currentState != PlayerState.stagger)
-            if(currentState != PlayerState.attacking){
-                SetGround();
-                if(Input.GetButtonDown("Jump")) Jump();
-                else if(Input.GetButtonDown("Fire1")) PreparFire();
-                else if(Input.GetButtonDown("Down")) Crouch();
-                else if(Input.GetButtonUp("Down")) Stand();
-            }
-    
             else{
-                posBow();
-                if(chargeTime != 0 && currentStrenght < arrowSpeed) currentStrenght += arrowSpeed/chargeTime * Time.deltaTime;
-                else currentStrenght = arrowSpeed;
-                if(Input.GetButtonUp("Fire1") || !Input.GetButton("Fire1")) Fire();
-                if(!Input.GetButton("Horizontal")) myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
+                Pause.Raise();
+                Time.timeScale = 0;
             }
+        }
         
-        if(Input.GetButtonDown("ChangeArrow")){
-            chosenArrow.Value += (int)Input.GetAxisRaw("ChangeArrow");
-            if(chosenArrow.Value >= arrows.currentObjects.Length) chosenArrow.Value = 0;
-            else if(chosenArrow.Value < 0) chosenArrow.Value = arrows.currentObjects.Length - 1;
-            changeArrow.Raise();
+        if(Time.timeScale == 1){
+            if(Input.GetButtonDown("Effect")){
+                    if( actionArrow[chosenArrow.Value] != null) actionArrow[chosenArrow.Value].Raise();
+                }
+            if(currentState != PlayerState.stagger)
+                if(currentState != PlayerState.attacking){
+                    SetGround();
+                    if(Input.GetButtonDown("Jump")) Jump();
+                    else if(Input.GetButtonDown("Fire1")) PreparFire();
+                    else if(Input.GetButtonDown("Down")) Crouch();
+                    else if(Input.GetButtonUp("Down")) Stand();
+                }
+        
+                else{
+                    posBow();
+                    if(chargeTime != 0 && currentStrenght < arrowSpeed) currentStrenght += arrowSpeed/chargeTime * Time.deltaTime;
+                    else currentStrenght = arrowSpeed;
+                    if(Input.GetButtonUp("Fire1") || !Input.GetButton("Fire1")) Fire();
+                    if(!Input.GetButton("Horizontal")) myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
+                }
+            
+            if(Input.GetButtonDown("ChangeArrow")){
+                chosenArrow.Value += (int)Input.GetAxisRaw("ChangeArrow");
+                if(chosenArrow.Value >= arrows.currentObjects.Length) chosenArrow.Value = 0;
+                else if(chosenArrow.Value < 0) chosenArrow.Value = arrows.currentObjects.Length - 1;
+                changeArrow.Raise();
+            }
         }
 
     }

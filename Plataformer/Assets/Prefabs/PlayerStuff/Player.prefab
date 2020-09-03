@@ -196,9 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9a92c071b193b4ba1151d70cc712e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputManager: {fileID: 11400000, guid: 9613c1fed75f0d24b8b0cbe1931a64d2, type: 2}
   currentState: 0
   Pause: {fileID: 11400000, guid: cf7ce135ea9d00d4996ad297b6810905, type: 2}
   UnPause: {fileID: 11400000, guid: f17bb1539b800ac428a1b773b77e4c63, type: 2}
+  Submit: {fileID: 11400000, guid: 5f21d2ac3bb18674c8fc288a958b0624, type: 2}
   DamageEffect: {fileID: 7904119211016606380, guid: 711dd75f6cb21134cbc5e0387f6f9071,
     type: 3}
   invunerableTime: 1

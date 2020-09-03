@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Player\Teleport.cs" />
      <Compile Include="Assets\Scripts\Scenario\ParallaxBackground.cs" />
      <Compile Include="Assets\Scripts\Scriptables\FloatValue.cs" />
+     <Compile Include="Assets\Scripts\Scriptables\InputManager.cs" />
      <Compile Include="Assets\Scripts\Scriptables\IntValue.cs" />
      <Compile Include="Assets\Scripts\Scriptables\ObjectArray.cs" />
      <Compile Include="Assets\Scripts\Scriptables\Range.cs" />
@@ -72,7 +73,9 @@
      <Compile Include="Assets\Scripts\UI\ArrowManager.cs" />
      <Compile Include="Assets\Scripts\UI\HearthManager.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\UI\PauseSettings.cs" />
      <Compile Include="Assets\Scripts\UI\Placa.cs" />
+     <Compile Include="Assets\Scripts\UI\WaitForSecondsRT.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

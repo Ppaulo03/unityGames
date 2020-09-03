@@ -12,9 +12,12 @@ public enum PlayerState{
 
 public class PlayerController : MonoBehaviour{
 
+    [SerializeField] private InputManager inputManager = null;
     [SerializeField] private PlayerState currentState;
     [SerializeField] private Signal Pause = null;
     [SerializeField] private Signal UnPause = null;
+    [SerializeField] private Signal Submit = null;
+
 
     [Header("Life Settings")]
     [SerializeField] private GameObject DamageEffect = null;
@@ -88,8 +91,7 @@ public class PlayerController : MonoBehaviour{
 
     private void Update(){
         setAnimGround();
-
-        if(Input.GetButtonDown("Pause")){
+        if(inputManager.GetButtonDown("Pause")){
             if( Time.timeScale == 0){
                 Time.timeScale = 1;
                 UnPause.Raise();
@@ -101,30 +103,34 @@ public class PlayerController : MonoBehaviour{
         }
         
         if(Time.timeScale == 1){
-            if(Input.GetButtonDown("Effect")){
+            if(inputManager.GetButtonDown("Submit")) Submit.Raise();
+            if(inputManager.GetButtonDown("Effect")){
                     if( actionArrow[chosenArrow.Value] != null) actionArrow[chosenArrow.Value].Raise();
-                }
+            }
             if(currentState != PlayerState.stagger)
                 if(currentState != PlayerState.attacking){
                     SetGround();
-                    if(Input.GetButtonDown("Jump")) Jump();
-                    else if(Input.GetButtonDown("Fire1")) PreparFire();
-                    else if(Input.GetButtonDown("Down")) Crouch();
-                    else if(Input.GetButtonUp("Down")) Stand();
+                    if(inputManager.GetButtonDown("Jump")) Jump();
+                    else if(inputManager.GetButtonDown("Fire")) PreparFire();
+                    else if(inputManager.GetButtonDown("Crouch")) Crouch();
+                    else if(inputManager.GetButtonUp("Crouch")) Stand();
                 }
-        
                 else{
                     posBow();
                     if(chargeTime != 0 && currentStrenght < arrowSpeed) currentStrenght += arrowSpeed/chargeTime * Time.deltaTime;
                     else currentStrenght = arrowSpeed;
-                    if(Input.GetButtonUp("Fire1") || !Input.GetButton("Fire1")) Fire();
-                    if(!Input.GetButton("Horizontal")) myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
+                    if(inputManager.GetButtonUp("Fire") || !inputManager.GetButton("Fire")) Fire();
+                    if(Horizontal() == 0) myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
                 }
             
-            if(Input.GetButtonDown("ChangeArrow")){
-                chosenArrow.Value += (int)Input.GetAxisRaw("ChangeArrow");
+            if(inputManager.GetButtonDown("ChangeArrowLeft")){
+                chosenArrow.Value -= 1;
+                if(chosenArrow.Value < 0) chosenArrow.Value = arrows.currentObjects.Length - 1;
+                changeArrow.Raise();
+            }
+            else if(inputManager.GetButtonDown("ChangeArrowRight")){
+                chosenArrow.Value += 1;
                 if(chosenArrow.Value >= arrows.currentObjects.Length) chosenArrow.Value = 0;
-                else if(chosenArrow.Value < 0) chosenArrow.Value = arrows.currentObjects.Length - 1;
                 changeArrow.Raise();
             }
         }
@@ -138,6 +144,18 @@ public class PlayerController : MonoBehaviour{
         }
     }
     
+    private float Horizontal(){
+        float value = 0;
+        if(inputManager.GetButton("Left")) value -= 1;
+        if(inputManager.GetButton("Right")) value += 1;
+        return value;
+    }
+    private int ChangeArrowValue(){
+        int value = 0;
+        if(inputManager.GetButton("ChangeArrowLeft")) value -= 1;
+        if(inputManager.GetButton("ChangeArrowRight")) value += 1;
+        return value;
+    }
     private void setAnimGround(){
         if(IsGrounded()){
                 anim.SetBool("Jumping",false);
@@ -207,7 +225,7 @@ public class PlayerController : MonoBehaviour{
     private void Run(){
         
         float xValue;
-        xValue = Input.GetAxisRaw("Horizontal");
+        xValue = Horizontal();
 
         if(xValue != 0){
             anim.SetBool("Running",true);

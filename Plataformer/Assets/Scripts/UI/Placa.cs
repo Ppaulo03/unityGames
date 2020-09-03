@@ -4,39 +4,40 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Placa : MonoBehaviour{
+
+    private InputManager inputManager;
     [SerializeField] private GameObject clue = null;
     [SerializeField] private GameObject dialogBox = null;
-    [SerializeField] private Text textBox = null;
+    [SerializeField] private TMPro.TMP_Text textBox = null;
     [SerializeField] private string[] message = null;
     [SerializeField] private bool StartAwake = false;
     private bool inRange = false;
     private bool active = false;
     private int TextIndex = 0;
 
-    private void Update() {
+    private void Start() {
+        inputManager = FindObjectOfType<InputManager>();
+    }
+
+    public void Submmited() {
         if(inRange){
-            if(Input.GetButtonDown("Submit")  && Time.timeScale != 0){
-
-                if(!active){
-                    active = true;
-                    textBox.text = message[0];
-                    clue.SetActive(false);
-                    dialogBox.SetActive(true);
-                }
-
-                else{
-                    TextIndex ++;
-                    if(TextIndex >= message.Length){
-                        TextIndex = 0;
-                        active = false;
-                        dialogBox.SetActive(false);
-                        clue.SetActive(true);
-                    }
-                    textBox.text = message[TextIndex];
-                }
-
+            if(!active){
+                active = true;
+                textBox.text = message[0];
+                clue.SetActive(false);
+                dialogBox.SetActive(true);
             }
 
+            else{
+                TextIndex ++;
+                if(TextIndex >= message.Length){
+                    TextIndex = 0;
+                    active = false;
+                    dialogBox.SetActive(false);
+                    clue.SetActive(true);
+                }
+                textBox.text = message[TextIndex];
+            }
         }
     }
 

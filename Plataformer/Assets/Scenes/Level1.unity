@@ -12009,18 +12009,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1847286346}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &902551594415452720 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5568911267270432807, guid: 3b39dda99ccab084f90cb3db92f3486a,
-    type: 3}
-  m_PrefabInstance: {fileID: 4741796376454326807}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9411abd8df54c814e8e234c27df2ae00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2947310824051955040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12088,23 +12076,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2947310824417121648, guid: e19ae30467e853a4e986c2d46a1ae5f4,
-        type: 3}
-      propertyPath: actionArrow.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 7ab6bd8ec1980c74aae92301565905b0,
-        type: 2}
-    - target: {fileID: 2947310824417121648, guid: e19ae30467e853a4e986c2d46a1ae5f4,
-        type: 3}
-      propertyPath: FailSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 94c0eac4bf59f1744a546bc9a4d58e8e, type: 3}
-    - target: {fileID: 2947310824417121648, guid: e19ae30467e853a4e986c2d46a1ae5f4,
-        type: 3}
-      propertyPath: Fired
-      value: 
-      objectReference: {fileID: 11400000, guid: 391e823fefd8a4c4aa0201436dcab396,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e19ae30467e853a4e986c2d46a1ae5f4, type: 3}
 --- !u!1001 &4741796376454326807
@@ -12114,26 +12085,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1580033299}
     m_Modifications:
-    - target: {fileID: 3708393358985933693, guid: 3b39dda99ccab084f90cb3db92f3486a,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741796374965722290, guid: 3b39dda99ccab084f90cb3db92f3486a,
-        type: 3}
-      propertyPath: damageSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 2a30a4ef941dfde4c982425ce2452a11, type: 3}
-    - target: {fileID: 4741796374965722290, guid: 3b39dda99ccab084f90cb3db92f3486a,
-        type: 3}
-      propertyPath: sounds
-      value: 
-      objectReference: {fileID: 902551594415452720}
-    - target: {fileID: 4741796374965722290, guid: 3b39dda99ccab084f90cb3db92f3486a,
-        type: 3}
-      propertyPath: lifePoints
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 4741796374965722290, guid: 3b39dda99ccab084f90cb3db92f3486a,
         type: 3}
       propertyPath: teleportArea
@@ -12194,30 +12145,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4741796374965722294, guid: 3b39dda99ccab084f90cb3db92f3486a,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.9716981
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741796374965722294, guid: 3b39dda99ccab084f90cb3db92f3486a,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.9716981
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741796374965722294, guid: 3b39dda99ccab084f90cb3db92f3486a,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.9716981
-      objectReference: {fileID: 0}
     - target: {fileID: 4741796374965722295, guid: 3b39dda99ccab084f90cb3db92f3486a,
         type: 3}
       propertyPath: m_Name
       value: BeeQueen
-      objectReference: {fileID: 0}
-    - target: {fileID: 5568911267270432807, guid: 3b39dda99ccab084f90cb3db92f3486a,
-        type: 3}
-      propertyPath: idleVolume
-      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b39dda99ccab084f90cb3db92f3486a, type: 3}

@@ -24,5 +24,10 @@ public class ArrowManagement : ScriptableObject, ISerializationCallbackReceiver
             arrows[i].currentQtd = arrows[i].maxOfArrows;
         }
     }
+    
+    public void ActiveEffect(int index){
+        if(arrows[index].effect != null)
+            arrows[index].effect.Raise();
+    }
 
 }

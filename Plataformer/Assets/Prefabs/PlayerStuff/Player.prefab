@@ -199,8 +199,8 @@ MonoBehaviour:
   inputManager: {fileID: 11400000, guid: 9613c1fed75f0d24b8b0cbe1931a64d2, type: 2}
   arrowManager: {fileID: 11400000, guid: 77866f8c11a0b0b4da10e51aa26bd4dd, type: 2}
   currentState: 0
-  Pause: {fileID: 11400000, guid: cf7ce135ea9d00d4996ad297b6810905, type: 2}
-  UnPause: {fileID: 11400000, guid: f17bb1539b800ac428a1b773b77e4c63, type: 2}
+  PauseSignal: {fileID: 11400000, guid: cf7ce135ea9d00d4996ad297b6810905, type: 2}
+  UnPauseSignal: {fileID: 11400000, guid: f17bb1539b800ac428a1b773b77e4c63, type: 2}
   Submit: {fileID: 11400000, guid: 5f21d2ac3bb18674c8fc288a958b0624, type: 2}
   DamageEffect: {fileID: 7904119211016606380, guid: 711dd75f6cb21134cbc5e0387f6f9071,
     type: 3}
@@ -218,6 +218,7 @@ MonoBehaviour:
   resistenciaDoAr: 2
   gravidade: 1.5
   JumpSound: {fileID: 8300000, guid: a4f35e70a2009f94386f69928f1a4582, type: 3}
+  Fired: {fileID: 11400000, guid: 391e823fefd8a4c4aa0201436dcab396, type: 2}
   firePoint: {fileID: 2947310823951558704}
   BowPositon: {fileID: 2947310824461862594}
   arrowSpeed: 15
@@ -226,14 +227,7 @@ MonoBehaviour:
   attackTime: 0.5
   arrowDelay: 0.2
   ArrowSound: {fileID: 8300000, guid: 9abda4c108008d846962e7b65f7d34bf, type: 3}
-  arrows: {fileID: 11400000, guid: 480be841c9c0b4a4f85b79512862387a, type: 2}
-  actionArrow:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: d789c1e5964cb9141bd3ea5594234f2c, type: 2}
-  - {fileID: 11400000, guid: 43a46a73327bbea4084ad9922efa5a0c, type: 2}
-  - {fileID: 11400000, guid: 7ab6bd8ec1980c74aae92301565905b0, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  FailSound: {fileID: 8300000, guid: 94c0eac4bf59f1744a546bc9a4d58e8e, type: 3}
   changeArrow: {fileID: 11400000, guid: dfa022b119f24c340a0ed60c4eb6bcd9, type: 2}
   chosenArrow: {fileID: 11400000, guid: 220a9e95d68528e4eb04ae89612ce68d, type: 2}
   groundLayer:

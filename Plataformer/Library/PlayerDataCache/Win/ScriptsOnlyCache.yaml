@@ -1633,7 +1633,7 @@ ScriptsOnlyBuild:
     className: CinemachineClearShot
   - hash:
       serializedVersion: 2
-      Hash: 0d106f4bde2d0cd58474aa4850234094
+      Hash: 2b291357e7b9b0710d4d3d1df7cde561
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ExplosionDamage

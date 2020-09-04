@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -741372998962892967, guid: e8d8b954fb50a3f469680f0cbccf36ec,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   lifePoints: 15
   invunerableTime: 1
   knockBackForce: 12
-  knockBackResistence: 0
+  knockBackResistence: 100
   groundLayer:
     serializedVersion: 2
     m_Bits: 28928
@@ -268,7 +268,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -365,4 +365,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Idle: {fileID: 8300000, guid: f8dd7e74e4addab48a91994d4dffa725, type: 3}
-  idleVolume: 0.2
+  idleVolume: 0.05

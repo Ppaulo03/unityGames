@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour{
     
 
     [Header("Arrows Settings")]
-    [SerializeField] private ObjectArray arrows = null;
     [SerializeField] private Signal changeArrow = null;
     [SerializeField] private IntValue chosenArrow = null;
 
@@ -81,6 +80,7 @@ public class PlayerController : MonoBehaviour{
     private bool deleyedAnim;
 
     private void Awake(){
+        Physics2D.IgnoreLayerCollision(10, 11, false);
         myRigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -127,12 +127,12 @@ public class PlayerController : MonoBehaviour{
             
             if(inputManager.GetButtonDown("ChangeArrowLeft")){
                 chosenArrow.Value -= 1;
-                if(chosenArrow.Value < 0) chosenArrow.Value = arrows.currentObjects.Length - 1;
+                if(chosenArrow.Value < 0) chosenArrow.Value = arrowManager.arrows.Length - 1;
                 changeArrow.Raise();
             }
             else if(inputManager.GetButtonDown("ChangeArrowRight")){
                 chosenArrow.Value += 1;
-                if(chosenArrow.Value >= arrows.currentObjects.Length) chosenArrow.Value = 0;
+                if(chosenArrow.Value >= arrowManager.arrows.Length) chosenArrow.Value = 0;
                 changeArrow.Raise();
             }
         }
@@ -181,13 +181,19 @@ public class PlayerController : MonoBehaviour{
                 doubleJump = true;
         }
         else{
+            StartCoroutine(fallDelay());
+        }
+  
+    }
+    private IEnumerator fallDelay(){
+        yield return new WaitForSeconds(0.5f);
+        if(!IsGrounded()){
             myRigidbody2D.drag = resistenciaDoAr;
             myRigidbody2D.gravityScale = gravidade;
             currentState = PlayerState.jumping;
         }
-  
+
     }
-    
     private bool IsGrounded() {
 
         Vector2 position = transform.position;
@@ -243,6 +249,11 @@ public class PlayerController : MonoBehaviour{
     
     private void Jump(){
         if(IsGrounded()){
+            
+            myRigidbody2D.drag = resistenciaDoAr;
+            myRigidbody2D.gravityScale = gravidade;
+            currentState = PlayerState.jumping;
+
             anim.SetBool("Jumping",true);
             anim.SetBool("Crouch",false);
             myRigidbody2D.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
@@ -326,6 +337,7 @@ public class PlayerController : MonoBehaviour{
     public void Hurt(Vector3 knockBack){
         
         if(currentState != PlayerState.stagger){
+            Physics2D.IgnoreLayerCollision(10, 11, true);
             if(HurtSound != null){
                 myAudioSource.clip = HurtSound;
                 myAudioSource.Play(0);
@@ -360,7 +372,7 @@ public class PlayerController : MonoBehaviour{
             Die();
         }
     }
-    
+  
     private IEnumerator attackCo(){
 
         attackRunning = true;
@@ -401,6 +413,7 @@ public class PlayerController : MonoBehaviour{
     
     private IEnumerator invunerableCo(){
         yield return new WaitForSeconds(invunerableTime);
+        Physics2D.IgnoreLayerCollision(10, 11, false);
         SetGround();
     }
     

@@ -4865,6 +4865,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagetag: Enemy
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 28928
+  Radius: 2.4
 --- !u!82 &-3528389894947426349
 AudioSource:
   m_ObjectHideFlags: 0

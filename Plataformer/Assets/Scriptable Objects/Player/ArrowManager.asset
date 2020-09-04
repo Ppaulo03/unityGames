@@ -19,8 +19,8 @@ MonoBehaviour:
     arrowsSprite: {fileID: -4337419419730556897, guid: 4d3d2cbd1b9731946928b8d927d79e79,
       type: 3}
     effect: {fileID: 0}
-    maxOfArrows: 3
-    currentQtd: 3
+    maxOfArrows: 8
+    currentQtd: 8
     CooldownTime: 3
   - name: Plant
     arrowObject: {fileID: 6119755711070262915, guid: 36b970d97b634b549b72f3847aa84ee9,
@@ -28,8 +28,8 @@ MonoBehaviour:
     arrowsSprite: {fileID: 2372543920737663427, guid: 4d3d2cbd1b9731946928b8d927d79e79,
       type: 3}
     effect: {fileID: 11400000, guid: d789c1e5964cb9141bd3ea5594234f2c, type: 2}
-    maxOfArrows: 3
-    currentQtd: 3
+    maxOfArrows: 5
+    currentQtd: 5
     CooldownTime: 5
   - name: Bomb
     arrowObject: {fileID: 8169994308900303928, guid: 3f966fef41bee1641ba888ea1d3e41dc,

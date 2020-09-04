@@ -6,6 +6,7 @@ public class Bee : FlyingEnemy
 {
     private float currentSpeed;
 
+    public bool freeze;
     [Header("Sounds")]
     [SerializeField] private AudioClip buzzSound = null;
     private AudioSource myAudioSource;
@@ -17,9 +18,11 @@ public class Bee : FlyingEnemy
     }
 
     private void FixedUpdate() {
-        if(currentState == EnemyState.walking)
+        if(currentState == EnemyState.idle) currentState = EnemyState.walking;
+        if(currentState == EnemyState.walking){
             Move();
             GetHeight();
+        }
     }
 
     private void Move(){

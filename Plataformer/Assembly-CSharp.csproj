@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Mechanic Stuff\AudioTrigger.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\DestroyOverTime.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\ExplosionDamage.cs" />
+     <Compile Include="Assets\Scripts\Mechanic Stuff\FreezeExplosion.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\SoundEffect.cs" />
      <Compile Include="Assets\Scripts\Obstacles\AcidPool.cs" />
@@ -64,6 +65,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\Teleport.cs" />
      <Compile Include="Assets\Scripts\Scenario\ParallaxBackground.cs" />
+     <Compile Include="Assets\Scripts\Scriptables\ArrowManagement.cs" />
      <Compile Include="Assets\Scripts\Scriptables\FloatValue.cs" />
      <Compile Include="Assets\Scripts\Scriptables\InputManager.cs" />
      <Compile Include="Assets\Scripts\Scriptables\IntValue.cs" />

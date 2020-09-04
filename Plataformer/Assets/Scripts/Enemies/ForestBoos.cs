@@ -70,7 +70,7 @@ public class ForestBoos : FlyingEnemy
     public override void Hurt(Vector3 knockBack){
         myRigidbody2D.velocity = Vector2.zero;
         if(currentState != EnemyState.stagger){
-
+            if(currentState == EnemyState.freeze) UnFreeze();
             currentState = EnemyState.stagger;
             Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
             lifePoints -= 1;
@@ -92,6 +92,15 @@ public class ForestBoos : FlyingEnemy
             }
         }
 
+    }
+
+    protected override void FrezzeBegin(){
+        StopCoroutine(invunerableCo());
+        VisionCollider.enabled = false;
+    }
+
+    protected override void FrezzeStop(){
+        VisionCollider.enabled = true;
     }
 
     private void OnCollisionEnter2D(Collision2D other){
@@ -122,7 +131,7 @@ public class ForestBoos : FlyingEnemy
             Vector3 dir = other.gameObject.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;      
             float distance = Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
-            if(currentState!=EnemyState.attacking){
+            if(currentState != EnemyState.attacking && currentState != EnemyState.freeze){
                 GameObject clone = Instantiate(acidBall, attackTransform.position, Quaternion.Euler (new Vector3(0,0,angle)));
                 clone.GetComponent<Rigidbody2D>().AddForce(dir*(distance*acidBallForce), ForceMode2D.Impulse);
             }
@@ -133,7 +142,7 @@ public class ForestBoos : FlyingEnemy
     }
 
     private void Drop(){ 
-        if(numPools.Value < maxPools){
+        if(numPools.Value < maxPools && currentState != EnemyState.freeze){
             StartCoroutine(attackCo());
             currentState = EnemyState.attacking;
             Instantiate(dropAcid, attackTransform.position, Quaternion.Euler (Vector3.zero));
@@ -145,13 +154,13 @@ public class ForestBoos : FlyingEnemy
     private IEnumerator attackCo(){
         myRigidbody2D.velocity = Vector2.zero;
         yield return new WaitForSeconds(attackTime);
-        currentState = EnemyState.walking;
+        if(currentState != EnemyState.freeze) currentState = EnemyState.walking;
     }
 
     private IEnumerator cooldownCo(float cooldown){
         VisionCollider.enabled = false;
         yield return new WaitForSeconds(cooldown);
-        VisionCollider.enabled = true;
+        if(currentState != EnemyState.freeze) VisionCollider.enabled = true;
         
     }
 

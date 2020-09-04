@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  freezeColor: {r: 0, g: 1, b: 1, a: 1}
+  freezeTime: 1
   speed: 4
   direction: 1
   DamageEffect: {fileID: 6632097852766207518, guid: e249944c4d6976f439ea3b61eb57fabd,

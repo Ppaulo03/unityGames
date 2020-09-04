@@ -8,12 +8,17 @@ public enum EnemyState{
     idle,
     jumping,
     attacking,
-    stagger
+    stagger,
+    freeze,
 }
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected EnemyState currentState;
+
+    [Header ("Freeze Settings")]
+    [SerializeField] protected Color freezeColor = new Color(0f, 1f, 1f, 1f);
+    [SerializeField] protected float freezeTime = 0f;
 
 
     [Header("Movement Settings")]
@@ -54,7 +59,7 @@ public class Enemy : MonoBehaviour
 
         if(currentState != EnemyState.stagger){
             HurtSound();
-
+            if(currentState == EnemyState.freeze) UnFreeze();
             currentState = EnemyState.stagger;
             Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
             
@@ -73,6 +78,34 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
+    public virtual void Freeze(){
+        anim.speed = 0;
+        mySpriteRenderer.color = freezeColor;
+        currentState = EnemyState.freeze;
+        myRigidbody2D.velocity = Vector2.zero;
+        FrezzeBegin();
+        if(lifePoints > 0) StartCoroutine(unFreezeCo());
+    }
+
+    protected virtual void FrezzeBegin(){
+        StopCoroutine(invunerableCo());
+    }
+    protected virtual void FrezzeStop(){
+    }
+
+    protected virtual void UnFreeze(){
+        anim.speed = 1;
+        mySpriteRenderer.color = Color.white;
+        currentState = EnemyState.idle;
+        FrezzeStop();
+    }
+
+    protected IEnumerator unFreezeCo(){
+        yield return new WaitForSeconds(freezeTime);
+        UnFreeze();
+    }
+
     protected virtual void DieEffect(){}
     protected virtual void Die(){
         DieEffect();
@@ -118,7 +151,6 @@ public class Enemy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        
         if(other.gameObject.CompareTag("Player")){
             Vector3 direction = (other.gameObject.transform.position - transform.position ).normalized;
             other.gameObject.GetComponent<PlayerController>().Hurt(direction* knockBackForce);
@@ -129,7 +161,8 @@ public class Enemy : MonoBehaviour
     protected IEnumerator invunerableCo()
     {
         yield return new WaitForSeconds(invunerableTime);
-        currentState = EnemyState.walking;
+        if(currentState != EnemyState.freeze)
+            currentState = EnemyState.walking;
     }
 
 

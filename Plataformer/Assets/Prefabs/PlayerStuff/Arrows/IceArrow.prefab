@@ -4826,6 +4826,7 @@ GameObject:
   - component: {fileID: 3023668920635959661}
   - component: {fileID: 4640221365577354590}
   - component: {fileID: 8087144336406924429}
+  - component: {fileID: -6506569545761464416}
   m_Layer: 9
   m_Name: IceArrow
   m_TagString: Arrow
@@ -4974,3 +4975,32 @@ MonoBehaviour:
   knockBackForce: 5
   arrowCollider: {fileID: 8935528094185849649}
   particles: {fileID: 1970008617559327735}
+  explosion: {fileID: 8874887330828168161, guid: e42216dc663c01740b934e53b2b7833e,
+    type: 3}
+--- !u!114 &-6506569545761464416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8935528094185849660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdc2e21fa16ca84687fcd9dfb4d96eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 7ab6bd8ec1980c74aae92301565905b0, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8087144336406924429}
+        m_MethodName: Explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8169994308900303926}
   - component: {fileID: 8169994308900303927}
   - component: {fileID: 8169994308900303925}
-  - component: {fileID: 8756281808264580243}
   - component: {fileID: 2636509177910566505}
   - component: {fileID: 5550010629498419802}
   - component: {fileID: 8169994308900303924}
@@ -114,22 +113,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.21875, y: 0.2616939}
   m_EdgeRadius: 0
---- !u!58 &8756281808264580243
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8169994308900303928}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!50 &2636509177910566505
 Rigidbody2D:
   serializedVersion: 4
@@ -180,7 +163,6 @@ MonoBehaviour:
   arrowCollider: {fileID: 8169994308900303925}
   explosion: {fileID: 6269064208262271925, guid: b3a6a4eb7278fd64a92433f128982879,
     type: 3}
-  explosionArea: {fileID: 8756281808264580243}
 --- !u!114 &-3450994818261914527
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 11400000, guid: 9613c1fed75f0d24b8b0cbe1931a64d2, type: 2}
+  arrowManager: {fileID: 11400000, guid: 77866f8c11a0b0b4da10e51aa26bd4dd, type: 2}
   currentState: 0
   Pause: {fileID: 11400000, guid: cf7ce135ea9d00d4996ad297b6810905, type: 2}
   UnPause: {fileID: 11400000, guid: f17bb1539b800ac428a1b773b77e4c63, type: 2}
@@ -204,7 +205,7 @@ MonoBehaviour:
   DamageEffect: {fileID: 7904119211016606380, guid: 711dd75f6cb21134cbc5e0387f6f9071,
     type: 3}
   invunerableTime: 1
-  maxLife: 3
+  maxLife: 4
   currentLife: {fileID: 11400000, guid: 968398fd07f8ddb4f9d45ffda69520cb, type: 2}
   herathContainers: {fileID: 11400000, guid: fd7a2dc8c9191534b9cc120d9c6bc528, type: 2}
   HealthChange: {fileID: 11400000, guid: 7d31c03f8d495024e9045817f664d946, type: 2}
@@ -230,7 +231,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: d789c1e5964cb9141bd3ea5594234f2c, type: 2}
   - {fileID: 11400000, guid: 43a46a73327bbea4084ad9922efa5a0c, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 7ab6bd8ec1980c74aae92301565905b0, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   changeArrow: {fileID: 11400000, guid: dfa022b119f24c340a0ed60c4eb6bcd9, type: 2}

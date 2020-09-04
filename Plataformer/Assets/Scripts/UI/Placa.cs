@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Placa : MonoBehaviour{
 
-    [SerializeField] private InputManager inputManager;
+    [SerializeField] private InputManager inputManager = null;
     [SerializeField] private GameObject clue = null;
     [SerializeField] private GameObject dialogBox = null;
     [SerializeField] private TMPro.TMP_Text textBox = null;

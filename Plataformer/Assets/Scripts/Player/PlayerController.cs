@@ -13,6 +13,7 @@ public enum PlayerState{
 public class PlayerController : MonoBehaviour{
 
     [SerializeField] private InputManager inputManager = null;
+    [SerializeField] private ArrowManagement arrowManager = null;
     [SerializeField] private PlayerState currentState;
     [SerializeField] private Signal Pause = null;
     [SerializeField] private Signal UnPause = null;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour{
     
 
     [Header("Fire Settings")]
+    [SerializeField] private Signal Fired = null;
     [SerializeField] private Transform firePoint = null;
     [SerializeField] private Transform BowPositon = null;
     [SerializeField] private float arrowSpeed = 0f;
@@ -54,12 +56,12 @@ public class PlayerController : MonoBehaviour{
     [SerializeField] private float attackTime = 0f;
     [SerializeField] private float arrowDelay = 0f;
     private bool attackRunning;
-     [SerializeField] private AudioClip ArrowSound = null;
+    [SerializeField] private AudioClip ArrowSound = null;
+    [SerializeField] private AudioClip FailSound = null;
     
 
     [Header("Arrows Settings")]
     [SerializeField] private ObjectArray arrows = null;
-    [SerializeField] private Signal[] actionArrow = null;
     [SerializeField] private Signal changeArrow = null;
     [SerializeField] private IntValue chosenArrow = null;
 
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour{
         if(Time.timeScale == 1){
             if(inputManager.GetButtonDown("Submit")) Submit.Raise();
             if(inputManager.GetButtonDown("Effect")){
-                    if( actionArrow[chosenArrow.Value] != null) actionArrow[chosenArrow.Value].Raise();
+                    if( arrowManager.arrows[chosenArrow.Value].effect != null) arrowManager.arrows[chosenArrow.Value].effect.Raise();
             }
             if(currentState != PlayerState.stagger)
                 if(currentState != PlayerState.attacking){
@@ -363,18 +365,32 @@ public class PlayerController : MonoBehaviour{
 
         attackRunning = true;
         myAudioSource.clip = ArrowSound;
-        myAudioSource.Play(0);
+        myAudioSource.Play();
         yield return new WaitForSeconds(0.05f);
         if(currentStrenght < (arrowSpeed / 2)) yield return new WaitForSeconds(arrowDelay);
         
+        if(arrowManager.arrows[chosenArrow.Value].currentQtd > 0){
+            GameObject clone = Instantiate(arrowManager.arrows[chosenArrow.Value].arrowObject, firePoint.position, Quaternion.Euler (new Vector3(0,0,arrowAngle)));
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 dir = (new Vector2(mousePos.x,mousePos.y) - new Vector2(BowPositon.position.x, BowPositon.position.y)).normalized;
+            clone.GetComponent<Rigidbody2D>().AddForce(dir*currentStrenght, ForceMode2D.Impulse);
+            arrowManager.arrows[chosenArrow.Value].currentQtd --;
+            if(arrowManager.arrows[chosenArrow.Value].currentQtd == 0) StartCoroutine(reloadCo(chosenArrow.Value));
+            Fired.Raise();
+        }else{
+            myAudioSource.clip = FailSound;
+            myAudioSource.Play();
+        }
         
-        GameObject clone = Instantiate(arrows.currentObjects[chosenArrow.Value], firePoint.position, Quaternion.Euler (new Vector3(0,0,arrowAngle)));
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = (new Vector2(mousePos.x,mousePos.y) - new Vector2(BowPositon.position.x, BowPositon.position.y)).normalized;
-        clone.GetComponent<Rigidbody2D>().AddForce(dir*currentStrenght, ForceMode2D.Impulse);
+        
         yield return new WaitForSeconds(attackTime);
         Reset();
 
+    }
+
+     private IEnumerator reloadCo(int arrowIndex){
+        yield return new WaitForSeconds(arrowManager.arrows[arrowIndex].CooldownTime);
+            arrowManager.arrows[arrowIndex].currentQtd = arrowManager.arrows[arrowIndex].maxOfArrows;
     }
 
     private IEnumerator delayCo(float delayTime){

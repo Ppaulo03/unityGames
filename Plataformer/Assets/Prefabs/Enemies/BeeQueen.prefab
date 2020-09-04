@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  freezeColor: {r: 0, g: 1, b: 1, a: 1}
+  freezeTime: 1
   speed: 3
   direction: 1
   DamageEffect: {fileID: 846235345726533522, guid: 5069a0984165a304687b3146214d2f9b,
@@ -185,8 +187,6 @@ MonoBehaviour:
   teleportArea: {fileID: 0}
   attackTime: 0.5
   bee: {fileID: 7683855655470011273, guid: 3a264d7a3cec1094db22ebcc2408f787, type: 3}
-  sounds: {fileID: 0}
-  damageSound: {fileID: 0}
 --- !u!95 &4741796374965722289
 Animator:
   serializedVersion: 3

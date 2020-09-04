@@ -7,30 +7,35 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour{
+    [Serializable] public struct KeyButton {
+        public string name;
+        public TMPro.TMP_Text button;
+    }
 
+    [Header("Mouse Texturee Settings")]
     [SerializeField] private Texture2D cursorTexture = null;
     [SerializeField] private CursorMode cursorMode = CursorMode.Auto;
     [SerializeField] private bool CenterMouse = false;
     private Vector2 hotSpot = Vector2.zero;
 
 
-
-    [Serializable] public struct KeyButton {
-        public string name;
-        public TMPro.TMP_Text button;
-    }
-
+    [Header("Control Settings")]
     [SerializeField] private InputManager inputManager = null;
     [SerializeField] private KeyButton[] keyButtons = null;
     private Dictionary<string, TMPro.TMP_Text> buttonKeys;
-    
-    [SerializeField] private AudioMixer mixer = null;
+
+
+    [Header("Audio Setting")]
     [SerializeField] private Slider slider = null;
+    [SerializeField] private AudioMixer mixer = null;
+    [SerializeField] private AudioMixerGroup mixerGroup = null;
+    private AudioSource[] audioSources;
+
+
+    [Header("Graphic Settings")]
     [SerializeField] private Toggle fullScreen = null;
     [SerializeField] private TMPro.TMP_Dropdown resolutionDropdown = null;
     [SerializeField] private TMPro.TMP_Dropdown qualityDropdown = null;
-    [SerializeField] private AudioMixerGroup mixerGroup = null;
-    private AudioSource[] audioSources;
     private Resolution[] resolutions;
 
 

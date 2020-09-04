@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DecodeText : MonoBehaviour
 {   
-    [SerializeField] private InputManager inputManager;
+    [SerializeField] private InputManager inputManager = null;
     [SerializeField] private TMPro.TMP_Text textBox = null;
     private string originalMessage;
     private void OnEnable() {

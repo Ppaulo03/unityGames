@@ -183,7 +183,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -280,6 +280,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  freezeColor: {r: 0, g: 1, b: 1, a: 1}
+  freezeTime: 2
   speed: 3
   direction: -1
   DamageEffect: {fileID: 846235345726533522, guid: 5069a0984165a304687b3146214d2f9b,
@@ -298,4 +300,5 @@ MonoBehaviour:
   hoverForce: 1
   gravityFall: 0.5
   turnTime: 0
+  freeze: 0
   buzzSound: {fileID: 8300000, guid: f8dd7e74e4addab48a91994d4dffa725, type: 3}

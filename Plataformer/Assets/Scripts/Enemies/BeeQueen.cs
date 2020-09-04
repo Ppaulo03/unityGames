@@ -46,6 +46,7 @@ public class BeeQueen : FlyingEnemy
     }
 
     private void OnCollisionEnter2D(Collision2D other){
+        if(currentState == EnemyState.freeze) UnFreeze();
         if(other.gameObject.CompareTag("Player")){
             Vector3 direction = (other.gameObject.transform.position - transform.position ).normalized;
             other.gameObject.GetComponent<PlayerController>().Hurt(direction* knockBackForce);
@@ -83,7 +84,7 @@ public class BeeQueen : FlyingEnemy
     private IEnumerator attackCo(){
         yield return new WaitForSeconds(attackTime);
         myRigidbody2D.velocity = Vector2.zero;
-        currentState = EnemyState.walking;
+        if(currentState != EnemyState.freeze) currentState = EnemyState.walking;
     }
 
 }

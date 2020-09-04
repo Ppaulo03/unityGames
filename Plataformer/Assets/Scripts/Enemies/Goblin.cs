@@ -111,14 +111,23 @@ public class Goblin : GroundEnemy{
 
         }
     }
+    protected override void FrezzeBegin(){
+        StopCoroutine(invunerableCo());
+        attackArea.enabled = false;
+    }
 
+    protected override void FrezzeStop(){
+        attackArea.enabled = true;
+    }
 
     private IEnumerator attackCo(float time){
         yield return new WaitForSeconds(time);
         myRigidbody2D.velocity = Vector2.zero;
-        currentState = EnemyState.idle;
-        StartCoroutine(idleCo());
-        StartCoroutine(attackCooldownCo());
+        if(currentState != EnemyState.freeze){
+            currentState = EnemyState.idle;
+            StartCoroutine(idleCo());
+            StartCoroutine(attackCooldownCo());
+        }
     }
 
     private IEnumerator attackCooldownCo(){

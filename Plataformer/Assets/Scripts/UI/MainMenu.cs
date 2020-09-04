@@ -7,7 +7,14 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour{
-    
+
+    [SerializeField] private Texture2D cursorTexture = null;
+    [SerializeField] private CursorMode cursorMode = CursorMode.Auto;
+    [SerializeField] private bool CenterMouse = false;
+    private Vector2 hotSpot = Vector2.zero;
+
+
+
     [Serializable] public struct KeyButton {
         public string name;
         public TMPro.TMP_Text button;
@@ -29,6 +36,8 @@ public class MainMenu : MonoBehaviour{
 
     private void Start(){
         Time.timeScale = 1;
+        if(CenterMouse) hotSpot = new Vector2(cursorTexture.width / 2 , cursorTexture.height / 2 );
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         slider.value = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
         audioSources =  FindObjectsOfType<AudioSource>();
         foreach (AudioSource audio in audioSources) audio.outputAudioMixerGroup = mixerGroup;
@@ -70,10 +79,6 @@ public class MainMenu : MonoBehaviour{
         Resolution resolution = resolutions[currentResolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
-    }
-
-    private void Update() {
-        
     }
 
     public void PlayGame(){
@@ -173,5 +178,6 @@ public class MainMenu : MonoBehaviour{
         }
 
     }
+
 
 }

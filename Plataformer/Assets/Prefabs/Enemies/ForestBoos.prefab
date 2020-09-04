@@ -152,14 +152,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  speed: 2
+  speed: 4
   direction: 1
   DamageEffect: {fileID: 6632097852766207518, guid: e249944c4d6976f439ea3b61eb57fabd,
     type: 3}
   lifePoints: 24
-  invunerableTime: 3
+  invunerableTime: 1.5
   knockBackForce: 7.5
-  knockBackResistence: 5
+  knockBackResistence: 100
   groundLayer:
     serializedVersion: 2
     m_Bits: 28928
@@ -170,8 +170,8 @@ MonoBehaviour:
   hoverForce: 1
   gravityFall: 0.25
   turnTime: 1
-  VisionCollider: {fileID: 7342324335529318099, guid: 0f9b99e57c12f7040b16a038261526ea,
-    type: 3}
+  teleportArea: {fileID: 0}
+  VisionCollider: {fileID: 907753871}
   attackTransform: {fileID: 7342324334223531491}
   acidBall: {fileID: 2335881417092001787, guid: 33246ad4516a123468ec9a050c9c4c5b,
     type: 3}
@@ -179,8 +179,8 @@ MonoBehaviour:
   acidBallForce: 0.15
   dropAcid: {fileID: 591157892504895860, guid: 425154e7907a70d4195b4e89f6244017, type: 3}
   numPools: {fileID: 11400000, guid: a75ac88edba34ee45b4529a5680aa276, type: 2}
-  maxPools: 10
-  dropCooldown: 7
+  maxPools: 15
+  dropCooldown: 2
   attackTime: 1.5
 --- !u!61 &1176406937
 BoxCollider2D:

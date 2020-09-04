@@ -71,6 +71,8 @@
      <Compile Include="Assets\Scripts\Scriptables\Range.cs" />
      <Compile Include="Assets\Scripts\Scriptables\Signal.cs" />
      <Compile Include="Assets\Scripts\UI\ArrowManager.cs" />
+     <Compile Include="Assets\Scripts\UI\ChangeScene.cs" />
+     <Compile Include="Assets\Scripts\UI\DecodeText.cs" />
      <Compile Include="Assets\Scripts\UI\HearthManager.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
      <Compile Include="Assets\Scripts\UI\PauseSettings.cs" />

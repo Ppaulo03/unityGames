@@ -5,7 +5,7 @@ using UnityEngine;
 public class ForestBoos : FlyingEnemy
 {
     private float currentSpeed;
-
+    [SerializeField] private GameObject teleportArea = null;
     [Header("Attack Settings")]
     [SerializeField] private Collider2D VisionCollider = null;
     [SerializeField] private Transform attackTransform = null;
@@ -54,6 +54,11 @@ public class ForestBoos : FlyingEnemy
                 transform.localScale = new Vector3(-transform.localScale.x,1,1);
             }
         }
+    }
+
+    protected override void DieEffect(){
+        if(teleportArea != null)
+            teleportArea.SetActive(true);
     }
 
     protected override void Turn(){

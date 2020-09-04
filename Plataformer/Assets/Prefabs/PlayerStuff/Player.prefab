@@ -208,7 +208,7 @@ MonoBehaviour:
   currentLife: {fileID: 11400000, guid: 968398fd07f8ddb4f9d45ffda69520cb, type: 2}
   herathContainers: {fileID: 11400000, guid: fd7a2dc8c9191534b9cc120d9c6bc528, type: 2}
   HealthChange: {fileID: 11400000, guid: 7d31c03f8d495024e9045817f664d946, type: 2}
-  HurtSound: {fileID: 8300000, guid: 0097d52f745b0804d81f2ac9076aa938, type: 3}
+  HurtSound: {fileID: 8300000, guid: 00a848297c7ecf142ab643e365ec29fe, type: 3}
   speed: 5
   jumpForce: 10
   doubleJumpForce: 9

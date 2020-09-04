@@ -10,11 +10,6 @@ public class BeeQueen : FlyingEnemy
     [SerializeField] private float attackTime = 0f;
     [SerializeField] private GameObject bee = null;
 
-    [Header("Sound Settings")]
-    [SerializeField] private SoundEffect sounds = null;
-    [SerializeField] private AudioClip damageSound = null;
-
-
     private void Start(){
         currentSpeed = Random.Range(speed*0.5f, speed*1.5f);
         currentState = EnemyState.walking;

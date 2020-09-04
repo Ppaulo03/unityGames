@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Placa : MonoBehaviour{
 
-    private InputManager inputManager;
+    [SerializeField] private InputManager inputManager;
     [SerializeField] private GameObject clue = null;
     [SerializeField] private GameObject dialogBox = null;
     [SerializeField] private TMPro.TMP_Text textBox = null;
@@ -15,15 +15,11 @@ public class Placa : MonoBehaviour{
     private bool active = false;
     private int TextIndex = 0;
 
-    private void Start() {
-        inputManager = FindObjectOfType<InputManager>();
-    }
-
     public void Submmited() {
         if(inRange){
             if(!active){
                 active = true;
-                textBox.text = message[0];
+                textBox.text = checkSpecial(message[0]);
                 clue.SetActive(false);
                 dialogBox.SetActive(true);
             }
@@ -36,25 +32,41 @@ public class Placa : MonoBehaviour{
                     dialogBox.SetActive(false);
                     clue.SetActive(true);
                 }
-                textBox.text = message[TextIndex];
+                textBox.text = checkSpecial(message[TextIndex]);
             }
         }
     }
 
+    private string checkSpecial(string message){
+        if(message.Contains("$")){
+            
+            string newString = "";
+            string[] cutString = message.Split(' ');
+            for(int i = 0; i < cutString.Length; i ++){
+                if(cutString[i].Contains("$")){
+                    cutString[i] = inputManager.GetKeyName(cutString[i].Substring(1));
+                }
+                newString += " " + cutString[i];
+            }
+            return newString;
+        }else return message;
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player")){
-            if(message != null){
-                inRange = true;
+            if(message != null){        
                 
+                inRange = true;
                 if(StartAwake){
                     active = true;
-                    textBox.text = message[0];
+                    textBox.text = checkSpecial(message[0]);
                     dialogBox.SetActive(true);
                     clue.SetActive(false);
+
                 }
                 else{
                     active = false;
-                    textBox.text = message[0];
+                    textBox.text = checkSpecial(message[0]);
                     dialogBox.SetActive(false);
                     clue.SetActive(true);
                 }
@@ -72,6 +84,9 @@ public class Placa : MonoBehaviour{
         }
     }
     
+    public void UptdateMessage(){
+         textBox.text = checkSpecial(message[TextIndex]);
+    }
 
 
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Signal", menuName = "ScriptableObject/InputManager", order = 0)]
 public class InputManager : ScriptableObject{
+
+    [SerializeField] private Signal Rebind = null;
     [System.Serializable] public struct KeyButton {
         public string name;
         public KeyCode key;
@@ -12,6 +14,7 @@ public class InputManager : ScriptableObject{
     [SerializeField] private KeyButton[] DefaultKeys = null;
     private Dictionary<string, KeyCode> DefaultKeysDict;
     private Dictionary<string, KeyCode> buttonKeys;
+
     private void OnEnable(){
         DefaultKeysDict = new Dictionary<string, KeyCode>();
         foreach(KeyButton button in DefaultKeys)DefaultKeysDict[button.name] = button.key;
@@ -51,6 +54,7 @@ public class InputManager : ScriptableObject{
     public void SetKey(string button, KeyCode key){
         buttonKeys[button] = key;
         PlayerPrefs.SetInt(button, (int) key);
+        Rebind.Raise();
     }
 
     public Dictionary<string, KeyCode> GetDefault(){
@@ -59,11 +63,31 @@ public class InputManager : ScriptableObject{
             PlayerPrefs.SetInt(entry.Key,(int) entry.Value);
             buttonKeys[entry.Key] = entry.Value;
         }
-
+        Rebind.Raise();
         return DefaultKeysDict;
     }
 
     public Dictionary<string, KeyCode> GetKeys(){
         return buttonKeys;
+    }
+
+    public string GetKeyName(string Button){
+        if(buttonKeys.ContainsKey(Button) == false){
+            Debug.LogError("InputManager :: GetButtonDown -- no button named: " + Button);
+            return "";
+        }
+        string KeyName = buttonKeys[Button].ToString();
+        switch(KeyName){
+            case "Mouse0":
+                return "Right Mouse Button";
+            case "Mouse1":
+                return "Left Mouse Button";
+            case "Return":
+                return "Enter";
+            case "Escape":
+                return "Esc";
+        }
+        return KeyName;
+        
     }
 }

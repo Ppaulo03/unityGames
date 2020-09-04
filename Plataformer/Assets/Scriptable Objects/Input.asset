@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe0078cc9e7324893e2258a88c0dc0, type: 3}
   m_Name: Input
   m_EditorClassIdentifier: 
+  Rebind: {fileID: 11400000, guid: ce2076037dc33b14bb5252dd520684b3, type: 2}
   DefaultKeys:
   - name: Jump
     key: 32
@@ -20,7 +21,7 @@ MonoBehaviour:
   - name: Right
     key: 100
   - name: Crouch
-    key: 115
+    key: 304
   - name: Fire
     key: 323
   - name: Effect
@@ -32,4 +33,4 @@ MonoBehaviour:
   - name: Pause
     key: 27
   - name: Submit
-    key: 13
+    key: 102

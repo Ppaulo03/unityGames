@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState{
+public enum PlayerState
+{
     onGround,
     crouching,
     jumping,
@@ -10,11 +11,14 @@ public enum PlayerState{
     stagger,
 }
 
-public class PlayerController : MonoBehaviour{
+public class PlayerController : MonoBehaviour
+{
 
     [SerializeField] private InputManager inputManager = null;
     [SerializeField] private ArrowManagement arrowManager = null;
     [SerializeField] private PlayerState currentState;
+    [SerializeField] private Range numMudas = null;
+    [SerializeField] private Range growOrder = null;
 
 
     [Header("UI Signals")]
@@ -83,7 +87,8 @@ public class PlayerController : MonoBehaviour{
     private bool deleyedAnim;
     private bool paused;
 
-    private void Awake(){
+    private void Awake()
+    {
 
         Physics2D.IgnoreLayerCollision(10, 11, false);
 
@@ -94,6 +99,9 @@ public class PlayerController : MonoBehaviour{
 
         currentLife.Value = maxLife;
         herathContainers.Value = maxLife;
+
+        numMudas.currentValue = 0;
+        growOrder.currentValue  = 0;
         
         currentStrenght = minStrength;
         paused = false;
@@ -101,8 +109,8 @@ public class PlayerController : MonoBehaviour{
         StartCoroutine(delayCo(0.2f));
 
     }
-
-    private void Update(){
+    private void Update()
+    {
 
         if(inputManager.GetButtonDown("Pause")) Pause();
         if(!paused){
@@ -140,29 +148,33 @@ public class PlayerController : MonoBehaviour{
         }
 
     }
-
-    private void FixedUpdate(){   
+    private void FixedUpdate()
+    {   
         
-        if(currentState == PlayerState.jumping || currentState == PlayerState.onGround){
-            Run();
-        }
+        if(currentState == PlayerState.jumping || currentState == PlayerState.onGround) Run();
+
     }
     
+
     //=========================================== Settings Function ====================================//
 
-    private void Pause(){
+    private void Pause()
+    {
 
-        if( Time.timeScale == 0){
+        if( Time.timeScale == 0)
+        {
             Time.timeScale = 1;
             UnPauseSignal.Raise();
         }
-        else{
+        else
+        {
             PauseSignal.Raise();
             Time.timeScale = 0;
         }
         
     }
-    private float Horizontal(){
+    private float Horizontal()
+    {
 
         float value = 0;
         if(inputManager.GetButton("Left")) value -= 1;
@@ -170,22 +182,27 @@ public class PlayerController : MonoBehaviour{
         return value;
 
     }
-    private void setAnimGround(){
+    private void setAnimGround()
+    {
 
-        if(IsGrounded()){
+        if(IsGrounded())
+        {
                 anim.SetBool("Jumping",false);
                 anim.SetBool("DoubleJump",false);
                 anim.SetBool("Falling",false);
         }
-        else if(!deleyedAnim){ 
+        else if(!deleyedAnim)
+        { 
             anim.SetBool("Falling",true);
             anim.SetBool("Crouch",false);
         }
     
     }
-    private void SetGround(){
+    private void SetGround()
+    {
         
-        if(IsGrounded()){
+        if(IsGrounded())
+        {
 
                 myRigidbody2D.drag = 0;
                 myRigidbody2D.gravityScale = 1;
@@ -193,7 +210,8 @@ public class PlayerController : MonoBehaviour{
                 doubleJump = true;
 
         }
-        else{
+        else
+        {
             myRigidbody2D.drag = resistenciaDoAr;
             myRigidbody2D.gravityScale = gravidade;
             if(currentState == PlayerState.stagger) currentState = PlayerState.jumping;
@@ -202,7 +220,8 @@ public class PlayerController : MonoBehaviour{
         }
   
     }
-    private bool IsGrounded() {
+    private bool IsGrounded()
+    {
 
         Vector2 position = transform.position;    
         for( float i = - raycastCorrection; i <= raycastCorrection; i += raycastCorrection){
@@ -217,13 +236,15 @@ public class PlayerController : MonoBehaviour{
         return false;
     
     }
-    private void Flip(float xValue){
+    private void Flip(float xValue)
+    {
 
         if(xValue > 0) mySpriteRenderer.flipX = false;
         else if(xValue < 0) mySpriteRenderer.flipX = true;
             
     }
-    private void Reset(){
+    private void Reset()
+    {
 
         foreach(AnimatorControllerParameter parameter in anim.parameters) {            
                 anim.SetBool(parameter.name, false);            
@@ -244,21 +265,24 @@ public class PlayerController : MonoBehaviour{
 
     //=================================== Movement Functions ==========================================================//
     
-    private void Crouch(){
+    private void Crouch()
+    {
 
         anim.SetBool("Crouch", true);
         currentState = PlayerState.crouching;
         StartCoroutine(slideCo());
 
     } 
-    private void Stand(){
+    private void Stand()
+    {
 
         anim.SetBool("Crouch", false);
         currentState = PlayerState.onGround;
         SetGround();
     
     }
-    private void Run(){
+    private void Run()
+    {
         
         float xValue;
         xValue = Horizontal();
@@ -274,7 +298,8 @@ public class PlayerController : MonoBehaviour{
         }
         
     }
-    private void Jump(){
+    private void Jump()
+    {
         if(IsGrounded()){
             
             myRigidbody2D.drag = resistenciaDoAr;
@@ -309,7 +334,8 @@ public class PlayerController : MonoBehaviour{
 
     //=================================== Arrow Functions ==========================================================//
 
-    public void ChangeArrow(int change){
+    public void ChangeArrow(int change)
+    {
         
         chosenArrow.Value += change;
         if(chosenArrow.Value < 0) chosenArrow.Value = arrowManager.arrows.Length - 1;
@@ -317,7 +343,8 @@ public class PlayerController : MonoBehaviour{
         changeArrow.Raise();
 
     }
-    private void posBow(){
+    private void posBow()
+    {
 
         Vector3 mousPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 dir = mousPos - BowPositon.position;
@@ -336,11 +363,13 @@ public class PlayerController : MonoBehaviour{
         }
 
     } 
-    private void chargeBow(){
+    private void chargeBow()
+    {
         if(chargeTime != 0 && currentStrenght < arrowSpeed) currentStrenght += arrowSpeed/chargeTime * Time.deltaTime;
         else currentStrenght = arrowSpeed;
     }
-    private void PreparFire(){
+    private void PreparFire()
+    {
 
         anim.SetBool("FiringArrow", true);
         anim.SetTrigger("Fire");
@@ -357,7 +386,8 @@ public class PlayerController : MonoBehaviour{
         }
 
     }
-    private void Fire(){
+    private void Fire()
+    {
         
         myRigidbody2D.drag = 0;
         anim.SetBool("Jumping", false);
@@ -371,7 +401,8 @@ public class PlayerController : MonoBehaviour{
 
     //=================================== Damage Functions ===================================================//
 
-    private void Die(){
+    private void Die()
+    {
 
         myRigidbody2D.velocity = Vector2.zero;
         transform.position = GameObject.FindWithTag("Respawn").transform.position;
@@ -380,7 +411,8 @@ public class PlayerController : MonoBehaviour{
         Reset();
 
     }
-    public void KnockBack(Vector3 knockBack){
+    public void KnockBack(Vector3 knockBack)
+    {
 
         currentState = PlayerState.stagger;
         myRigidbody2D.velocity = Vector2.zero;
@@ -388,7 +420,8 @@ public class PlayerController : MonoBehaviour{
         StartCoroutine(invunerableCo());
 
     }
-    public void Hurt(Vector3 knockBack){
+    public void Hurt(Vector3 knockBack)
+    {
         
         if(currentState != PlayerState.stagger){
 
@@ -417,7 +450,8 @@ public class PlayerController : MonoBehaviour{
         }
         
     }
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other)
+    {
         
         if(other.CompareTag("LevelArea")){
             Die();
@@ -428,7 +462,8 @@ public class PlayerController : MonoBehaviour{
 
     //=================================== Coroutines ==========================================================//
 
-    private IEnumerator attackCo(){
+    private IEnumerator attackCo()
+    {
 
         attackRunning = true;
 
@@ -461,16 +496,21 @@ public class PlayerController : MonoBehaviour{
         Reset();
 
     }
-    private IEnumerator reloadCo(int arrowIndex){
+    private IEnumerator reloadCo(int arrowIndex)
+    {
         yield return new WaitForSeconds(arrowManager.arrows[arrowIndex].CooldownTime);
             arrowManager.arrows[arrowIndex].currentQtd = arrowManager.arrows[arrowIndex].maxOfArrows;
     }
-    private IEnumerator delayCo(float delayTime){
+    private IEnumerator delayCo(float delayTime)
+    {
+
         deleyedAnim = true;
         yield return new WaitForSeconds(delayTime);
         deleyedAnim = false;
+
     }  
-    private IEnumerator invunerableCo(){
+    private IEnumerator invunerableCo()
+    {
 
         for(int i = 0; i < 4; i++ ){
             mySpriteRenderer.color = new Color(1f,1f,1f,0.5f);
@@ -482,13 +522,15 @@ public class PlayerController : MonoBehaviour{
         Physics2D.IgnoreLayerCollision(10, 11, false);
         SetGround();
     }
-    private IEnumerator slideCo(){
+    private IEnumerator slideCo()
+    {
 
         yield return new WaitForSeconds(slideTime);
         myRigidbody2D.velocity = Vector2.zero;
 
     }
-    private IEnumerator fallDelay(){
+    private IEnumerator fallDelay()
+    {
 
         yield return new WaitForSeconds(1f);
         if(!IsGrounded())

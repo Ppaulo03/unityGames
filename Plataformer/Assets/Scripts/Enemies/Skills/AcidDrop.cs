@@ -18,7 +18,9 @@ public class AcidDrop : MonoBehaviour
         StartCoroutine(DropCo());
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
         if(other.gameObject.CompareTag("Player")){
             other.gameObject.GetComponent<PlayerController>().Hurt(Vector3.zero);
         }
@@ -38,12 +40,14 @@ public class AcidDrop : MonoBehaviour
 
     }
 
-    private IEnumerator DropCo(){
+    private IEnumerator DropCo()
+    {
         yield return new WaitForSeconds(fallTime);
         myRigidbody.bodyType = RigidbodyType2D.Dynamic;
     }
 
-    private IEnumerator DestroyCo(){
+    private IEnumerator DestroyCo()
+    {
         yield return new WaitForSeconds(fallTime);
         Destroy(gameObject);
     }

@@ -8,7 +8,8 @@ public class ExplosionDamage : MonoBehaviour
     [SerializeField] private LayerMask groundLayer = ~0;
     [SerializeField] private float Radius = 0f;
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if(!other.isTrigger){
             if(other.gameObject.CompareTag(damagetag)){
                 Vector2 Direction = other.ClosestPoint(transform.position) - new Vector2(transform.position.x, transform.position.y);
@@ -21,4 +22,5 @@ public class ExplosionDamage : MonoBehaviour
             }
         }
     }
+    
 }

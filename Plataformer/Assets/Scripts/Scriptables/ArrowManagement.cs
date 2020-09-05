@@ -6,7 +6,8 @@ using UnityEngine;
 public class ArrowManagement : ScriptableObject, ISerializationCallbackReceiver
 {
 
-    [System.Serializable] public struct ArrowStruct {
+    [System.Serializable] public struct ArrowStruct
+    {
         public string name;
         public GameObject arrowObject;
         public Sprite arrowsSprite;
@@ -19,13 +20,15 @@ public class ArrowManagement : ScriptableObject, ISerializationCallbackReceiver
     public ArrowStruct[] arrows = null;
 
     public void OnBeforeSerialize(){}
-    public void OnAfterDeserialize(){
+    public void OnAfterDeserialize()
+    {
         for(int i = 0; i < arrows.Length; i ++){
             arrows[i].currentQtd = arrows[i].maxOfArrows;
         }
     }
     
-    public void ActiveEffect(int index){
+    public void ActiveEffect(int index)
+    {
         if(arrows[index].effect != null)
             arrows[index].effect.Raise();
     }

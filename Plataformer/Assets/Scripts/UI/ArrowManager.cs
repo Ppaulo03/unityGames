@@ -16,15 +16,18 @@ public class ArrowManager : MonoBehaviour
 
     private int[] countDowns = {0, 0, 0, 0, 0, 0};
 
-    private void Start() {
+    private void Start()
+    {
         ChangeArrow();
     }
 
-    private void Update() {
+    private void Update()
+    {
         CountdownText.text = countDowns[chosenArrow.Value].ToString();
     }
 
-    public void ChangeArrow(){
+    public void ChangeArrow()
+    {
         chosenArrowImage.sprite = arrowManagement.arrows[chosenArrow.Value].arrowsSprite;
         arrowQtd.text = "x" + arrowManagement.arrows[chosenArrow.Value].currentQtd.ToString();
         if(arrowManagement.arrows[chosenArrow.Value].currentQtd == 0){
@@ -33,7 +36,8 @@ public class ArrowManager : MonoBehaviour
         else Countdown.SetActive(false);
     }
 
-    public void ShootArrow(){
+    public void ShootArrow()
+    {
         
         arrowQtd.text = "x" + arrowManagement.arrows[chosenArrow.Value].currentQtd.ToString();
         if(arrowManagement.arrows[chosenArrow.Value].currentQtd == 0){
@@ -43,7 +47,8 @@ public class ArrowManager : MonoBehaviour
         
     }
 
-    private IEnumerator countdownCo(int index){
+    private IEnumerator countdownCo(int index)
+    {
         for(int i = Mathf.RoundToInt(arrowManagement.arrows[chosenArrow.Value].CooldownTime); i > 0 ; i--){
             countDowns[index] = i;
             yield return new WaitForSeconds(1f);

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum EnemyState{
+public enum EnemyState
+{
     walking,
     idle,
     jumping,
@@ -34,7 +34,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float knockBackResistence = 0f;
 
 
-
     [Header("Ground Check")]
     [SerializeField] protected LayerMask groundLayer = ~0;
     [SerializeField] protected float groundDistance = 0f;
@@ -47,123 +46,140 @@ public class Enemy : MonoBehaviour
     protected SpriteRenderer mySpriteRenderer;
     protected Animator anim;
 
-    private void Awake() {
+    private void Awake()
+    {
         myRigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    protected virtual void HurtSound(){}
 
-    public virtual void Hurt(Vector3 knockBack){
+//============================================ Hurt Functions ===================================================//
+    protected virtual void Die()
+    {
+        
+        DieEffect();
+        gameObject.SetActive(false);
+
+    } protected virtual void DieEffect(){}
+    public virtual void Hurt(Vector3 knockBack)
+    {
 
         if(currentState != EnemyState.stagger){
-            HurtSound();
+
             if(currentState == EnemyState.freeze) UnFreeze();
             currentState = EnemyState.stagger;
             Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
             
             myRigidbody2D.velocity = Vector2.zero;
-            Vector3 RealKnockBack = knockBack - new Vector3(knockBackResistence,knockBackResistence, 0);
-            if(RealKnockBack.x < 0) new Vector3(0, RealKnockBack.y, 0);
-            if(RealKnockBack.x < 0) new Vector3(RealKnockBack.x, 0, 0);
-
+            Vector3 RealKnockBack = knockBack - new Vector3(knockBackResistence, knockBackResistence, 0);
+            if( RealKnockBack.x < 0) new Vector3( 0, RealKnockBack.y, 0);
+            if( RealKnockBack.y < 0) new Vector3( RealKnockBack.x, 0, 0);
             myRigidbody2D.AddForce(RealKnockBack, ForceMode2D.Impulse);
             
             lifePoints -= 1;
-
             if (lifePoints <= 0) Die();
-            else StartCoroutine(invunerableCo());
+            else{
+                HurtAction();
+                StartCoroutine(invunerableCo());
+            }
 
         }
 
+    }protected virtual void HurtAction(){}
+    protected IEnumerator invunerableCo()
+    {
+
+        yield return new WaitForSeconds(invunerableTime);
+        if(currentState != EnemyState.freeze) currentState = EnemyState.walking;
+    
     }
 
-    public virtual void Freeze(){
+
+//=============================================== Freeze Functions =============================================//
+    public virtual void Freeze()
+    {
+
         anim.speed = 0;
         mySpriteRenderer.color = freezeColor;
         currentState = EnemyState.freeze;
         myRigidbody2D.velocity = Vector2.zero;
         FrezzeBegin();
         if(lifePoints > 0) StartCoroutine(unFreezeCo());
-    }
 
-    protected virtual void FrezzeBegin(){
-        StopCoroutine(invunerableCo());
-    }
-    protected virtual void FrezzeStop(){
-    }
+    } protected virtual void FrezzeBegin(){ StopCoroutine(invunerableCo()); }
+    protected virtual void UnFreeze()
+    {
 
-    protected virtual void UnFreeze(){
         anim.speed = 1;
         mySpriteRenderer.color = Color.white;
         currentState = EnemyState.idle;
         FrezzeStop();
-    }
 
-    protected IEnumerator unFreezeCo(){
+    } protected virtual void FrezzeStop(){}
+    protected IEnumerator unFreezeCo()
+    {
+
         yield return new WaitForSeconds(freezeTime);
         UnFreeze();
+
     }
 
-    protected virtual void DieEffect(){}
-    protected virtual void Die(){
-        DieEffect();
-        gameObject.SetActive(false);
-    }
-        
-    protected virtual void Turn(){
-        myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
-        direction = -direction;
-        mySpriteRenderer.flipX = !mySpriteRenderer.flipX;
-    }
 
-    protected float PlataformEnd() {
+//================================================= Ground Check ================================================//
+
+    protected float PlataformEnd()
+    {
         
         Vector2 position = transform.position + SizeCorrection;
         Vector2 direction = Vector2.down;
         
         for(float i = -raycastCorrection; i <= raycastCorrection; i += 2*raycastCorrection){
 
-            Debug.DrawRay(position + Vector2.right*i, direction, Color.green); 
+            //Debug.DrawRay(position + Vector2.right*i, direction, Color.green); 
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, direction, groundDistance, groundLayer);
-
-            if (hit.collider == null) return (i/raycastCorrection);
+            if (hit.collider == null) return ( i / raycastCorrection );
             
         }
         return 0;
         
     }
+    protected bool OnGround()
+    {
 
-    protected bool OnGround() {
         Vector2 position = transform.position + SizeCorrection;
         Vector2 direction = Vector2.down;
         
         for(float i = -raycastCorrection; i <= raycastCorrection; i += raycastCorrection){
             
-            Debug.DrawRay(position + Vector2.right*i, direction, Color.green);
+            //Debug.DrawRay(position + Vector2.right*i, direction, Color.green);
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, direction, groundDistance, groundLayer);
-            
             if (hit.collider != null) return true;
             
         }
         return false;
     }
+//================================================================================================================//
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player")){
-            Vector3 direction = (other.gameObject.transform.position - transform.position ).normalized;
-            other.gameObject.GetComponent<PlayerController>().Hurt(direction* knockBackForce);
+    protected virtual void Turn()
+    {
+        
+        direction = -direction;
+        transform.localScale = new Vector3(-transform.localScale.x,1,1);
+        myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
+    
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if( other.gameObject.CompareTag("Player") )
+        {
+
+            Vector3 direction = ( other.gameObject.transform.position - transform.position ).normalized;
+            other.gameObject.GetComponent<PlayerController>().Hurt( direction * knockBackForce );
+
         }
 
     }
     
-    protected IEnumerator invunerableCo()
-    {
-        yield return new WaitForSeconds(invunerableTime);
-        if(currentState != EnemyState.freeze)
-            currentState = EnemyState.walking;
-    }
-
-
 }

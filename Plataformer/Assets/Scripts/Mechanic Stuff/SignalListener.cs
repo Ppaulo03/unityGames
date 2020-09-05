@@ -8,15 +8,18 @@ public class SignalListener : MonoBehaviour
     [SerializeField] private Signal signal = null;
     [SerializeField] private UnityEvent signalEvent = null;
 
-    public void onSignalRaised(){
+    public void onSignalRaised()
+    {
         signalEvent.Invoke();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         signal.RegisterListener(this);
     }
     
-    private void OnDisable() {
+    private void OnDisable()
+    {
         signal.DeRegisterListener(this);
     }
 

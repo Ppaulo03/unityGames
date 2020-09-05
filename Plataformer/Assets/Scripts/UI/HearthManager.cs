@@ -11,11 +11,13 @@ public class HearthManager : MonoBehaviour
     [SerializeField] private FloatValue HearthContainers = null;
     [SerializeField] private FloatValue Health = null;
     
-    void Start(){
+    void Start()
+    {
         InitiHearths();
     }
 
-    private void InitiHearths(){
+    private void InitiHearths()
+    {
         for(int i = 0; i < hearths.Length; i ++){
             if(i < HearthContainers.Value) hearths[i].gameObject.SetActive(true);
             else hearths[i].gameObject.SetActive(false);
@@ -23,7 +25,8 @@ public class HearthManager : MonoBehaviour
         }
     }
 
-    public void UpdateHearths(){
+    public void UpdateHearths()
+    {
         for(int i = 0; i < HearthContainers.Value; i ++){
             if(i< Health.Value){
                 hearths[i].sprite = fullHearth;

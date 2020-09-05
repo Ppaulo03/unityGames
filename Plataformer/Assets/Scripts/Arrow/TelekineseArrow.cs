@@ -8,16 +8,17 @@ public class TelekineseArrow : Arrow
     [SerializeField] private float burstTime = 0f;
     private bool controlling = true;
     private bool change = true;
-    
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         
         if(controlling) Control();
         DirectArrow();
 
     }
 
-    private void Control(){
+    private void Control()
+    {
         if(change){
             change = false;  
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -29,10 +30,11 @@ public class TelekineseArrow : Arrow
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         if(other.gameObject.CompareTag("Enemy")){
-            Destroy(gameObject);
             other.gameObject.GetComponent<Enemy>().Hurt(myRigidbody.velocity.normalized * knockBackForce);
+            Destroy(gameObject);
         }
         else{
             myRigidbody.velocity = Vector2.zero;
@@ -42,7 +44,8 @@ public class TelekineseArrow : Arrow
         }
     }
 
-    private IEnumerator ChangeCo(){
+    private IEnumerator ChangeCo()
+    {
         yield return new WaitForSeconds(burstTime);
         change = true;
     }

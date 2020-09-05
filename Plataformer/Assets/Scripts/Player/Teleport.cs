@@ -11,12 +11,14 @@ public class Teleport : MonoBehaviour
     private AudioSource myAudioSource;
     private Animator anim;
 
-    private void Start() {
+    private void Start()
+    {
         myAudioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if(other.gameObject.CompareTag("Player")){
             myAudioSource.Play();
             anim.SetTrigger("Teleport");
@@ -24,7 +26,8 @@ public class Teleport : MonoBehaviour
         }
     }
 
-    private IEnumerator TeleportCo(){
+    private IEnumerator TeleportCo()
+    {
         yield return new WaitForSeconds(0.3f);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(levelToLoad);
         while(!asyncOperation.isDone){

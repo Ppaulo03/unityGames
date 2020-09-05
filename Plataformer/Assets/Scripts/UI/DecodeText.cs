@@ -7,16 +7,19 @@ public class DecodeText : MonoBehaviour
     [SerializeField] private InputManager inputManager = null;
     [SerializeField] private TMPro.TMP_Text textBox = null;
     private string originalMessage;
-    private void OnEnable() {
+    private void OnEnable()
+    {
         originalMessage = textBox.text;
         UptdateMessage();
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         textBox.text = originalMessage ;
     }
 
-    private string checkSpecial(string message){
+    private string checkSpecial(string message)
+    {
         if(message.Contains("$")){
             
             string newString = "";
@@ -32,7 +35,8 @@ public class DecodeText : MonoBehaviour
         }else return message;
     }
 
-    public void UptdateMessage(){
+    public void UptdateMessage()
+    {
         textBox.text = checkSpecial(originalMessage);
     }
 

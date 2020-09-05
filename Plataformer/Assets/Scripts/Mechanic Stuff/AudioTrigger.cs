@@ -12,11 +12,13 @@ public class AudioTrigger : MonoBehaviour
 
     private AudioSource mainCameraAudio = null;
 
-    private void Start() {
+    private void Start()
+    {
         mainCameraAudio = Camera.main.GetComponent<AudioSource>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if(other.gameObject.CompareTag("Player")){
             mainCameraAudio.clip = NewAudio;
             mainCameraAudio.volume = NewAudioVolume;
@@ -24,11 +26,13 @@ public class AudioTrigger : MonoBehaviour
         }
     }
     
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other)
+    {
         if(other.gameObject.CompareTag("Player")){
             mainCameraAudio.clip = Initial;
             mainCameraAudio.volume = InitialVolume;
             mainCameraAudio.Play();
         }
     }
+    
 }

@@ -11,7 +11,8 @@ public class GoblinBomb : MonoBehaviour
         StartCoroutine(ExplosionCo());
     }  
 
-    private IEnumerator ExplosionCo(){
+    private IEnumerator ExplosionCo()
+    {
         yield return new WaitForSeconds(explosionTime);
         Instantiate(explosion, transform.position, Quaternion.Euler (Vector3.zero));
         Destroy(gameObject);

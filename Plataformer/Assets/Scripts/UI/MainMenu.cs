@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour{
-    [Serializable] public struct KeyButton {
+public class MainMenu : MonoBehaviour
+{
+    [Serializable] public struct KeyButton
+    {
         public string name;
         public TMPro.TMP_Text button;
     }
@@ -39,31 +41,39 @@ public class MainMenu : MonoBehaviour{
     private Resolution[] resolutions;
 
 
-    private void Start(){
+    private void Start()
+    {
         Time.timeScale = 1;
+
+        //Set Mouse Texture 
         if(CenterMouse) hotSpot = new Vector2(cursorTexture.width / 2 , cursorTexture.height / 2 );
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        
+        //Set VolumeSettings
         slider.value = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
         audioSources =  FindObjectsOfType<AudioSource>();
         foreach (AudioSource audio in audioSources) audio.outputAudioMixerGroup = mixerGroup;
 
+        //Set ButtonKeys
         buttonKeys = new Dictionary<string, TMPro.TMP_Text>();
         foreach(KeyButton button in keyButtons) buttonKeys[button.name] = button.button;
         foreach(KeyValuePair<string, KeyCode> entry in inputManager.GetKeys())
             buttonKeys[entry.Key].text = entry.Value.ToString();
 
-
+        //Set FullScreen
         fullScreen.isOn = PlayerPrefs.GetInt("FullScreen", 1) == 1 ? true:false;
-        
+
+        //Set Quality
         QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", 3));
         qualityDropdown.value = PlayerPrefs.GetInt("Quality", 3);
         qualityDropdown.RefreshShownValue();
         
+        //Set Resulution
+        int currentResolutionIndex = 0;
         resolutions =  Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
 
-        int currentResolutionIndex = 0;
         for(int i = 0; i < resolutions.Length; i++){
             string option = resolutions[i].width + "x" + resolutions[i].height;
             options.Add(option);
@@ -86,19 +96,12 @@ public class MainMenu : MonoBehaviour{
 
     }
 
-    public void PlayGame(){
+    public void PlayGame()
+    {
         StartCoroutine(playGameCo());
     }
-    
-    public void BackToMainMenu(){
-        StartCoroutine(MainMenuCo());
-    }
-
-    public void Unpause(){
-        Time.timeScale = 1;
-    }
-
-    private IEnumerator playGameCo(){
+    private IEnumerator playGameCo()
+    {
         yield return new WaitForSeconds(2f);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Level1");
         while(!asyncOperation.isDone){
@@ -106,18 +109,31 @@ public class MainMenu : MonoBehaviour{
         }
     }
 
-    private IEnumerator MainMenuCo(){
+    public void BackToMainMenu()
+    {
+        StartCoroutine(MainMenuCo());
+    }
+     private IEnumerator MainMenuCo()
+    {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(0);
         while(!asyncOperation.isDone){
             yield return null;
         }
     }
 
-    public void QuitGame(){
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+    }
+    public void QuitGame()
+    {
         Application.Quit();
     }
 
-    public void setFullScreen(bool isFullscreen){
+
+//=======================================Graphic Settings================================================//
+    public void setFullScreen(bool isFullscreen)
+    {
         Screen.fullScreen = isFullscreen;
 
         if(isFullscreen) PlayerPrefs.SetInt("FullScreen", 1);
@@ -125,27 +141,35 @@ public class MainMenu : MonoBehaviour{
 
     }
 
-    public void setResolution(int resolutionIndex){
+    public void setResolution(int resolutionIndex)
+    {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         PlayerPrefs.SetInt("Resolution", resolutionIndex);
     }
 
-    public void setQuality(int qualityIndex){
+    public void setQuality(int qualityIndex)
+    {
         QualitySettings.SetQualityLevel(qualityIndex);
         PlayerPrefs.SetInt("Quality", qualityIndex);
     }
 
-    public void SetVolumeLevel (float sliderValue){
+
+//======================================Volume Settings=================================================//
+    public void SetVolumeLevel (float sliderValue)
+    {
         mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
         PlayerPrefs.SetFloat("MusicVolume", sliderValue);
     }
 
-    public void RebindKey(string ButtonName){
+
+//=======================================KeyBinding====================================================//
+    public void RebindKey(string ButtonName)
+    {
         StartCoroutine(RebindKeyCo(ButtonName, buttonKeys[ButtonName].text));
     }
-
-    private IEnumerator RebindKeyCo(string ButtonName, string oldValue){
+    private IEnumerator RebindKeyCo(string ButtonName, string oldValue)
+    {
         WaitForSecondsRT wait = new WaitForSecondsRT(1);
         string keyName = "N/A";
         do{
@@ -174,8 +198,8 @@ public class MainMenu : MonoBehaviour{
         buttonKeys[ButtonName].text = keyName;
         inputManager.SetKey(ButtonName, (KeyCode) System.Enum.Parse(typeof(KeyCode), keyName));
     }
-    
-    public void BindKeysDefault(){
+    public void BindKeysDefault()
+    {
 
         foreach(KeyValuePair<string, KeyCode> entry in inputManager.GetDefault())
         {

@@ -18,7 +18,8 @@ public class AcidPool : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if(other.gameObject.CompareTag("Player")){
             other.gameObject.GetComponent<PlayerController>().Hurt(Vector3.zero);
             Mycollidder.enabled = false;
@@ -26,12 +27,14 @@ public class AcidPool : MonoBehaviour
         }
     }
 
-    private IEnumerator cooldownCo(){
+    private IEnumerator cooldownCo()
+    {
         yield return new WaitForSeconds(colldownTime);
         Mycollidder.enabled = true;
     }
 
-    private IEnumerator destroyCo(){
+    private IEnumerator destroyCo()
+    {
         yield return new WaitForSeconds(lifeTime);
         numPools.Value --;
         StopCoroutine(cooldownCo());

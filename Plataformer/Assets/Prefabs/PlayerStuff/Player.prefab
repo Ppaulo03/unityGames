@@ -199,6 +199,8 @@ MonoBehaviour:
   inputManager: {fileID: 11400000, guid: 9613c1fed75f0d24b8b0cbe1931a64d2, type: 2}
   arrowManager: {fileID: 11400000, guid: 77866f8c11a0b0b4da10e51aa26bd4dd, type: 2}
   currentState: 0
+  numMudas: {fileID: 11400000, guid: 2346a44acc94c1143b1b8744347469d2, type: 2}
+  growOrder: {fileID: 11400000, guid: 804e53cb550bb4648bfc0b45e70a7c62, type: 2}
   PauseSignal: {fileID: 11400000, guid: cf7ce135ea9d00d4996ad297b6810905, type: 2}
   UnPauseSignal: {fileID: 11400000, guid: f17bb1539b800ac428a1b773b77e4c63, type: 2}
   Submit: {fileID: 11400000, guid: 5f21d2ac3bb18674c8fc288a958b0624, type: 2}

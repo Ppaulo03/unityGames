@@ -4,10 +4,12 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Signal", menuName = "ScriptableObject/InputManager", order = 0)]
-public class InputManager : ScriptableObject{
+public class InputManager : ScriptableObject
+{
 
     [SerializeField] private Signal Rebind = null;
-    [System.Serializable] public struct KeyButton {
+    [System.Serializable] public struct KeyButton
+    {
         public string name;
         public KeyCode key;
     }
@@ -15,7 +17,8 @@ public class InputManager : ScriptableObject{
     private Dictionary<string, KeyCode> DefaultKeysDict;
     private Dictionary<string, KeyCode> buttonKeys;
 
-    private void OnEnable(){
+    private void OnEnable()
+    {
         DefaultKeysDict = new Dictionary<string, KeyCode>();
         foreach(KeyButton button in DefaultKeys)DefaultKeysDict[button.name] = button.key;
         
@@ -27,7 +30,8 @@ public class InputManager : ScriptableObject{
 
     }
 
-    public bool GetButtonDown(string buttonName){
+    public bool GetButtonDown(string buttonName)
+    {
         if(buttonKeys.ContainsKey(buttonName) == false){
             Debug.LogError("InputManager :: GetButtonDown -- no button named: " + buttonName);
             return false;
@@ -35,7 +39,8 @@ public class InputManager : ScriptableObject{
         return Input.GetKeyDown( buttonKeys[buttonName]);
     }
 
-    public bool GetButtonUp(string buttonName){
+    public bool GetButtonUp(string buttonName)
+    {
         if(buttonKeys.ContainsKey(buttonName) == false){
             Debug.LogError("InputManager :: GetButtonDown -- no button named: " + buttonName);
             return false;
@@ -43,7 +48,8 @@ public class InputManager : ScriptableObject{
         return Input.GetKeyUp(buttonKeys[buttonName]);
     }
 
-    public bool GetButton(string buttonName){
+    public bool GetButton(string buttonName)
+    {
         if(buttonKeys.ContainsKey(buttonName) == false){
             Debug.LogError("InputManager :: GetButtonDown -- no button named: " + buttonName);
             return false;
@@ -51,13 +57,15 @@ public class InputManager : ScriptableObject{
         return Input.GetKey(buttonKeys[buttonName]);
     }
 
-    public void SetKey(string button, KeyCode key){
+    public void SetKey(string button, KeyCode key)
+    {
         buttonKeys[button] = key;
         PlayerPrefs.SetInt(button, (int) key);
         Rebind.Raise();
     }
 
-    public Dictionary<string, KeyCode> GetDefault(){
+    public Dictionary<string, KeyCode> GetDefault()
+    {
 
         foreach(KeyValuePair<string, KeyCode> entry in DefaultKeysDict){
             PlayerPrefs.SetInt(entry.Key,(int) entry.Value);
@@ -67,11 +75,13 @@ public class InputManager : ScriptableObject{
         return DefaultKeysDict;
     }
 
-    public Dictionary<string, KeyCode> GetKeys(){
+    public Dictionary<string, KeyCode> GetKeys()
+    {
         return buttonKeys;
     }
 
-    public string GetKeyName(string Button){
+    public string GetKeyName(string Button)
+    {
         if(buttonKeys.ContainsKey(Button) == false){
             Debug.LogError("InputManager :: GetButtonDown -- no button named: " + Button);
             return "";

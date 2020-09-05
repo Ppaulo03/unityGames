@@ -11,38 +11,44 @@ public class SoundEffect : MonoBehaviour
 
     private AudioSource myAudioSource;
 
-    private void Start() {
+    private void Start()
+    {
         myAudioSource = GetComponent<AudioSource>();
     }
     
-    public void changeSound(AudioClip newSound, float volume){
+    public void changeSound(AudioClip newSound, float volume)
+    {
         myAudioSource.loop = false;
         myAudioSource.clip = newSound;
         myAudioSource.volume = volume;
         if(Idle != null) StartCoroutine(idleSoundCo());
     }
 
-    private void IdleSound(){
+    private void IdleSound()
+    {
         myAudioSource.clip = Idle;
         myAudioSource.loop = true;
          myAudioSource.volume = idleVolume;
         myAudioSource.Play();
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if(other.gameObject.CompareTag("Player")){
             if(Idle != null) IdleSound();
         }
     }
     
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other)
+    {
         if(other.gameObject.CompareTag("Player")){
             myAudioSource.Stop();
             StopCoroutine(idleSoundCo());
         }
     }
 
-    private IEnumerator idleSoundCo(){
+    private IEnumerator idleSoundCo()
+    {
         yield return new WaitForSeconds(myAudioSource.clip.length + 0.2f);
             IdleSound();
     }

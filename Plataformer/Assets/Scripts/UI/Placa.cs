@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Placa : MonoBehaviour{
+public class Placa : MonoBehaviour
+{
 
     [SerializeField] private InputManager inputManager = null;
     [SerializeField] private GameObject clue = null;
@@ -15,7 +16,8 @@ public class Placa : MonoBehaviour{
     private bool active = false;
     private int TextIndex = 0;
 
-    public void Submmited() {
+    public void Submmited()
+    {
         if(inRange){
             if(!active){
                 active = true;
@@ -37,7 +39,8 @@ public class Placa : MonoBehaviour{
         }
     }
 
-    private string checkSpecial(string message){
+    private string checkSpecial(string message)
+    {
         if(message.Contains("$")){
             
             string newString = "";
@@ -52,7 +55,8 @@ public class Placa : MonoBehaviour{
         }else return message;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if(other.gameObject.CompareTag("Player")){
             if(message != null){        
                 
@@ -74,7 +78,8 @@ public class Placa : MonoBehaviour{
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other)
+    {
         if(other.gameObject.CompareTag("Player")){
             inRange = false;
             active = false;
@@ -84,7 +89,8 @@ public class Placa : MonoBehaviour{
         }
     }
     
-    public void UptdateMessage(){
+    public void UptdateMessage()
+    {
          textBox.text = checkSpecial(message[TextIndex]);
     }
 

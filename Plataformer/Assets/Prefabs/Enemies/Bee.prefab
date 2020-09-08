@@ -300,5 +300,5 @@ MonoBehaviour:
   hoverForce: 1
   gravityFall: 0.5
   turnTime: 0
-  freeze: 0
   buzzSound: {fileID: 8300000, guid: f8dd7e74e4addab48a91994d4dffa725, type: 3}
+  buzzVolume: 0.1

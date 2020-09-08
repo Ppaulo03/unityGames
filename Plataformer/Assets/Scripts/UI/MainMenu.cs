@@ -96,14 +96,15 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void PlayGame()
+    public void ChooseLevel(string level)
     {
-        StartCoroutine(playGameCo());
+        StartCoroutine(ChooseLevelCo(level));
     }
-    private IEnumerator playGameCo()
+    private IEnumerator ChooseLevelCo(string level)
     {
-        yield return new WaitForSeconds(2f);
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Level1");
+        WaitForSecondsRT wait = new WaitForSecondsRT(1);
+        yield return new WaitForSecondsRT(2f);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(level);
         while(!asyncOperation.isDone){
             yield return null;
         }

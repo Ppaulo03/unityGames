@@ -12,6 +12,7 @@ public class FlyingEnemy : Enemy
     [SerializeField] private float turnTime = 0f;
     protected float currentSpeed;
     protected bool turn = true;
+    public bool ground = false;
     
     protected virtual void Move()
     {
@@ -32,11 +33,11 @@ public class FlyingEnemy : Enemy
 
         for(float i = -raycastCorrection; i <= raycastCorrection; i += raycastCorrection){
             
-            //Debug.DrawRay(position + Vector2.right*i, direction, Color.green);
+            Debug.DrawRay(position + Vector2.right*i, direction, Color.green);
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, direction, groundDistance, groundLayer);
         
             if (hit.collider != null){
-
+                ground = true;
                 if(hit.distance > desiredHeight) myRigidbody2D.gravityScale = gravityFall;
                 else{
                     myRigidbody2D.gravityScale = 0; 
@@ -47,6 +48,7 @@ public class FlyingEnemy : Enemy
             } 
 
         }
+        ground = false;
         myRigidbody2D.gravityScale = gravityFall;
         return;
 

@@ -172,9 +172,11 @@ MonoBehaviour:
   hoverForce: 1
   gravityFall: 0.25
   turnTime: 1
+  ground: 0
   teleportArea: {fileID: 0}
   VisionCollider: {fileID: 907753871}
   attackTransform: {fileID: 7342324334223531491}
+  minion: {fileID: 5201597943427193499, guid: 50d7be3fbb71cfc4cb553eacbf1225bc, type: 3}
   acidBall: {fileID: 2335881417092001787, guid: 33246ad4516a123468ec9a050c9c4c5b,
     type: 3}
   acidBallCooldown: 5

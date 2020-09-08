@@ -365,4 +365,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Idle: {fileID: 8300000, guid: f8dd7e74e4addab48a91994d4dffa725, type: 3}
-  idleVolume: 0.05
+  idleVolume: 0.5

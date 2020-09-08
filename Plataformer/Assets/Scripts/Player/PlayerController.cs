@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
 
-        Physics2D.IgnoreLayerCollision(10, 11, false);
+        ignoreLayers(false);
 
         myRigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -103,6 +103,9 @@ public class PlayerController : MonoBehaviour
         numMudas.currentValue = 0;
         growOrder.currentValue  = 0;
         
+        for(int i = 0; i < arrowManager.arrows.Length; i++)
+            arrowManager.arrows[i].currentQtd = arrowManager.arrows[i].maxOfArrows;
+
         currentStrenght = minStrength;
         paused = false;
         Time.timeScale = 1;
@@ -121,7 +124,7 @@ public class PlayerController : MonoBehaviour
             if(inputManager.GetButtonDown("Effect")) arrowManager.ActiveEffect(chosenArrow.Value);
 
             if(currentState != PlayerState.stagger){
-                
+
                 if(currentState != PlayerState.attacking){
                     
                     SetGround();
@@ -158,9 +161,13 @@ public class PlayerController : MonoBehaviour
 
     //=========================================== Settings Function ====================================//
 
+    private void ignoreLayers(bool ignor){
+        Physics2D.IgnoreLayerCollision(10, 11, ignor);
+        Physics2D.IgnoreLayerCollision(10, 14, ignor);
+    }
     private void Pause()
     {
-
+        paused = !paused;
         if( Time.timeScale == 0)
         {
             Time.timeScale = 1;
@@ -215,7 +222,10 @@ public class PlayerController : MonoBehaviour
             myRigidbody2D.drag = resistenciaDoAr;
             myRigidbody2D.gravityScale = gravidade;
             if(currentState == PlayerState.stagger) currentState = PlayerState.jumping;
-            else StartCoroutine(fallDelay());
+            else{
+                if(currentState == PlayerState.attacking) currentState = PlayerState.onGround;
+                StartCoroutine(fallDelay());
+            }
 
         }
   
@@ -243,9 +253,10 @@ public class PlayerController : MonoBehaviour
         else if(xValue < 0) mySpriteRenderer.flipX = true;
             
     }
+
     private void Reset()
     {
-
+        ignoreLayers(false);
         foreach(AnimatorControllerParameter parameter in anim.parameters) {            
                 anim.SetBool(parameter.name, false);            
         }
@@ -406,11 +417,15 @@ public class PlayerController : MonoBehaviour
 
         myRigidbody2D.velocity = Vector2.zero;
         transform.position = GameObject.FindWithTag("Respawn").transform.position;
-        currentLife.Value = maxLife;
-        HealthChange.Raise();
+        StartCoroutine(HealthDelayCo());
         Reset();
 
+    }private IEnumerator HealthDelayCo(){
+        yield return new WaitForSeconds(0.2f);
+        currentLife.Value = maxLife;
+        HealthChange.Raise();
     }
+
     public void KnockBack(Vector3 knockBack)
     {
 
@@ -424,8 +439,6 @@ public class PlayerController : MonoBehaviour
     {
         
         if(currentState != PlayerState.stagger){
-
-            Physics2D.IgnoreLayerCollision(10, 11, true);
            
             if(HurtSound != null){
                 myAudioSource.clip = HurtSound;
@@ -439,12 +452,12 @@ public class PlayerController : MonoBehaviour
             currentLife.Value -= 1;
             HealthChange.Raise();
             
+            myRigidbody2D.velocity = Vector2.zero;
             if(currentLife.Value <= 0) Die();
             else{
-
+                ignoreLayers(true);
                 if( knockBack != Vector3.zero ) KnockBack(knockBack);
                 else StartCoroutine(invunerableCo());
-
             }
         
         }
@@ -514,13 +527,19 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < 4; i++ ){
             mySpriteRenderer.color = new Color(1f,1f,1f,0.5f);
-            yield return new WaitForSeconds(invunerableTime/8);
+            yield return new WaitForSeconds(invunerableTime/16);
             mySpriteRenderer.color = new Color(1f,1f,1f,1f);
-            yield return new WaitForSeconds(invunerableTime/8);
+            yield return new WaitForSeconds(invunerableTime/16);
         }
-        
-        Physics2D.IgnoreLayerCollision(10, 11, false);
         SetGround();
+        for(int i = 0; i < 4; i++ ){
+            mySpriteRenderer.color = new Color(1f,1f,1f,0.5f);
+            yield return new WaitForSeconds(invunerableTime/16);
+            mySpriteRenderer.color = new Color(1f,1f,1f,1f);
+            yield return new WaitForSeconds(invunerableTime/16);
+        }
+        ignoreLayers(false);
+        
     }
     private IEnumerator slideCo()
     {

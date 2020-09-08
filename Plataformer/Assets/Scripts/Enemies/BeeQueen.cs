@@ -28,10 +28,12 @@ public class BeeQueen : FlyingEnemy
 
     private void CheckDistance()
     {
-        if(Mathf.Abs(transform.position.y - InitialPos.y) > 5)
+        if(Mathf.Abs(transform.position.y - InitialPos.y) > 6)
             transform.position =  new Vector3(transform.position.x,InitialPos.y,transform.position.z);
-        if(Mathf.Abs(transform.position.x - InitialPos.x) > 22)
-            transform.position =  new Vector3(InitialPos.x,transform.position.y,transform.position.z);
+        if(transform.position.x - InitialPos.x > 21)
+            transform.position =  new Vector3(transform.position.x - 21, transform.position.y,transform.position.z);
+        else if (transform.position.x - InitialPos.x < -21)
+            transform.position =  new Vector3(transform.position.x + 21, transform.position.y,transform.position.z);
     }
     
     private void SpawnBee()
@@ -73,12 +75,9 @@ public class BeeQueen : FlyingEnemy
             currentState = EnemyState.attacking;
             
             if(other.gameObject.transform.position.x > gameObject.transform.position.x){
-                mySpriteRenderer.flipX = false;
-                direction = 1;
-            }else{
-                mySpriteRenderer.flipX = true;
-                direction = -1;
-            }
+                if(direction != 1) Turn();
+            }else if(direction != -1) Turn();
+            
             anim.SetTrigger("Attack");
             StartCoroutine(attackCo());
         }

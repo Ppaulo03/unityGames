@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Teleport : MonoBehaviour
 {
-    [SerializeField] private string levelToLoad = "";
+    [SerializeField] private Signal levelToLoad = null;
 
     [Header("Components")]
     private AudioSource myAudioSource;
@@ -28,10 +28,8 @@ public class Teleport : MonoBehaviour
 
     private IEnumerator TeleportCo()
     {
-        yield return new WaitForSeconds(0.3f);
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(levelToLoad);
-        while(!asyncOperation.isDone){
-            yield return null;
-        }
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 0;
+        levelToLoad.Raise();
     }
 }

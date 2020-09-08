@@ -8,6 +8,7 @@ public class ForestBoos : FlyingEnemy
     [Header("Attack Settings")]
     [SerializeField] private Collider2D VisionCollider = null;
     [SerializeField] private Transform attackTransform = null;
+    [SerializeField] private GameObject minion = null;
 
 
     [Header("AcidBall")]
@@ -32,6 +33,7 @@ public class ForestBoos : FlyingEnemy
         currentSpeed = Random.Range(speed*0.5f, speed*1.5f);
         currentState = EnemyState.walking;
         InitialPos = transform.position;
+        maxLife = lifePoints;
         StartCoroutine(dropCo());
     }
     private void FixedUpdate()
@@ -62,10 +64,14 @@ public class ForestBoos : FlyingEnemy
     {
         if(lifePoints + 2 <= maxLife)
         {
+            
             maxLife = lifePoints;
             acidBallForce = acidBallForce + 0.005f;
             acidBallCooldown = acidBallCooldown - 0.05f;
             speed = speed + 0.2f;
+           
+            Instantiate(minion, transform.position, Quaternion.Euler (Vector3.zero));
+
         }
     }
 

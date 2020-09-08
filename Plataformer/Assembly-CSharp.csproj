@@ -43,6 +43,7 @@
      <Compile Include="Assets\Scripts\Arrow\PlantArrow.cs" />
      <Compile Include="Assets\Scripts\Arrow\PlantGrow.cs" />
      <Compile Include="Assets\Scripts\Arrow\TelekineseArrow.cs" />
+     <Compile Include="Assets\Scripts\Enemies\BatMonster.cs" />
      <Compile Include="Assets\Scripts\Enemies\Bee.cs" />
      <Compile Include="Assets\Scripts\Enemies\BeeQueen.cs" />
      <Compile Include="Assets\Scripts\Enemies\DarkSlime.cs" />
@@ -51,9 +52,12 @@
      <Compile Include="Assets\Scripts\Enemies\ForestBoos.cs" />
      <Compile Include="Assets\Scripts\Enemies\Goblin.cs" />
      <Compile Include="Assets\Scripts\Enemies\GroundEnemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\MinionHead.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Mushroom.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\AcidBall.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\AcidDrop.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\GoblinBomb.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Skills\Projectile.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\AudioTrigger.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\DestroyOverTime.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\ExplosionDamage.cs" />
@@ -61,6 +65,7 @@
      <Compile Include="Assets\Scripts\Mechanic Stuff\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Mechanic Stuff\SoundEffect.cs" />
      <Compile Include="Assets\Scripts\Obstacles\AcidPool.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\BreakingPlataform.cs" />
      <Compile Include="Assets\Scripts\Obstacles\FallingPlataform.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\Teleport.cs" />

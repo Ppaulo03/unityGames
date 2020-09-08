@@ -28,8 +28,8 @@ MonoBehaviour:
     arrowsSprite: {fileID: 2372543920737663427, guid: 4d3d2cbd1b9731946928b8d927d79e79,
       type: 3}
     effect: {fileID: 11400000, guid: d789c1e5964cb9141bd3ea5594234f2c, type: 2}
-    maxOfArrows: 1000
-    currentQtd: 1000
+    maxOfArrows: 5
+    currentQtd: 5
     CooldownTime: 5
   - name: Bomb
     arrowObject: {fileID: 8169994308900303928, guid: 3f966fef41bee1641ba888ea1d3e41dc,

@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     [Header("Ground Check")]
     [SerializeField] protected LayerMask groundLayer = ~0;
     [SerializeField] protected float groundDistance = 0f;
-    [SerializeField] protected float raycastCorrection = 0f;
+    [SerializeField] [Range(0.1f, 5)] protected float raycastCorrection = 0.1f;
     [SerializeField] protected Vector3 SizeCorrection = Vector3.zero;
 
 
@@ -73,8 +73,10 @@ public class Enemy : MonoBehaviour
             
             myRigidbody2D.velocity = Vector2.zero;
             Vector3 RealKnockBack = knockBack - new Vector3(knockBackResistence, knockBackResistence, 0);
-            if( RealKnockBack.x < 0) new Vector3( 0, RealKnockBack.y, 0);
-            if( RealKnockBack.y < 0) new Vector3( RealKnockBack.x, 0, 0);
+
+            if( RealKnockBack.x < 0) RealKnockBack = new Vector3( 0, RealKnockBack.y, 0);
+            if( RealKnockBack.y < 0) RealKnockBack = new Vector3( RealKnockBack.x, 0, 0);
+            
             myRigidbody2D.AddForce(RealKnockBack, ForceMode2D.Impulse);
             
             lifePoints -= 1;
@@ -136,7 +138,7 @@ public class Enemy : MonoBehaviour
         
         for(float i = -raycastCorrection; i <= raycastCorrection; i += 2*raycastCorrection){
 
-            //Debug.DrawRay(position + Vector2.right*i, direction, Color.green); 
+            Debug.DrawRay(position + Vector2.right*i, direction, Color.green); 
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, direction, groundDistance, groundLayer);
             if (hit.collider == null) return ( i / raycastCorrection );
             
@@ -152,7 +154,7 @@ public class Enemy : MonoBehaviour
         
         for(float i = -raycastCorrection; i <= raycastCorrection; i += raycastCorrection){
             
-            //Debug.DrawRay(position + Vector2.right*i, direction, Color.green);
+            Debug.DrawRay(position + Vector2.right*i, direction, Color.green);
             RaycastHit2D hit = Physics2D.Raycast(position + Vector2.right*i, direction, groundDistance, groundLayer);
             if (hit.collider != null) return true;
             
@@ -171,7 +173,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-
+        ColisionAction(other);
         if( other.gameObject.CompareTag("Player") )
         {
 
@@ -181,5 +183,6 @@ public class Enemy : MonoBehaviour
         }
 
     }
+    protected virtual void ColisionAction(Collision2D other){}
     
 }

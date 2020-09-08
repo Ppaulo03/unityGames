@@ -206,7 +206,7 @@ MonoBehaviour:
   Submit: {fileID: 11400000, guid: 5f21d2ac3bb18674c8fc288a958b0624, type: 2}
   DamageEffect: {fileID: 7904119211016606380, guid: 711dd75f6cb21134cbc5e0387f6f9071,
     type: 3}
-  invunerableTime: 1
+  invunerableTime: 2
   maxLife: 4
   currentLife: {fileID: 11400000, guid: 968398fd07f8ddb4f9d45ffda69520cb, type: 2}
   herathContainers: {fileID: 11400000, guid: fd7a2dc8c9191534b9cc120d9c6bc528, type: 2}

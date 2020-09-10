@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("AirTime")]
+    [SerializeField] private float falldelayTime = 0f;
     [SerializeField] private float resistenciaDoAr = 0f;
     [SerializeField] private float gravidade = 0f;
     [SerializeField] private AudioClip JumpSound = null;
@@ -211,10 +212,10 @@ public class PlayerController : MonoBehaviour
         if(IsGrounded())
         {
 
-                myRigidbody2D.drag = 0;
-                myRigidbody2D.gravityScale = 1;
-                if(currentState != PlayerState.crouching) currentState = PlayerState.onGround;
-                doubleJump = true;
+            myRigidbody2D.drag = 0;
+            myRigidbody2D.gravityScale = 1;
+            if(currentState != PlayerState.crouching) currentState = PlayerState.onGround;
+            doubleJump = true;
 
         }
         else
@@ -258,17 +259,15 @@ public class PlayerController : MonoBehaviour
     {
         ignoreLayers(false);
         foreach(AnimatorControllerParameter parameter in anim.parameters) {            
-                anim.SetBool(parameter.name, false);            
+            anim.SetBool(parameter.name, false);            
         }
-
         anim.SetTrigger("Idle");
 
         currentStrenght = minStrength;
-
         Flip(transform.localScale.x);
         transform.localScale = new Vector3(1,1,1);
-
         attackRunning = false;
+
         SetGround();
 
     }
@@ -311,7 +310,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if(IsGrounded()){
+        if(currentState == PlayerState.onGround){
             
             myRigidbody2D.drag = resistenciaDoAr;
             myRigidbody2D.gravityScale = gravidade;
@@ -479,7 +478,6 @@ public class PlayerController : MonoBehaviour
     {
 
         attackRunning = true;
-
         myAudioSource.clip = ArrowSound;
         myAudioSource.Play();
 
@@ -498,8 +496,7 @@ public class PlayerController : MonoBehaviour
             if(arrowManager.arrows[chosenArrow.Value].currentQtd == 0) StartCoroutine(reloadCo(chosenArrow.Value));
             Fired.Raise();
         
-        }
-        else{
+        } else{
 
             myAudioSource.clip = FailSound;
             myAudioSource.Play();
@@ -525,14 +522,13 @@ public class PlayerController : MonoBehaviour
     private IEnumerator invunerableCo()
     {
 
-        for(int i = 0; i < 4; i++ ){
-            mySpriteRenderer.color = new Color(1f,1f,1f,0.5f);
-            yield return new WaitForSeconds(invunerableTime/16);
-            mySpriteRenderer.color = new Color(1f,1f,1f,1f);
-            yield return new WaitForSeconds(invunerableTime/16);
-        }
+        mySpriteRenderer.color = new Color(1f,1f,1f,0.5f);
+        yield return new WaitForSeconds(invunerableTime/16);
+        mySpriteRenderer.color = new Color(1f,1f,1f,1f);
+        yield return new WaitForSeconds(invunerableTime/16);
+
         SetGround();
-        for(int i = 0; i < 4; i++ ){
+        for(int i = 0; i < 8; i++ ){
             mySpriteRenderer.color = new Color(1f,1f,1f,0.5f);
             yield return new WaitForSeconds(invunerableTime/16);
             mySpriteRenderer.color = new Color(1f,1f,1f,1f);
@@ -543,19 +539,16 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator slideCo()
     {
-
         yield return new WaitForSeconds(slideTime);
         myRigidbody2D.velocity = Vector2.zero;
-
     }
     private IEnumerator fallDelay()
     {
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(falldelayTime);
+        StopCoroutine(fallDelay());
         if(!IsGrounded())
             if(currentState != PlayerState.attacking)
-                 currentState = PlayerState.jumping;
-        
+                currentState = PlayerState.jumping;   
     }
     
 }

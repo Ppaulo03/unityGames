@@ -207,7 +207,7 @@ MonoBehaviour:
   DamageEffect: {fileID: 7904119211016606380, guid: 711dd75f6cb21134cbc5e0387f6f9071,
     type: 3}
   invunerableTime: 2
-  maxLife: 4
+  maxLife: 5
   currentLife: {fileID: 11400000, guid: 968398fd07f8ddb4f9d45ffda69520cb, type: 2}
   herathContainers: {fileID: 11400000, guid: fd7a2dc8c9191534b9cc120d9c6bc528, type: 2}
   HealthChange: {fileID: 11400000, guid: 7d31c03f8d495024e9045817f664d946, type: 2}
@@ -217,6 +217,7 @@ MonoBehaviour:
   doubleJumpForce: 9
   doubleJump: 0
   slideTime: 0.75
+  falldelayTime: 1
   resistenciaDoAr: 2
   gravidade: 1.5
   JumpSound: {fileID: 8300000, guid: a4f35e70a2009f94386f69928f1a4582, type: 3}
@@ -258,7 +259,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 0
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.1964493
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 1

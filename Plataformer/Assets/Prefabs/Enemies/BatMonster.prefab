@@ -221,7 +221,7 @@ MonoBehaviour:
     type: 3}
   lifePoints: 3
   invunerableTime: 0.5
-  knockBackForce: 6
+  knockBackForce: 2
   knockBackResistence: 0
   groundLayer:
     serializedVersion: 2

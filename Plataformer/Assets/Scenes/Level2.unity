@@ -4556,7 +4556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1456959448, guid: 3605ff32956656a4aacaa227dabbf666, type: 3}
       propertyPath: signalEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: MoreSoon
+      value: Level3
       objectReference: {fileID: 0}
     - target: {fileID: 3906249081954612520, guid: 3605ff32956656a4aacaa227dabbf666,
         type: 3}
@@ -4864,6 +4864,11 @@ PrefabInstance:
       propertyPath: FailSound
       value: 
       objectReference: {fileID: 8300000, guid: 94c0eac4bf59f1744a546bc9a4d58e8e, type: 3}
+    - target: {fileID: 2947310824417121648, guid: e19ae30467e853a4e986c2d46a1ae5f4,
+        type: 3}
+      propertyPath: maxLife
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e19ae30467e853a4e986c2d46a1ae5f4, type: 3}
 --- !u!1001 &1187449253

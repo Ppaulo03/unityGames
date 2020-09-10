@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
     {
         
         DieEffect();
-        gameObject.SetActive(false);
+        Destroy(gameObject);
 
     } protected virtual void DieEffect(){}
     public virtual void Hurt(Vector3 knockBack)
@@ -71,13 +71,13 @@ public class Enemy : MonoBehaviour
             currentState = EnemyState.stagger;
             Instantiate(DamageEffect, transform.position, Quaternion.Euler(Vector3.zero));
             
-            myRigidbody2D.velocity = Vector2.zero;
-            Vector3 RealKnockBack = knockBack - new Vector3(knockBackResistence, knockBackResistence, 0);
-
-            if( RealKnockBack.x < 0) RealKnockBack = new Vector3( 0, RealKnockBack.y, 0);
-            if( RealKnockBack.y < 0) RealKnockBack = new Vector3( RealKnockBack.x, 0, 0);
-            
-            myRigidbody2D.AddForce(RealKnockBack, ForceMode2D.Impulse);
+            if(myRigidbody2D.bodyType == RigidbodyType2D.Dynamic){
+                myRigidbody2D.velocity = Vector2.zero;
+                Vector3 RealKnockBack = knockBack - new Vector3(knockBackResistence, knockBackResistence, 0);
+                if( RealKnockBack.x < 0) RealKnockBack = new Vector3( 0, RealKnockBack.y, 0);
+                if( RealKnockBack.y < 0) RealKnockBack = new Vector3( RealKnockBack.x, 0, 0);
+                myRigidbody2D.AddForce(RealKnockBack, ForceMode2D.Impulse);
+            }
             
             lifePoints -= 1;
             if (lifePoints <= 0) Die();
@@ -168,7 +168,8 @@ public class Enemy : MonoBehaviour
         
         direction = -direction;
         transform.localScale = new Vector3(-transform.localScale.x,1,1);
-        myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
+        if(myRigidbody2D.bodyType == RigidbodyType2D.Dynamic)
+            myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
     
     }
     private void OnCollisionEnter2D(Collision2D other)

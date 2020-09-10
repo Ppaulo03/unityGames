@@ -151,6 +151,7 @@ MonoBehaviour:
   numMudas: {fileID: 11400000, guid: 2346a44acc94c1143b1b8744347469d2, type: 2}
   growOrder: {fileID: 11400000, guid: 804e53cb550bb4648bfc0b45e70a7c62, type: 2}
   mudaLifeTime: 20
+  currentMuda: 0
 --- !u!114 &4141801294866535339
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -54,6 +54,8 @@
      <Compile Include="Assets\Scripts\Enemies\GroundEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\MinionHead.cs" />
      <Compile Include="Assets\Scripts\Enemies\Mushroom.cs" />
+     <Compile Include="Assets\Scripts\Enemies\ShadowBoss.cs" />
+     <Compile Include="Assets\Scripts\Enemies\ShadowTentacle.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\AcidBall.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\AcidDrop.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\GoblinBomb.cs" />

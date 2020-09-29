@@ -14075,8 +14075,8 @@ MonoBehaviour:
   dialogBox: {fileID: 779479831}
   textBox: {fileID: 1334353369}
   message:
-  - 'Tente pular nesse bloco a sua esquerda '
-  - "Mas cuidado pra n\xE3o cair junto com ele"
+  - Try jumping on the blocks on your left
+  - But, be careful to not fall with them
   StartAwake: 1
 --- !u!61 &1408995840
 BoxCollider2D:

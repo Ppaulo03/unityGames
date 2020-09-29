@@ -85,7 +85,6 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer mySpriteRenderer;
     private AudioSource myAudioSource;
 
-    private bool deleyedAnim;
     private bool paused;
 
     private void Awake()
@@ -110,9 +109,10 @@ public class PlayerController : MonoBehaviour
         currentStrenght = minStrength;
         paused = false;
         Time.timeScale = 1;
-        StartCoroutine(delayCo(0.2f));
 
     }
+
+
     private void Update()
     {
 
@@ -195,11 +195,11 @@ public class PlayerController : MonoBehaviour
 
         if(IsGrounded())
         {
-                anim.SetBool("Jumping",false);
-                anim.SetBool("DoubleJump",false);
-                anim.SetBool("Falling",false);
+            anim.SetBool("Jumping",false);
+            anim.SetBool("DoubleJump",false);
+            anim.SetBool("Falling",false);
         }
-        else if(!deleyedAnim)
+        else
         { 
             anim.SetBool("Falling",true);
             anim.SetBool("Crouch",false);
@@ -239,9 +239,7 @@ public class PlayerController : MonoBehaviour
 
             //Debug.DrawRay(position + Vector2.right*i, Vector2.down, Color.green);
             RaycastHit2D hit = Physics2D.Raycast( position + Vector2.right * i, Vector2.down, groundDistance,  groundLayer);
-            if (hit.collider != null){          
-                return true;
-            }
+            if (hit.collider != null) return true;
 
         }
         return false;
@@ -303,8 +301,13 @@ public class PlayerController : MonoBehaviour
             Flip(xValue);
         }
         else{
-            if(IsGrounded()) myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
+            
             anim.SetBool("Running",false);
+            if(IsGrounded()){
+                myRigidbody2D.velocity = new Vector2(0, myRigidbody2D.velocity.y);
+                if(currentState != PlayerState.attacking) anim.SetTrigger("Idle");
+            }
+
         }
         
     }
@@ -381,10 +384,9 @@ public class PlayerController : MonoBehaviour
     private void PreparFire()
     {
 
+        currentState = PlayerState.attacking;
         anim.SetBool("FiringArrow", true);
         anim.SetTrigger("Fire");
-
-        currentState = PlayerState.attacking;
 
         myRigidbody2D.drag = 2f;
         if(mySpriteRenderer.flipX == true){
@@ -511,17 +513,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(arrowManager.arrows[arrowIndex].CooldownTime);
             arrowManager.arrows[arrowIndex].currentQtd = arrowManager.arrows[arrowIndex].maxOfArrows;
     }
-    private IEnumerator delayCo(float delayTime)
-    {
-
-        deleyedAnim = true;
-        yield return new WaitForSeconds(delayTime);
-        deleyedAnim = false;
-
-    }  
     private IEnumerator invunerableCo()
     {
-
+        yield return null;
         mySpriteRenderer.color = new Color(1f,1f,1f,0.5f);
         yield return new WaitForSeconds(invunerableTime/16);
         mySpriteRenderer.color = new Color(1f,1f,1f,1f);
